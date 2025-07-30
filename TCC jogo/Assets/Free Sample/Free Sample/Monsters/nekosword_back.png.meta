@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      nekosword_back_0: -1610901315648265253
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
