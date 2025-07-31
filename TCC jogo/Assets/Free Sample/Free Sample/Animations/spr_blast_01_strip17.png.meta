@@ -659,7 +659,29 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spr_blast_01_strip17_0: -7602380814700314586
+      spr_blast_01_strip17_1: 1365583359883962003
+      spr_blast_01_strip17_10: 1486546690569427556
+      spr_blast_01_strip17_11: -3675476515864171020
+      spr_blast_01_strip17_12: 5169628930585893388
+      spr_blast_01_strip17_13: 5004453154725965337
+      spr_blast_01_strip17_14: 3853175032096611433
+      spr_blast_01_strip17_15: -2493382632106355809
+      spr_blast_01_strip17_16: 7208079686113087707
+      spr_blast_01_strip17_17: 298807554734257141
+      spr_blast_01_strip17_18: -2542341699922255618
+      spr_blast_01_strip17_19: -6970162307274304512
+      spr_blast_01_strip17_2: -1710779520872395899
+      spr_blast_01_strip17_20: 7465506805556194388
+      spr_blast_01_strip17_21: -7544616756297130864
+      spr_blast_01_strip17_3: -6156591469438825177
+      spr_blast_01_strip17_4: -8153999491280699692
+      spr_blast_01_strip17_5: -3980739813075837055
+      spr_blast_01_strip17_6: 3843656245059675087
+      spr_blast_01_strip17_7: 8456810860912803154
+      spr_blast_01_strip17_8: 1820803678889221814
+      spr_blast_01_strip17_9: 3629573010749199297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
