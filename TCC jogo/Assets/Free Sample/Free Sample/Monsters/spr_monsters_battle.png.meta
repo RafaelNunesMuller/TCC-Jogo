@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spr_monsters_battle_0: -3217374891057995310
+      spr_monsters_battle_1: -7128631872445224609
+      spr_monsters_battle_2: 4043093038000924101
+      spr_monsters_battle_3: 484442696188515672
+      spr_monsters_battle_4: 1980581510058946814
+      spr_monsters_battle_5: 4834973666810769851
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

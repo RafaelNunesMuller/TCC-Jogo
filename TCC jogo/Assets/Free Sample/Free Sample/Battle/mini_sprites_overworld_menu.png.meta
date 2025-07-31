@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mini_sprites_overworld_menu_0: -6328519552119524141
+      mini_sprites_overworld_menu_1: -4399324092007844107
+      mini_sprites_overworld_menu_2: -2549292373371691014
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
