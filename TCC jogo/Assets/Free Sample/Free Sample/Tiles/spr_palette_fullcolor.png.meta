@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spr_palette_fullcolor_0: 6366433300539449725
+      spr_palette_fullcolor_1: -2788805429269817099
+      spr_palette_fullcolor_2: -2596036515775212044
+      spr_palette_fullcolor_3: 5363562968957126642
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
