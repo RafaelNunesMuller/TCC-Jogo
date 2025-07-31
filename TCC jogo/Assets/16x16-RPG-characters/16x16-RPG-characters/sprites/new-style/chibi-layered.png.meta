@@ -634,7 +634,28 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chibi-layered_0: 5845835507735083389
+      chibi-layered_1: -1112729367974562650
+      chibi-layered_10: -6002964593973502238
+      chibi-layered_11: 3398754836679955668
+      chibi-layered_12: 3150525731743835657
+      chibi-layered_13: 1268309249231162714
+      chibi-layered_14: 8736200731859618644
+      chibi-layered_15: -8951461031040666709
+      chibi-layered_16: 2330240754134878772
+      chibi-layered_17: -740411767325681505
+      chibi-layered_18: 1877875522428308166
+      chibi-layered_19: 5486073191296581014
+      chibi-layered_2: -997956132385722387
+      chibi-layered_20: 1487620971297919808
+      chibi-layered_3: 6669552830547885389
+      chibi-layered_4: -1897858651997141559
+      chibi-layered_5: -7061416306764853186
+      chibi-layered_6: -315552387713334887
+      chibi-layered_7: 3700627191134711703
+      chibi-layered_8: 4343197933428616938
+      chibi-layered_9: -2678350249093484843
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

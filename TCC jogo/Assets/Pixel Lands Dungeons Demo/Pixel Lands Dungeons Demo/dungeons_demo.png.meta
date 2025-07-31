@@ -584,7 +584,26 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dungeons_demo_0: -8078634230174752381
+      dungeons_demo_1: -2150349263560530713
+      dungeons_demo_10: 7697172527387183079
+      dungeons_demo_11: 3150185488650022958
+      dungeons_demo_12: -2840936803366341298
+      dungeons_demo_13: -4281476079116351356
+      dungeons_demo_14: -6841589139379815541
+      dungeons_demo_15: -3952695712452859503
+      dungeons_demo_16: 4972471427851947486
+      dungeons_demo_17: -1447909552963039020
+      dungeons_demo_18: -704479158872252524
+      dungeons_demo_2: 1505174430636420462
+      dungeons_demo_3: -84922331002586686
+      dungeons_demo_4: -5811274623382839753
+      dungeons_demo_5: -1267513302180571766
+      dungeons_demo_6: -3130999968923375529
+      dungeons_demo_7: 8232585463606827342
+      dungeons_demo_8: 4566013314395942668
+      dungeons_demo_9: -822870061260410517
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
