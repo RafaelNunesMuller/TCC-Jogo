@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 232545883}
   - component: {fileID: 232545882}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Grid da decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
