@@ -1,56 +1,56 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private bool isMoving = false;
-    private Vector2 input;
+    private Vector2 movement;
     private Vector3 targetPos;
     private Animator anim;
-
-    private Vector2 lastMoveDir = Vector2.down; // Começa virado pra baixo
+    public GameObject menuUI;
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        targetPos = transform.position;
     }
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            menuUI.SetActive(!menuUI.activeSelf);
+        }
+
+
         if (!isMoving)
         {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
+            // Captura da direção
+            movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            // Impede diagonais
-            if (input != Vector2.zero)
+            // Travar em uma direção por vez (como Pokémon e Mother fazem)
+            if (movement.x != 0)
+                movement.y = 0;
+
+            if (movement != Vector2.zero)
             {
-                if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
-                    input.y = 0;
-                else
-                    input.x = 0;
-
-                // Salva última direção
-                lastMoveDir = input;
-
-                // Atualiza animação
-                anim.SetFloat("Horizontal", input.x);
-                anim.SetFloat("Vertical", input.y);
-                anim.SetFloat("Speed", 1f);
-
-                targetPos = transform.position + new Vector3(input.x, input.y, 0);
+                // Calcula o próximo bloco
+                targetPos = transform.position + new Vector3(movement.x, movement.y, 0);
                 StartCoroutine(Move());
-            }
-            else
-            {
-                anim.SetFloat("Speed", 0f);
 
-                // Mesmo parado, mantém a direção do idle
-                anim.SetFloat("Horizontal", lastMoveDir.x);
-                anim.SetFloat("Vertical", lastMoveDir.y);
+                // Atualiza direção e "última direção"
+                anim.SetFloat("Horizontal", movement.x);
+                anim.SetFloat("Vertical", movement.y);
+                anim.SetFloat("LastMovex", movement.x);
+                anim.SetFloat("LastMovey", movement.y);
             }
         }
+
+        // Enquanto estiver andando, manter a animação ativa
+        anim.SetBool("isMoving", isMoving);
     }
 
     IEnumerator Move()
