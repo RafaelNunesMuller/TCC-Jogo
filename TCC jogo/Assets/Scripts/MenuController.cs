@@ -8,6 +8,7 @@ public class MenuController : MonoBehaviour
     private int currentIndex = 0;
     public GameObject menuUI;
     public Player playerScript;
+    public GameObject MenuPanel;
 
     void Start()
     {
@@ -16,13 +17,9 @@ public class MenuController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.I)) // ou ESC, ou outro botão
         {
-            bool isMenuActive = !menuUI.activeSelf;
-            menuUI.SetActive(isMenuActive);
-
-            // Desativa ou ativa o script de movimento
-            playerScript.enabled = !isMenuActive;
+            menuUI.SetActive(!menuUI.activeSelf); // ativa/desativa
         }
 
 
