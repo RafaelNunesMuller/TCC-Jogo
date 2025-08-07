@@ -1,6 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 using UnityEditor;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -10,38 +11,37 @@ public class Player : MonoBehaviour
     private Vector3 targetPos;
     private Animator anim;
     public GameObject menuUI;
-
+    public GameObject MenuPanel;
     void Start()
     {
         anim = GetComponent<Animator>();
         targetPos = transform.position;
     }
 
+
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.I)) // ou ESC, ou outro botÃ£o
         {
-            menuUI.SetActive(!menuUI.activeSelf);
+            menuUI.SetActive(menuUI.activeSelf); // ativa/desativa
         }
-
-
         if (!isMoving)
         {
-            // Captura da direção
+            // Captura da direÃ§Ã£o
             movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            // Travar em uma direção por vez (como Pokémon e Mother fazem)
+            // Travar em uma direÃ§Ã£o por vez (como PokÃ©mon)
             if (movement.x != 0)
                 movement.y = 0;
 
             if (movement != Vector2.zero)
             {
-                // Calcula o próximo bloco
+                // Calcula o prÃ³ximo bloco
                 targetPos = transform.position + new Vector3(movement.x, movement.y, 0);
                 StartCoroutine(Move());
 
-                // Atualiza direção e "última direção"
+                // Atualiza direÃ§Ã£o e "Ãºltima direÃ§Ã£o"
                 anim.SetFloat("Horizontal", movement.x);
                 anim.SetFloat("Vertical", movement.y);
                 anim.SetFloat("LastMovex", movement.x);
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        // Enquanto estiver andando, manter a animação ativa
+        // Enquanto estiver andando, manter a animaÃ§Ã£o ativa
         anim.SetBool("isMoving", isMoving);
     }
 
@@ -66,4 +66,5 @@ public class Player : MonoBehaviour
         transform.position = targetPos;
         isMoving = false;
     }
+        
 }
