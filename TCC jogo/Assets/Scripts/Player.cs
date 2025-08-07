@@ -1,6 +1,7 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using System.Collections;
 using UnityEditor;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class Player : MonoBehaviour
     private Animator anim;
     public GameObject menuUI;
     public GameObject MenuPanel;
+    public bool canMove = true; // ‚Üê controle de movimento
+    private Rigidbody2D rb;
+
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         targetPos = transform.position;
     }
@@ -22,28 +27,26 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.I)) // ou ESC, ou outro bot„o
+        if (Input.GetKeyDown(KeyCode.I)) // ou ESC, ou outro bot√£o
         {
             menuUI.SetActive(menuUI.activeSelf); // ativa/desativa
         }
-
-
         if (!isMoving)
         {
-            // Captura da direÁ„o
+            // Captura da dire√ß√£o
             movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            // Travar em uma direÁ„o por vez (como PokÈmon e Mother fazem)
+            // Travar em uma dire√ß√£o por vez (como Pok√©mon)
             if (movement.x != 0)
                 movement.y = 0;
 
             if (movement != Vector2.zero)
             {
-                // Calcula o prÛximo bloco
+                // Calcula o pr√≥ximo bloco
                 targetPos = transform.position + new Vector3(movement.x, movement.y, 0);
                 StartCoroutine(Move());
 
-                // Atualiza direÁ„o e "˙ltima direÁ„o"
+                // Atualiza dire√ß√£o e "√∫ltima dire√ß√£o"
                 anim.SetFloat("Horizontal", movement.x);
                 anim.SetFloat("Vertical", movement.y);
                 anim.SetFloat("LastMovex", movement.x);
@@ -51,7 +54,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        // Enquanto estiver andando, manter a animaÁ„o ativa
+        // Enquanto estiver andando, manter a anima√ß√£o ativa
         anim.SetBool("isMoving", isMoving);
     }
 
@@ -68,4 +71,5 @@ public class Player : MonoBehaviour
         transform.position = targetPos;
         isMoving = false;
     }
+        
 }
