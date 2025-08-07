@@ -1,33 +1,56 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Velocidade suave do movimento
+    public float moveSpeed = 5f;
     private bool isMoving = false;
-    private Vector2 input;
+    private Vector2 movement;
     private Vector3 targetPos;
+    private Animator anim;
+    public GameObject menuUI;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+        targetPos = transform.position;
+    }
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            menuUI.SetActive(!menuUI.activeSelf);
+        }
+
+
         if (!isMoving)
         {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
+            // Captura da direção
+            movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            // Impede movimento diagonal
-            if (input != Vector2.zero)
+            // Travar em uma direção por vez (como Pokémon e Mother fazem)
+            if (movement.x != 0)
+                movement.y = 0;
+
+            if (movement != Vector2.zero)
             {
-                if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
-                    input.y = 0;
-                else
-                    input.x = 0;
-
-                // Mover 1 unidade no mundo Unity (equivale a 1 tile de 16x16 se PPU = 16)
-                targetPos = transform.position + new Vector3(input.x, input.y, 0);
+                // Calcula o próximo bloco
+                targetPos = transform.position + new Vector3(movement.x, movement.y, 0);
                 StartCoroutine(Move());
+
+                // Atualiza direção e "última direção"
+                anim.SetFloat("Horizontal", movement.x);
+                anim.SetFloat("Vertical", movement.y);
+                anim.SetFloat("LastMovex", movement.x);
+                anim.SetFloat("LastMovey", movement.y);
             }
         }
+
+        // Enquanto estiver andando, manter a animação ativa
+        anim.SetBool("isMoving", isMoving);
     }
 
     IEnumerator Move()
