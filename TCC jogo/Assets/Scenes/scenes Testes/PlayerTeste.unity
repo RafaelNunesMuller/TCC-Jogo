@@ -458,6 +458,7 @@ MonoBehaviour:
   moveSpeed: 5
   menuUI: {fileID: 1296356718}
   MenuPanel: {fileID: 1296356718}
+  canMove: 1
 --- !u!50 &405159144
 Rigidbody2D:
   serializedVersion: 5
