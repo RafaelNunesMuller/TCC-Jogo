@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private Vector3 targetPos;
     private Animator anim;
     public GameObject menuUI;
+    public GameObject MenuPanel;
 
     void Start()
     {
@@ -17,12 +18,13 @@ public class Player : MonoBehaviour
         targetPos = transform.position;
     }
 
+
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.I)) // ou ESC, ou outro botão
         {
-            menuUI.SetActive(!menuUI.activeSelf);
+            menuUI.SetActive(menuUI.activeSelf); // ativa/desativa
         }
 
 
