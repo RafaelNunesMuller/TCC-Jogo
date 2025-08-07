@@ -12,13 +12,8 @@ public class Player : MonoBehaviour
     private Animator anim;
     public GameObject menuUI;
     public GameObject MenuPanel;
-    public bool canMove = true; // ← controle de movimento
-    private Rigidbody2D rb;
-
-
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         targetPos = transform.position;
     }
