@@ -4,20 +4,23 @@ using System.Collections.Generic;
 
 public class MenuItem : MonoBehaviour
 {
-    public GameObject itemSlotPrefab;
-    public Transform itemSlotContainer;
-    public RectTransform cursor;
+    public GameObject itemSlotPrefab;       // Prefab do slot de item
+    public Transform itemSlotContainer;     // Container dos slots (pai)
+    public RectTransform cursor;             // Cursor que indica o slot selecionado
+    public GameObject inventarioPainel;     // Painel do inventário
 
-    private List<RectTransform> itemSlots = new List<RectTransform>();
-    private int cursorIndex = 0;
-
-    void Start()
-    {
-        GenerateItemSlots(25);
-        MoveCursor(0);
-    }
+    private List<RectTransform> itemSlots = new List<RectTransform>();  // Lista dos slots
+    private int cursorIndex = 0;             // Índice do cursor
+    private List<Item> itensAtuais = new List<Item>();  // Lista atual dos itens mostrados
 
     void Update()
+    {
+        if (!inventarioPainel.activeSelf) return; // Só responde se o inventário estiver aberto
+
+        HandleInput();
+    }
+
+    void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -33,7 +36,7 @@ public class MenuItem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            gameObject.SetActive(false);
+            inventarioPainel.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -42,66 +45,67 @@ public class MenuItem : MonoBehaviour
         }
     }
 
-    void GenerateItemSlots(int count)
+    // Abre o inventário e cria/atualiza os slots dos itens
+    public void Open(List<Item> itens)
     {
-        var listaItens = Inventario.instance.itens;
+        itensAtuais = itens;  // Guarda a lista atual para uso posterior
+        inventarioPainel.SetActive(true);
 
-        for (int i = 0; i < count; i++)
+        // Limpa os slots antigos
+        foreach (Transform child in itemSlotContainer)
+            Destroy(child.gameObject);
+
+        itemSlots.Clear();
+
+        // Cria 25 slots, preenchendo com os itens disponíveis ou "---" se vazio
+        for (int i = 0; i < 25; i++)
         {
             GameObject newSlot = Instantiate(itemSlotPrefab, itemSlotContainer);
             newSlot.transform.localScale = Vector3.one;
-            Text text = newSlot.GetComponentInChildren<Text>();
 
-            if (i < listaItens.Count)
-            {
-                Item item = listaItens[i];
-                text.text = item.nome + " x" + item.quantidade;
-            }
+            Text text = newSlot.GetComponentInChildren<Text>();
+            if (i < itensAtuais.Count)
+                text.text = itensAtuais[i].nome + " x" + itensAtuais[i].quantidade;
             else
-            {
                 text.text = "---";
-            }
 
             itemSlots.Add(newSlot.GetComponent<RectTransform>());
         }
+
+        cursorIndex = 0;
+        MoveCursor(cursorIndex);
     }
 
+    // Move o cursor para o slot selecionado
     void MoveCursor(int index)
     {
+        // Faz o cursor filho do slot para se posicionar junto
         cursor.SetParent(itemSlots[index]);
         cursor.anchoredPosition = new Vector2(-40f, 0f);
+        cursor.localScale = Vector3.one;  // Reset escala, importante!
     }
 
+    // Usa o item selecionado
     void UseItem(int index)
     {
-        var listaItens = Inventario.instance.itens;
-
-        if (index < listaItens.Count)
+        if (index < itensAtuais.Count)
         {
-            Item item = listaItens[index];
+            Item item = itensAtuais[index];
             item.quantidade--;
 
             Debug.Log("Usou: " + item.nome);
 
             if (item.quantidade <= 0)
             {
-                listaItens.RemoveAt(index);
+                itensAtuais.RemoveAt(index);
             }
 
-            AtualizarSlots();
-        }
-    }
+            // Ajusta o cursor para não sair do intervalo válido
+            if (cursorIndex >= itensAtuais.Count)
+                cursorIndex = Mathf.Max(0, itensAtuais.Count - 1);
 
-    void AtualizarSlots()
-    {
-        foreach (Transform child in itemSlotContainer)
-        {
-            Destroy(child.gameObject);
+            Open(itensAtuais);
+            MoveCursor(cursorIndex);
         }
-
-        itemSlots.Clear();
-        GenerateItemSlots(25);
-        cursorIndex = Mathf.Clamp(cursorIndex, 0, itemSlots.Count - 1);
-        MoveCursor(cursorIndex);
     }
 }
