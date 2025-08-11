@@ -6,12 +6,13 @@ using Unity.VisualScripting;
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    private bool isMoving = false;
+    public bool isMoving = false;
     private Vector2 movement;
     private Vector3 targetPos;
     private Animator anim;
     public GameObject menuUI;
     public GameObject MenuPanel;
+    public bool canMove = true; // ← controle de movimento
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -21,11 +22,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.I)) // ou ESC, ou outro botão
+        if (!canMove) // Bloqueia se menu está aberto
         {
-            menuUI.SetActive(menuUI.activeSelf); // ativa/desativa
+            anim.SetBool("isMoving", false);
+            return;
         }
+
         if (!isMoving)
         {
             // Captura da direção
