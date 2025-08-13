@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,8 +22,24 @@ public class Inventario : MonoBehaviour
 
     void CarregarItensIniciais()
     {
-        itens.Add(new Item("Potion", "Cura", 3));
-        itens.Add(new Item("Ether", "Magia", 1));
-        itens.Add(new Item("Antidote", "Cura", 2));
+        itens.Add(new Potion(3));
     }
+
+    public void funcItens(int index)
+{
+    // Se índice inválido, não faz nada
+    if (index < 0 || index >= itens.Count)
+        return;
+
+    // Usa o item
+    Item item = itens[index];
+    item.Usar();
+
+    // Diminui quantidade
+    item.quantidade--;
+    if (item.quantidade <= 0)
+    {
+        itens.RemoveAt(index);
+    }
+}
 }

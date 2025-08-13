@@ -10,7 +10,6 @@ public class NPCInventory : MonoBehaviour
         // Exemplo: Inventário fixo do NPC
         itens.Add(new Item("Poção", "Consumível", 5));
         itens.Add(new Item("Espada de Ferro", "Equipamento", 1));
-        itens.Add(new Item("Antídoto", "Consumível", 3));
     }
 
     // Método para adicionar item ao NPC
