@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 [System.Serializable]
 public class Item
 {
@@ -11,4 +13,10 @@ public class Item
         this.tipo = tipo;
         this.quantidade = quantidade;
     }
+
+    public virtual void Usar()
+    {
+        
+    }
+
 }
