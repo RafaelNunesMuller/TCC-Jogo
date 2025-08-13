@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-
 public class MenuItem : MonoBehaviour
 {
     public GameObject itemSlotPrefab;       // Prefab do slot de item
@@ -22,13 +21,13 @@ public class MenuItem : MonoBehaviour
 
     void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             cursorIndex = Mathf.Min(cursorIndex + 1, itemSlots.Count - 1);
             MoveCursor(cursorIndex);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             cursorIndex = Mathf.Max(cursorIndex - 1, 0);
             MoveCursor(cursorIndex);
@@ -58,7 +57,7 @@ public class MenuItem : MonoBehaviour
         itemSlots.Clear();
 
         // Cria 25 slots, preenchendo com os itens disponíveis ou "---" se vazio
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 30; i++)
         {
             GameObject newSlot = Instantiate(itemSlotPrefab, itemSlotContainer);
             newSlot.transform.localScale = Vector3.one; // garante escala correta
@@ -90,24 +89,25 @@ public class MenuItem : MonoBehaviour
     // Usa o item selecionado
     void UseItem(int index)
     {
-        if (index < itensAtuais.Count)
-        {
-            Item item = itensAtuais[index];
-            item.quantidade--;
+        if (index < 0 || index >= itensAtuais.Count) return;
 
-            Debug.Log("Usou: " + item.nome);
+        Item item = itensAtuais[index];
 
-            if (item.quantidade <= 0)
-            {
-                itensAtuais.RemoveAt(index);
-            }
+        // Chama o efeito do item passando o player
+        playerStats player = FindFirstObjectByType<playerStats>();
+        if (player != null)
+            item.Usar(player);
 
-            // Ajusta o cursor para não sair do intervalo válido
-            if (cursorIndex >= itensAtuais.Count)
-                cursorIndex = Mathf.Max(0, itensAtuais.Count - 1);
+        item.quantidade--;
 
-            Open(itensAtuais);
-            MoveCursor(cursorIndex);
-        }
+        if (item.quantidade <= 0)
+            itensAtuais.RemoveAt(index);
+
+        if (cursorIndex >= itensAtuais.Count)
+            cursorIndex = Mathf.Max(0, itensAtuais.Count - 1);
+
+        Open(itensAtuais);
+        MoveCursor(cursorIndex);
     }
+
 }
