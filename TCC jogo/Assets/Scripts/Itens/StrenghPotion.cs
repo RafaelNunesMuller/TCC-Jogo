@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class StrenghPotion : MonoBehaviour
+public class StrenghPotion : Item
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int ForcaUp;
+
+    public StrenghPotion(int quantidade) : base("StrenghPotion", "aumentou", quantidade)
     {
-        
+        ForcaUp = 20; // Quantidade que vai aumentar a força
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Usar(playerStats player)
     {
-        
+        player.ForcaUp(ForcaUp);
     }
 }

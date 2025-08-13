@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class DefensePotion : MonoBehaviour
+public class DefensePotion : Item
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int DefUp;
+
+    public DefensePotion(int quantidade) : base("DefensePotion", "aumentou", quantidade)
     {
-        
+        DefUp = 20; // Quantidade que vai aumentar a força
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Usar(playerStats player)
     {
-        
+        player.DefUp(DefUp);
     }
 }

@@ -51,9 +51,12 @@ public class MenuController : MonoBehaviour
             UpdateCursor();
         }
 
-        if (Input.GetKeyDown(KeyCode.Z)) // Confirmar
+        if (menuUI.activeSelf)
         {
-            SelectOption();
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                SelectOption();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.X)) // Confirmar

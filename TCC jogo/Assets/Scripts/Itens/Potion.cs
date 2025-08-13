@@ -1,23 +1,14 @@
-using UnityEngine;
-
 public class Potion : Item
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int curarHP;
 
-    public Potion(int quantidade) : base("Potion", "Cura", quantidade) { }
-
-    public override void Usar()
+    public Potion(int quantidade) : base("Potion", "Cura", quantidade)
     {
-        Debug.Log("Usou uma Potion");
-        playerStats player = GameObject.FindFirstObjectByType<playerStats>();
-        if (player != null )
-        {
-            player.Curar(50);
-            Debug.Log("HP atual: " + player.currentHP);
-        }
-        else
-        {
-            Debug.LogWarning("Nenhum playerStats encontrado na cena!");
-        }
+        curarHP = 20; // Quantidade que vai curar
+    }
+
+    public override void Usar(playerStats player)
+    {
+        player.Curar(curarHP);
     }
 }

@@ -20,7 +20,25 @@ public class playerStats : MonoBehaviour
 
     public void Curar(int quantidade)
     {
-        currentHP = Mathf.Min(currentHP + quantidade, maxHP);
+        currentHP += quantidade;
+        if (currentHP > maxHP)
+            currentHP = maxHP;
+
+        Debug.Log("HP Atual: " + currentHP + "/" + maxHP);
+    }
+
+    public void ForcaUp(int quantidade)
+    {
+        strength += quantidade;
+        
+        Debug.Log("forca aumentada");
+    }
+
+    public void DefUp(int quantidade)
+    {
+        defense += quantidade;
+
+        Debug.Log("defesa aumentada");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

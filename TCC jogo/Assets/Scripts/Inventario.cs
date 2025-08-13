@@ -23,23 +23,29 @@ public class Inventario : MonoBehaviour
     void CarregarItensIniciais()
     {
         itens.Add(new Potion(3));
+        itens.Add(new StrenghPotion(4));
+        itens.Add(new DefensePotion(4));
     }
 
     public void funcItens(int index)
-{
-    // Se índice inválido, não faz nada
-    if (index < 0 || index >= itens.Count)
-        return;
-
-    // Usa o item
-    Item item = itens[index];
-    item.Usar();
-
-    // Diminui quantidade
-    item.quantidade--;
-    if (item.quantidade <= 0)
     {
-        itens.RemoveAt(index);
+        if (index < 0 || index >= itens.Count) return;
+
+        Item item = itens[index];
+
+        // Busca o PlayerStats na cena
+        playerStats player = FindFirstObjectByType<playerStats>();
+        if (player != null)
+        {
+            item.Usar(player); // passa o player
+        }
+
+        // Diminui quantidade
+        item.quantidade--;
+        if (item.quantidade <= 0)
+        {
+            itens.RemoveAt(index);
+        }
     }
-}
+
 }

@@ -14,7 +14,7 @@ public class Item
         this.quantidade = quantidade;
     }
 
-    public virtual void Usar()
+    public virtual void Usar(playerStats player)
     {
         
     }
