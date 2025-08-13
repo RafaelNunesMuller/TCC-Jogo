@@ -8,7 +8,7 @@ public class MenuItem : MonoBehaviour
     public Transform itemSlotContainer;     // Container dos slots (pai)
     public RectTransform cursor;             // Cursor que indica o slot selecionado
     public GameObject inventarioPainel;     // Painel do inventário
-
+  
     private List<RectTransform> itemSlots = new List<RectTransform>();  // Lista dos slots
     private int cursorIndex = 0;             // Índice do cursor
     private List<Item> itensAtuais = new List<Item>();  // Lista atual dos itens mostrados
@@ -61,7 +61,7 @@ public class MenuItem : MonoBehaviour
         for (int i = 0; i < 25; i++)
         {
             GameObject newSlot = Instantiate(itemSlotPrefab, itemSlotContainer);
-            newSlot.transform.localScale = Vector3.one;
+            newSlot.transform.localScale = Vector3.one; // garante escala correta
 
             Text text = newSlot.GetComponentInChildren<Text>();
             if (i < itensAtuais.Count)
@@ -77,12 +77,14 @@ public class MenuItem : MonoBehaviour
     }
 
     // Move o cursor para o slot selecionado
+
+    
     void MoveCursor(int index)
     {
         // Faz o cursor filho do slot para se posicionar junto
         cursor.SetParent(itemSlots[index]);
         cursor.anchoredPosition = new Vector2(-40f, 0f);
-        cursor.localScale = Vector3.one;  // Reset escala, importante!
+    
     }
 
     // Usa o item selecionado
