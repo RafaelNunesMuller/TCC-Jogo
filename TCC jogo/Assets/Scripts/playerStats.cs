@@ -24,6 +24,37 @@ public class playerStats : MonoBehaviour
     public int StrengthTotal => strength + (armaEquipada != null ? armaEquipada.bonusForca : 0);
     public int DefenseTotal  => defense + (armaduraEquipada != null ? armaduraEquipada.bonusDefesa : 0);
 
+    // Métodos para equipar
+    public void EquiparArma(Equipamento arma)
+    {
+        // Remove bônus da arma antiga
+        if (armaEquipada != null)
+        {
+            strength -= armaEquipada.bonusForca;
+        }
+
+        // Equipa nova arma
+        armaEquipada = arma;
+        strength += armaEquipada.bonusForca;
+
+        Debug.Log("Equipada arma: " + armaEquipada.nome + " | ATK agora: " + strength);
+    }
+
+    public void EquiparArmadura(Equipamento armadura)
+    {
+        // Remove bônus da armadura antiga
+        if (armaduraEquipada != null)
+        {
+            defense -= armaduraEquipada.bonusDefesa;
+        }
+
+        // Equipa nova armadura
+        armaduraEquipada = armadura;
+        defense += armaduraEquipada.bonusDefesa;
+
+        Debug.Log("Equipada armadura: " + armaduraEquipada.nome + " | DEF agora: " + defense);
+    }
+
     public void Curar(int quantidade)
     {
         currentHP += quantidade;
@@ -45,18 +76,7 @@ public class playerStats : MonoBehaviour
         Debug.Log("Defesa aumentada");
     }
 
-    // -------- EQUIPAR / DESEQUIPAR --------
-    public void EquiparArma(Equipamento arma)
-    {
-        armaEquipada = arma;
-        Debug.Log($"Arma equipada: {arma.nome}");
-    }
-
-    public void EquiparArmadura(Equipamento armadura)
-    {
-        armaduraEquipada = armadura;
-        Debug.Log($"Armadura equipada: {armadura.nome}");
-    }
+    
 
     // -------- XP e Level --------
     public void GainExperience(int xp)

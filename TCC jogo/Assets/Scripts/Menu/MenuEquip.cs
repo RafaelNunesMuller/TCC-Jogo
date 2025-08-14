@@ -11,7 +11,11 @@ public class MenuEquip : MonoBehaviour
     public TMP_Text statusText;
     public Transform equipListParent;
     public GameObject equipItemPrefab;
-    public RectTransform cursor; // Cursor para seleção
+    public RectTransform cursor;
+
+    [Header("Slots Visuais")]
+    public Image slotArmaIcon;
+    public Image slotArmaduraIcon;
 
     private List<Equipamento> inventarioEquip = new List<Equipamento>();
     private List<GameObject> botoesAtuais = new List<GameObject>();
@@ -76,7 +80,6 @@ public class MenuEquip : MonoBehaviour
                 GameObject obj = Instantiate(equipItemPrefab, equipListParent);
                 obj.GetComponentInChildren<TMP_Text>().text = equip.nome;
 
-                // Guardar info do equipamento no botão
                 ItemEquipUI ui = obj.AddComponent<ItemEquipUI>();
                 ui.equipamento = equip;
 
@@ -106,9 +109,17 @@ public class MenuEquip : MonoBehaviour
     void Equipar(Equipamento equip)
     {
         if (slotSelecionado == "Arma")
+        {
             playerStats.EquiparArma(equip);
+            slotArmaIcon.sprite = equip.sprite; // Atualiza o slot visual
+            slotArmaIcon.color = Color.white;
+        }
         else if (slotSelecionado == "Armadura")
+        {
             playerStats.EquiparArmadura(equip);
+            slotArmaduraIcon.sprite = equip.sprite; // Atualiza o slot visual
+            slotArmaduraIcon.color = Color.white;
+        }
 
         AtualizarStatus();
         FecharLista();
