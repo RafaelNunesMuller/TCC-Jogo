@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class playerStats : MonoBehaviour
 {
-
     [Header("Atributos Base")]
     public int level = 1;
     public int experience = 0;
@@ -17,6 +16,13 @@ public class playerStats : MonoBehaviour
     public int maxHP = 50;
     public int currentHP;
 
+    [Header("Equipamentos")]
+    public Equipamento armaEquipada;
+    public Equipamento armaduraEquipada;
+
+    // -------- MÉTODOS DE STATUS --------
+    public int StrengthTotal => strength + (armaEquipada != null ? armaEquipada.bonusForca : 0);
+    public int DefenseTotal  => defense + (armaduraEquipada != null ? armaduraEquipada.bonusDefesa : 0);
 
     public void Curar(int quantidade)
     {
@@ -30,24 +36,29 @@ public class playerStats : MonoBehaviour
     public void ForcaUp(int quantidade)
     {
         strength += quantidade;
-        
-        Debug.Log("forca aumentada");
+        Debug.Log("Força aumentada");
     }
 
     public void DefUp(int quantidade)
     {
         defense += quantidade;
-
-        Debug.Log("defesa aumentada");
+        Debug.Log("Defesa aumentada");
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // -------- EQUIPAR / DESEQUIPAR --------
+    public void EquiparArma(Equipamento arma)
     {
-        currentHP = maxHP;
+        armaEquipada = arma;
+        Debug.Log($"Arma equipada: {arma.nome}");
     }
 
-    // Update is called once per frame
+    public void EquiparArmadura(Equipamento armadura)
+    {
+        armaduraEquipada = armadura;
+        Debug.Log($"Armadura equipada: {armadura.nome}");
+    }
+
+    // -------- XP e Level --------
     public void GainExperience(int xp)
     {
         experience += xp;
@@ -59,7 +70,7 @@ public class playerStats : MonoBehaviour
 
     int ExperienceToNextLevel()
     {
-        return level * 10 + 20; // fórmula simples, pode ajustar depois
+        return level * 10 + 20; 
     }
 
     void LevelUp()
@@ -73,5 +84,10 @@ public class playerStats : MonoBehaviour
         currentHP = maxHP;
         Debug.Log("Level up! Agora nível " + level);
     }
-}
 
+    // Start
+    void Start()
+    {
+        currentHP = maxHP;
+    }
+}

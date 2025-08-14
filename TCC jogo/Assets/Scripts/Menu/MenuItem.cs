@@ -77,37 +77,47 @@ public class MenuItem : MonoBehaviour
 
     // Move o cursor para o slot selecionado
 
-    
+
     void MoveCursor(int index)
     {
-        // Faz o cursor filho do slot para se posicionar junto
-        cursor.SetParent(itemSlots[index]);
-        cursor.anchoredPosition = new Vector2(-40f, 0f);
-    
+        if (index < 0 || index >= itemSlots.Count) return;
+
+        RectTransform targetSlot = itemSlots[index];
+        cursor.anchoredPosition = targetSlot.anchoredPosition;
     }
 
-    // Usa o item selecionado
-    void UseItem(int index)
-    {
-        if (index < 0 || index >= itensAtuais.Count) return;
 
+    // Usa o item selecionado
+    public void UseItem(int index)
+    {
+        if (index < 0 || index >= itensAtuais.Count)
+            return;
+
+        // Obtém o item
         Item item = itensAtuais[index];
 
-        // Chama o efeito do item passando o player
+        // Procura o player para aplicar o efeito
         playerStats player = FindFirstObjectByType<playerStats>();
         if (player != null)
             item.Usar(player);
 
+        // Diminui quantidade
         item.quantidade--;
 
+        // Remove se acabou
         if (item.quantidade <= 0)
             itensAtuais.RemoveAt(index);
 
+        // Ajusta índice do cursor para não sair do limite
         if (cursorIndex >= itensAtuais.Count)
             cursorIndex = Mathf.Max(0, itensAtuais.Count - 1);
 
+        // Reabre/atualiza inventário visual
         Open(itensAtuais);
+
+        // Reposiciona cursor
         MoveCursor(cursorIndex);
     }
+
 
 }
