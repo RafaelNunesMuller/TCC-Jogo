@@ -9,126 +9,108 @@ public class MenuEquip : MonoBehaviour
 
     [Header("UI")]
     public TMP_Text statusText;
+    public TMP_Text EquipamentoAtual;
     public Transform equipListParent;
     public GameObject equipItemPrefab;
     public RectTransform cursor;
 
-    [Header("Slots Visuais")]
-    public Image slotArmaIcon;
-    public Image slotArmaduraIcon;
-
-    private List<Equipamento> inventarioEquip = new List<Equipamento>();
-    private List<GameObject> botoesAtuais = new List<GameObject>();
-
-    private string slotSelecionado = "";
+    private List<Item> inventario = new List<Item>();
+    private List<RectTransform> equipSlots = new List<RectTransform>();
+    private List<Item> itensAtuais = new List<Item>();
     private int cursorIndex = 0;
-    private bool selecionandoItem = false;
+    private string slotSelecionado = "";
 
     void Start()
     {
-        // Equipamentos de exemplo
-        inventarioEquip.Add(new Equipamento("Espada de Ferro", 5, 0));
-        inventarioEquip.Add(new Equipamento("Espada Lendária", 15, 0));
-        inventarioEquip.Add(new Equipamento("Armadura de Couro", 0, 3));
-        inventarioEquip.Add(new Equipamento("Armadura de Aço", 0, 8));
+        // Exemplo de inventário
+        inventario.Add(new Item("Poção de Vida", ItemTipo.Consumivel, 5));
+        inventario.Add(new Item("Espada de Ferro", ItemTipo.Arma, 1, null, bonusForca: 5));
+        inventario.Add(new Item("Espada Lendária", ItemTipo.Arma, 1, null, bonusForca: 15));
+        inventario.Add(new Item("Armadura de Couro", ItemTipo.Armadura, 1, null, bonusDefesa: 3));
+        inventario.Add(new Item("Armadura de Aço", ItemTipo.Armadura, 1, null, bonusDefesa: 8));
 
         AtualizarStatus();
+        AtualizarEquip();
     }
 
     void Update()
     {
-        if (!selecionandoItem) return;
+        if (!gameObject.activeSelf || itensAtuais.Count == 0) return;
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            cursorIndex = (cursorIndex - 1 + botoesAtuais.Count) % botoesAtuais.Count;
-            MoverCursor();
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            cursorIndex = (cursorIndex + 1) % botoesAtuais.Count;
-            MoverCursor();
-        }
-        else if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Equipar(botoesAtuais[cursorIndex].GetComponent<ItemEquipUI>().equipamento);
-        }
-        else if (Input.GetKeyDown(KeyCode.X))
-        {
-            FecharLista();
-        }
+        HandleInput();
     }
 
     public void SelecionarSlot(string slot)
     {
-        slotSelecionado = slot;
+        slotSelecionado = slot; // "Arma" ou "Armadura"
         MostrarListaEquip();
     }
 
     void MostrarListaEquip()
     {
+        // Limpa itens antigos
         foreach (Transform child in equipListParent)
             Destroy(child.gameObject);
+        equipSlots.Clear();
+        itensAtuais.Clear();
 
-        botoesAtuais.Clear();
-
-        foreach (Equipamento equip in inventarioEquip)
+        // Filtra itens do tipo selecionado
+        foreach (Item item in inventario)
         {
-            if ((slotSelecionado == "Arma" && equip.bonusForca > 0) ||
-                (slotSelecionado == "Armadura" && equip.bonusDefesa > 0))
+            if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
+                (slotSelecionado == "Armadura" && item.tipo == ItemTipo.Armadura))
             {
                 GameObject obj = Instantiate(equipItemPrefab, equipListParent);
-                obj.GetComponentInChildren<TMP_Text>().text = equip.nome;
+                ItemEquipUI ui = obj.GetComponent<ItemEquipUI>();
+                ui.Configurar(item, () => Equipar(item));
 
-                ItemEquipUI ui = obj.AddComponent<ItemEquipUI>();
-                ui.equipamento = equip;
-
-                botoesAtuais.Add(obj);
+                equipSlots.Add(obj.GetComponent<RectTransform>());
+                itensAtuais.Add(item);
             }
         }
 
-        if (botoesAtuais.Count > 0)
-        {
-            cursorIndex = 0;
-            selecionandoItem = true;
-            cursor.gameObject.SetActive(true);
-            MoverCursor();
-        }
-        else
-        {
-            selecionandoItem = false;
-            cursor.gameObject.SetActive(false);
-        }
+        cursorIndex = 0;
+        MoveCursor(cursorIndex);
     }
 
-    void MoverCursor()
+    void MoveCursor(int index)
     {
-        cursor.position = botoesAtuais[cursorIndex].transform.position;
+        if (index < 0 || index >= equipSlots.Count) return;
+        cursor.anchoredPosition = equipSlots[index].anchoredPosition;
     }
 
-    void Equipar(Equipamento equip)
+    void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            cursorIndex = Mathf.Min(cursorIndex + 1, equipSlots.Count - 1);
+            MoveCursor(cursorIndex);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            cursorIndex = Mathf.Max(cursorIndex - 1, 0);
+            MoveCursor(cursorIndex);
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            gameObject.SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (cursorIndex >= 0 && cursorIndex < itensAtuais.Count)
+                Equipar(itensAtuais[cursorIndex]);
+        }
+    }
+
+    void Equipar(Item item)
     {
         if (slotSelecionado == "Arma")
-        {
-            playerStats.EquiparArma(equip);
-            slotArmaIcon.sprite = equip.sprite; // Atualiza o slot visual
-            slotArmaIcon.color = Color.white;
-        }
+            playerStats.EquiparArma(item);
         else if (slotSelecionado == "Armadura")
-        {
-            playerStats.EquiparArmadura(equip);
-            slotArmaduraIcon.sprite = equip.sprite; // Atualiza o slot visual
-            slotArmaduraIcon.color = Color.white;
-        }
+            playerStats.EquiparArmadura(item);
 
         AtualizarStatus();
-        FecharLista();
-    }
-
-    void FecharLista()
-    {
-        selecionandoItem = false;
-        cursor.gameObject.SetActive(false);
+        AtualizarEquip();
     }
 
     void AtualizarStatus()
@@ -138,9 +120,11 @@ public class MenuEquip : MonoBehaviour
             $"ATK: {playerStats.strength}\n" +
             $"DEF: {playerStats.defense}";
     }
-}
 
-public class ItemEquipUI : MonoBehaviour
-{
-    public Equipamento equipamento;
+    void AtualizarEquip()
+    {
+        EquipamentoAtual.text =
+            $"Arma: {playerStats.armaEquipada}\n" +
+            $"Armadura: {playerStats.armaduraEquipada}";
+    }
 }

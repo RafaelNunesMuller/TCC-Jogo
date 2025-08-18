@@ -1,17 +1,18 @@
 using UnityEngine;
 
+[System.Serializable]
 public class Equipamento
 {
     public string nome;
     public int bonusForca;
     public int bonusDefesa;
-    public Sprite sprite;
+    public Sprite sprite; // ícone do equipamento
 
-    public Equipamento(string nome, int bonusForca, int bonusDefesa, Sprite sprite = null)
+    public Equipamento(string nome, int forca, int defesa, Sprite sprite = null)
     {
         this.nome = nome;
-        this.bonusForca = bonusForca;
-        this.bonusDefesa = bonusDefesa;
+        this.bonusForca = forca;
+        this.bonusDefesa = defesa;
         this.sprite = sprite;
     }
 }

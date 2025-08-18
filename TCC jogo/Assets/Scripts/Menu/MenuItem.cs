@@ -12,6 +12,19 @@ public class MenuItem : MonoBehaviour
     private int cursorIndex = 0;             // Índice do cursor
     private List<Item> itensAtuais = new List<Item>();  // Lista atual dos itens mostrados
 
+
+    public static List<Item> inventario = new List<Item>();
+
+    void Start()
+    {
+        // Exemplo de inicialização
+        inventario.Add(new Item("Poção de Vida", ItemTipo.Consumivel, 5));
+        inventario.Add(new Item("Espada de Ferro", ItemTipo.Arma, 1, null, bonusForca: 5));
+        inventario.Add(new Item("Espada Lendária", ItemTipo.Arma, 1, null, bonusForca: 15));
+        inventario.Add(new Item("Armadura de Couro", ItemTipo.Armadura, 1, null, bonusDefesa: 3));
+        inventario.Add(new Item("Armadura de Aço", ItemTipo.Armadura, 1, null, bonusDefesa: 8));
+    }
+
     void Update()
     {
         if (!inventarioPainel.activeSelf) return; // Só responde se o inventário estiver aberto

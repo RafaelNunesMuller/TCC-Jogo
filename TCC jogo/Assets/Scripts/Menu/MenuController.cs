@@ -13,6 +13,7 @@ public class MenuController : MonoBehaviour
     public static Inventario instance;
     public MenuItem menuItem;
     public GameObject inventario;
+    public GameObject MenuEquip;
 
 
     void Start()
@@ -27,6 +28,7 @@ public class MenuController : MonoBehaviour
             bool isActive = !menuUI.activeSelf;
             menuUI.SetActive(isActive);
             inventario.SetActive(false);
+            MenuEquip.SetActive(false);
 
             // Bloqueia ou libera o movimento do player
             playerScript.canMove = !isActive;
@@ -89,6 +91,9 @@ public class MenuController : MonoBehaviour
                 break;
 
             case 1:
+                menuUI.SetActive(false);
+                playerScript.canMove = false; // Bloqueia movimento
+                MenuEquip.SetActive(true);
                 Debug.Log("Abrir EQUIP");
                 break;
 

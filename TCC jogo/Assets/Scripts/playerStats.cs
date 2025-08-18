@@ -25,35 +25,18 @@ public class playerStats : MonoBehaviour
     public int DefenseTotal  => defense + (armaduraEquipada != null ? armaduraEquipada.bonusDefesa : 0);
 
     // Métodos para equipar
-    public void EquiparArma(Equipamento arma)
+    public void EquiparArma(Item arma)
     {
-        // Remove bônus da arma antiga
-        if (armaEquipada != null)
-        {
-            strength -= armaEquipada.bonusForca;
-        }
-
-        // Equipa nova arma
-        armaEquipada = arma;
-        strength += armaEquipada.bonusForca;
-
-        Debug.Log("Equipada arma: " + armaEquipada.nome + " | ATK agora: " + strength);
+        strength += arma.bonusForca;
+        Debug.Log("Equipou arma: " + arma.nome);
     }
 
-    public void EquiparArmadura(Equipamento armadura)
+    public void EquiparArmadura(Item armadura)
     {
-        // Remove bônus da armadura antiga
-        if (armaduraEquipada != null)
-        {
-            defense -= armaduraEquipada.bonusDefesa;
-        }
-
-        // Equipa nova armadura
-        armaduraEquipada = armadura;
-        defense += armaduraEquipada.bonusDefesa;
-
-        Debug.Log("Equipada armadura: " + armaduraEquipada.nome + " | DEF agora: " + defense);
+        defense += armadura.bonusDefesa;
+        Debug.Log("Equipou armadura: " + armadura.nome);
     }
+
 
     public void Curar(int quantidade)
     {
