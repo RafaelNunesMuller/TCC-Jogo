@@ -4,7 +4,8 @@ public enum ItemTipo
 {
     Consumivel,
     Arma,
-    Armadura
+    Armadura,
+    Acessorio
 }
 
 [System.Serializable]

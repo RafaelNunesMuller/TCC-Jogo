@@ -1,28 +1,44 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.Events;
 
 public class ItemEquipUI : MonoBehaviour
 {
-    public TMP_Text nomeText;
-    public Button button;
-    private System.Action acao;
+    public Image iconImage;          // Ícone do item
+    public TMP_Text nomeText;        // Nome do item
+    
 
-    public void Configurar(Item item, System.Action onClick)
+    private UnityAction onClick;
+
+    public void Configurar(Item item, UnityEngine.Events.UnityAction acao)
     {
-        nomeText.text = item.nome;
-        acao = onClick;
-        button.onClick.RemoveAllListeners();
-        button.onClick.AddListener(() => acao.Invoke());
+        if (iconImage != null)
+        {
+            if (item.icone != null)
+            {
+                iconImage.sprite = item.icone;
+                iconImage.enabled = true;
+            }
+            else
+            {
+                iconImage.sprite = null; // deixa vazio mas mantém visível
+                iconImage.enabled = false; // ou pode deixar true se quiser sempre mostrar
+            }
+        }
+
+        if (nomeText != null)
+            nomeText.text = item.nome;
+
+        
+
+        onClick = acao;
     }
 
-    public void Acionar()
-    {
-        acao?.Invoke();
-    }
 
-    public void SetColor(Color cor)
+    // Para usar no botão do prefab
+    public void Selecionar()
     {
-        nomeText.color = cor;
+        onClick?.Invoke();
     }
 }

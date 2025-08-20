@@ -19,25 +19,52 @@ public class playerStats : MonoBehaviour
     [Header("Equipamentos")]
     public Equipamento armaEquipada;
     public Equipamento armaduraEquipada;
+    public Equipamento acessorioEquipado;
 
-    // -------- MÉTODOS DE STATUS --------
+    // -------- PROPRIEDADES --------
     public int StrengthTotal => strength + (armaEquipada != null ? armaEquipada.bonusForca : 0);
-    public int DefenseTotal  => defense + (armaduraEquipada != null ? armaduraEquipada.bonusDefesa : 0);
+    public int DefenseTotal => defense +
+                               (armaduraEquipada != null ? armaduraEquipada.bonusDefesa : 0) +
+                               (acessorioEquipado != null ? acessorioEquipado.bonusDefesa : 0);
 
-    // Métodos para equipar
+    // -------- MÉTODOS DE EQUIPAR --------
     public void EquiparArma(Item arma)
     {
-        strength += arma.bonusForca;
-        Debug.Log("Equipou arma: " + arma.nome);
+        // Remove bônus da arma anterior
+        if (armaEquipada != null)
+            strength -= armaEquipada.bonusForca;
+
+        // Equipa a nova arma
+        armaEquipada = new Equipamento(arma.nome, arma.bonusForca, arma.bonusDefesa, arma.icone);
+        strength += armaEquipada.bonusForca;
+
+        Debug.Log("Equipou arma: " + arma.nome + " | Strength agora: " + strength);
     }
+
 
     public void EquiparArmadura(Item armadura)
     {
-        defense += armadura.bonusDefesa;
+        // Remove bônus da arma anterior
+        if (armaduraEquipada != null)
+            strength -= armaduraEquipada.bonusForca;
+
+        armaduraEquipada = new Equipamento(armadura.nome, armadura.bonusForca, armadura.bonusDefesa, armadura.icone);
+        defense += armaduraEquipada.bonusDefesa;
         Debug.Log("Equipou armadura: " + armadura.nome);
     }
 
+    public void EquiparAcessorio(Item acessorio)
+    {
+        // Remove bônus da arma anterior
+        if (acessorioEquipado != null)
+            strength -= acessorioEquipado.bonusForca;
 
+        acessorioEquipado = new Equipamento(acessorio.nome, acessorio.bonusForca, acessorio.bonusDefesa, acessorio.icone);
+        defense += acessorioEquipado.bonusDefesa;
+        Debug.Log("Equipou acessório: " + acessorio.nome);
+    }
+
+    // -------- MÉTODOS DE CURA E AUMENTO --------
     public void Curar(int quantidade)
     {
         currentHP += quantidade;
@@ -59,9 +86,7 @@ public class playerStats : MonoBehaviour
         Debug.Log("Defesa aumentada");
     }
 
-    
-
-    // -------- XP e Level --------
+    // -------- XP e LEVEL --------
     public void GainExperience(int xp)
     {
         experience += xp;
@@ -73,7 +98,7 @@ public class playerStats : MonoBehaviour
 
     int ExperienceToNextLevel()
     {
-        return level * 10 + 20; 
+        return level * 10 + 20;
     }
 
     void LevelUp()
@@ -88,7 +113,7 @@ public class playerStats : MonoBehaviour
         Debug.Log("Level up! Agora nível " + level);
     }
 
-    // Start
+    // -------- START --------
     void Start()
     {
         currentHP = maxHP;

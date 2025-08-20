@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 432ec7c6b2bc4b247a4ae3baecc8bba3
+guid: 1d7ee60571bdca7429f3df6dff01ae15
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7773801882638470053
-    second: sword_02b_0
+      213: -104226450262520760
+    second: necklace_01a_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sword_02b_0
+      name: necklace_01a_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5abcde8ff9712eb60800000000000000
-      internalID: 7773801882638470053
+      spriteID: 84c07ef7896bd8ef0800000000000000
+      internalID: -104226450262520760
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      sword_02b_0: 7773801882638470053
+      necklace_01a_0: -104226450262520760
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
