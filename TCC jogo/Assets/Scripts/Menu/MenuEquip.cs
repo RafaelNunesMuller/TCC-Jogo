@@ -8,7 +8,6 @@ public class MenuEquip : MonoBehaviour
     public playerStats playerStats;
 
     [Header("UI")]
-    public TMP_Text statusText;
     public TMP_Text EquipamentoAtual;
     public Transform equipListParent;
     public GameObject equipItemPrefab;
@@ -18,6 +17,9 @@ public class MenuEquip : MonoBehaviour
     public Button weaponButton;
     public Button armorButton;
     public Button accessoryButton;
+
+    [Header("Referências")]
+    public GameObject menuPanel; // arrasta o MenuPanel no inspector
 
     private List<Item> inventario = new List<Item>();
     private List<RectTransform> equipSlots = new List<RectTransform>();
@@ -62,7 +64,7 @@ public class MenuEquip : MonoBehaviour
         botoesSlots.Add(armorButton.GetComponent<RectTransform>());
         botoesSlots.Add(accessoryButton.GetComponent<RectTransform>());
 
-        AtualizarStatus();
+        
         AtualizarEquip();
 
         // Começa no primeiro botão
@@ -74,6 +76,15 @@ public class MenuEquip : MonoBehaviour
     {
         if (!gameObject.activeSelf) return;
         HandleInput();
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            VoltarParaMenu();
+        }
+    }
+    public void VoltarParaMenu()
+    {
+        gameObject.SetActive(false); // fecha o Status
+        menuPanel.SetActive(true);        // reabre o menu principal
     }
 
     void HandleInput()
@@ -206,17 +217,10 @@ public class MenuEquip : MonoBehaviour
         else if (slotSelecionado == "Acessorio")
             playerStats.EquiparAcessorio(item);
 
-        AtualizarStatus();
         AtualizarEquip();
     }
 
-    void AtualizarStatus()
-    {
-        statusText.text =
-            $"HP: {playerStats.maxHP}\n" +
-            $"ATK: {playerStats.strength}\n" +
-            $"DEF: {playerStats.defense}";
-    }
+    
 
     void AtualizarEquip()
     {

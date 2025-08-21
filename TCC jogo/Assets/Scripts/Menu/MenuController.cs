@@ -14,6 +14,7 @@ public class MenuController : MonoBehaviour
     public MenuItem menuItem;
     public GameObject inventario;
     public GameObject MenuEquip;
+    public GameObject MenuStatus;
 
 
     void Start()
@@ -61,12 +62,6 @@ public class MenuController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.X)) // Confirmar
-        {
-            menuUI.SetActive(true); // Fecha o menu principal
-            playerScript.canMove = false; // Bloqueia movimento
-        }
-
     }
 
 
@@ -92,12 +87,15 @@ public class MenuController : MonoBehaviour
 
             case 1:
                 menuUI.SetActive(false);
-                playerScript.canMove = false; // Bloqueia movimento
-                MenuEquip.SetActive(true);
+                playerScript.canMove = false; 
+                MenuEquip.SetActive(true); //Abre o Equip
                 Debug.Log("Abrir EQUIP");
                 break;
 
             case 2:
+                menuUI.SetActive(false);
+                playerScript.canMove = false;
+                MenuStatus.SetActive(true); //Abre o Status
                 Debug.Log("Abrir STATUS");
                 break;
 

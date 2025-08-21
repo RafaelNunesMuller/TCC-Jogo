@@ -7,7 +7,10 @@ public class MenuItem : MonoBehaviour
     public Transform itemSlotContainer;     // Container dos slots (pai)
     public RectTransform cursor;             // Cursor que indica o slot selecionado
     public GameObject inventarioPainel;     // Painel do inventário
-  
+
+    [Header("Referências")]
+    public GameObject menuPanel; // arrasta o MenuPanel no inspector
+
     private List<RectTransform> itemSlots = new List<RectTransform>();  // Lista dos slots
     private int cursorIndex = 0;             // Índice do cursor
     private List<Item> itensAtuais = new List<Item>();  // Lista atual dos itens mostrados
@@ -30,6 +33,17 @@ public class MenuItem : MonoBehaviour
         if (!inventarioPainel.activeSelf) return; // Só responde se o inventário estiver aberto
 
         HandleInput();
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            VoltarParaMenu();
+        }
+    }
+
+    public void VoltarParaMenu()
+    {
+        gameObject.SetActive(false); // fecha o Status
+        menuPanel.SetActive(true);        // reabre o menu principal
     }
 
     void HandleInput()
@@ -44,11 +58,6 @@ public class MenuItem : MonoBehaviour
         {
             cursorIndex = Mathf.Max(cursorIndex - 1, 0);
             MoveCursor(cursorIndex);
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            inventarioPainel.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
