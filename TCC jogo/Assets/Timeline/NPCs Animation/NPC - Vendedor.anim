@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NPC - 4 (walk rigth)
+  m_Name: NPC - Vendedor
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1087196445, guid: b626eef37b8dea949bfab4f6e50390f2, type: 3}
-    - time: 0.18333334
-      value: {fileID: -1557898311, guid: b626eef37b8dea949bfab4f6e50390f2, type: 3}
-    - time: 0.33333334
-      value: {fileID: -507065073, guid: b626eef37b8dea949bfab4f6e50390f2, type: 3}
+      value: {fileID: 2972348795776874399, guid: ded74394e725cdd4a8b920423715e8a0, type: 3}
+    - time: 0.16666667
+      value: {fileID: 5270805838419048377, guid: ded74394e725cdd4a8b920423715e8a0, type: 3}
+    - time: 0.3
+      value: {fileID: -8589575742217872470, guid: ded74394e725cdd4a8b920423715e8a0, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,15 +48,15 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1087196445, guid: b626eef37b8dea949bfab4f6e50390f2, type: 3}
-    - {fileID: -1557898311, guid: b626eef37b8dea949bfab4f6e50390f2, type: 3}
-    - {fileID: -507065073, guid: b626eef37b8dea949bfab4f6e50390f2, type: 3}
+    - {fileID: 2972348795776874399, guid: ded74394e725cdd4a8b920423715e8a0, type: 3}
+    - {fileID: 5270805838419048377, guid: ded74394e725cdd4a8b920423715e8a0, type: 3}
+    - {fileID: -8589575742217872470, guid: ded74394e725cdd4a8b920423715e8a0, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.35000002
+    m_StopTime: 0.3166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
