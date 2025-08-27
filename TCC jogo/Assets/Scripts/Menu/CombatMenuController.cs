@@ -3,9 +3,13 @@ using UnityEngine.UI;
 
 public class CombatMenuController : MonoBehaviour
 {
-    public Button[] opcoesMenu;           // As opções do menu (Text ou TMP_Text)
-    public RectTransform cursor;        // O cursor que será movido
+    public Button[] opcoesMenu;           // As opï¿½ï¿½es do menu (Text ou TMP_Text)
+    public RectTransform cursor;        // O cursor que serï¿½ movido
     private int opcaoSelecionada = 0;
+    public static Inventario instance;
+    public MenuItem menuItem;
+    public GameObject Menu;
+    public GameObject InventarioItem;
 
     void Start()
     {
@@ -37,11 +41,11 @@ public class CombatMenuController : MonoBehaviour
 
     void AtualizarCursor()
     {
-        // Reposiciona o cursor como filho do botão atual (alinha perfeitamente)
+        // Reposiciona o cursor como filho do botï¿½o atual (alinha perfeitamente)
         cursor.SetParent(opcoesMenu[opcaoSelecionada].transform, true);
 
-        // Posiciona um pouco à esquerda do texto
-        cursor.anchoredPosition = new Vector2(195, -15); // distância da esquerda
+        // Posiciona um pouco ï¿½ esquerda do texto
+        cursor.anchoredPosition = new Vector2(195, -15); // distï¿½ncia da esquerda
     }
 
 
@@ -53,7 +57,9 @@ public class CombatMenuController : MonoBehaviour
                 Debug.Log("ATACAR!");
                 break;
             case 1:
-                Debug.Log("ITEM!");
+                InventarioItem.SetActive(true);
+                Menu.SetActive(false); // Fecha o menu principal
+                Debug.Log("Abrir ITEM");
                 break;
             case 2:
                 Debug.Log("FUGIR!");
