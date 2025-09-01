@@ -23140,6 +23140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1614035149}
   - component: {fileID: 1614035150}
+  - component: {fileID: 1614035151}
   m_Layer: 0
   m_Name: 06-conjurer_7
   m_TagString: Untagged
@@ -23155,7 +23156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614035148}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -124.56, y: 4.44, z: 5.2584605}
   m_LocalScale: {x: 1.8309, y: 1.8309, z: 1.8309}
   m_ConstrainProportionsScale: 0
@@ -23217,6 +23218,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1614035151
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614035148}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1614139821
 GameObject:
   m_ObjectHideFlags: 0
@@ -23344,6 +23367,8 @@ PlayableDirector:
     value: {fileID: 2121831959}
   - key: {fileID: -7588628936584609913, guid: c356f91cc513b884eb96a4934353292f, type: 2}
     value: {fileID: 1614035148}
+  - key: {fileID: -505031049307303623, guid: c356f91cc513b884eb96a4934353292f, type: 2}
+    value: {fileID: 1614035151}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1707943722
