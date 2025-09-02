@@ -1571,16 +1571,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee25232732d7e4845a75311c5951796f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: "Dem\xF4nio Risonho"
+  enemyName: Demonio Risonho
   level: 2
-  strength: 12
-  defense: 6
-  magic: 3
-  magicDefense: 3
-  speed: 6
-  maxHP: 70
+  strength: 6
+  defense: 3
+  magic: 2
+  magicDefense: 1
+  speed: 5
+  maxHP: 30
   currentHP: 0
-  experienceReward: 50
+  experienceReward: 40
 --- !u!1 &1066825314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2283,9 +2283,10 @@ MonoBehaviour:
   - {fileID: 338361297}
   - {fileID: 214145478}
   cursor: {fileID: 479920307}
-  menuItem: {fileID: 471025511}
   Menu: {fileID: 669700052}
   InventarioItem: {fileID: 471025507}
+  attackMenu: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1424603391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,6 +2497,7 @@ MonoBehaviour:
     bonusForca: 0
     bonusDefesa: 0
     sprite: {fileID: 0}
+  ataques: []
 --- !u!114 &1434373202
 MonoBehaviour:
   m_ObjectHideFlags: 0
