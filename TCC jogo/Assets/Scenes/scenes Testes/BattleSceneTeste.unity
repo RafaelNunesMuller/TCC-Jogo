@@ -795,6 +795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 405063664}
   - component: {fileID: 405063663}
+  - component: {fileID: 405063665}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Untagged
@@ -846,7 +847,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5164087793625138443, guid: 933ab54b2564e9343bd06308101473fc, type: 3}
+  m_Sprite: {fileID: -2211054923940112595, guid: 70ac244bbb9b5134cb4e5b2d4647c55b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -872,6 +873,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &405063665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405063662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee25232732d7e4845a75311c5951796f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Olho Espectral
+  level: 7
+  strength: 8
+  defense: 5
+  magic: 12
+  magicDefense: 9
+  speed: 7
+  maxHP: 100
+  currentHP: 0
+  experienceReward: 80
 --- !u!1 &471025507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,6 +1481,7 @@ GameObject:
   m_Component:
   - component: {fileID: 715987131}
   - component: {fileID: 715987130}
+  - component: {fileID: 715987132}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -1535,6 +1559,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715987132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715987129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee25232732d7e4845a75311c5951796f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: "Dem\xF4nio Risonho"
+  level: 2
+  strength: 12
+  defense: 6
+  magic: 3
+  magicDefense: 3
+  speed: 6
+  maxHP: 70
+  currentHP: 0
+  experienceReward: 50
 --- !u!1 &1066825314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,6 +2680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1661613542}
   - component: {fileID: 1661613541}
+  - component: {fileID: 1661613543}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Untagged
@@ -2711,6 +2758,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1661613543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661613540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee25232732d7e4845a75311c5951796f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: "Corruptor Anf\xEDbio"
+  level: 3
+  strength: 9
+  defense: 6
+  magic: 2
+  magicDefense: 3
+  speed: 5
+  maxHP: 80
+  currentHP: 0
+  experienceReward: 30
 --- !u!1 &1662501991
 GameObject:
   m_ObjectHideFlags: 0
