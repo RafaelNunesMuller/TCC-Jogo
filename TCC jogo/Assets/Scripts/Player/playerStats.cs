@@ -21,16 +21,19 @@ public class playerStats : MonoBehaviour
     public Equipamento armaduraEquipada;
     public Equipamento acessorioEquipado;
 
+    [Header("Ataques DisponÃ­veis")]
+    public Attack[] ataques;
+
     // -------- PROPRIEDADES --------
     public int StrengthTotal => strength + (armaEquipada != null ? armaEquipada.bonusForca : 0);
     public int DefenseTotal => defense +
                                (armaduraEquipada != null ? armaduraEquipada.bonusDefesa : 0) +
                                (acessorioEquipado != null ? acessorioEquipado.bonusDefesa : 0);
 
-    // -------- MÉTODOS DE EQUIPAR --------
+    // -------- Mï¿½TODOS DE EQUIPAR --------
     public void EquiparArma(Item arma)
     {
-        // Remove bônus da arma anterior
+        // Remove bï¿½nus da arma anterior
         if (armaEquipada != null)
             strength -= armaEquipada.bonusForca;
 
@@ -44,7 +47,7 @@ public class playerStats : MonoBehaviour
 
     public void EquiparArmadura(Item armadura)
     {
-        // Remove bônus da arma anterior
+        // Remove bï¿½nus da arma anterior
         if (armaduraEquipada != null)
             strength -= armaduraEquipada.bonusForca;
 
@@ -55,16 +58,16 @@ public class playerStats : MonoBehaviour
 
     public void EquiparAcessorio(Item acessorio)
     {
-        // Remove bônus da arma anterior
+        // Remove bï¿½nus da arma anterior
         if (acessorioEquipado != null)
             strength -= acessorioEquipado.bonusForca;
 
         acessorioEquipado = new Equipamento(acessorio.nome, acessorio.bonusForca, acessorio.bonusDefesa, acessorio.icone);
         defense += acessorioEquipado.bonusDefesa;
-        Debug.Log("Equipou acessório: " + acessorio.nome);
+        Debug.Log("Equipou acessï¿½rio: " + acessorio.nome);
     }
 
-    // -------- MÉTODOS DE CURA E AUMENTO --------
+    // -------- Mï¿½TODOS DE CURA E AUMENTO --------
     public void Curar(int quantidade)
     {
         currentHP += quantidade;
@@ -77,7 +80,7 @@ public class playerStats : MonoBehaviour
     public void ForcaUp(int quantidade)
     {
         strength += quantidade;
-        Debug.Log("Força aumentada");
+        Debug.Log("Forï¿½a aumentada");
     }
 
     public void DefUp(int quantidade)
@@ -110,7 +113,7 @@ public class playerStats : MonoBehaviour
         speed += 1;
         maxHP += 5;
         currentHP = maxHP;
-        Debug.Log("Level up! Agora nível " + level);
+        Debug.Log("Level up! Agora nï¿½vel " + level);
     }
 
     // -------- START --------

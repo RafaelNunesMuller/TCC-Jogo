@@ -3,13 +3,17 @@ using UnityEngine.UI;
 
 public class CombatMenuController : MonoBehaviour
 {
-    public Button[] opcoesMenu;           // As op��es do menu (Text ou TMP_Text)
-    public RectTransform cursor;        // O cursor que ser� movido
+     public Button[] opcoesMenu;      // Opções do menu (Atacar, Item, Fugir)
+    public RectTransform cursor;     // O cursor do menu
     private int opcaoSelecionada = 0;
-    public static Inventario instance;
-    public MenuItem menuItem;
-    public GameObject Menu;
-    public GameObject InventarioItem;
+
+    [Header("Menus")]
+    public GameObject Menu;          // Menu principal
+    public GameObject InventarioItem;// Menu de itens
+
+    [Header("Referências de Combate")]
+    public AttackMenu attackMenu;    // Script do menu de ataques
+    public playerStats player;       // Referência ao Player
 
     void Start()
     {
@@ -54,6 +58,8 @@ public class CombatMenuController : MonoBehaviour
         switch (opcao)
         {
             case 0:
+                attackMenu.gameObject.SetActive(true); // abre o painel de ataques
+                Menu.SetActive(false);                 // fecha o menu principal
                 Debug.Log("ATACAR!");
                 break;
             case 1:
