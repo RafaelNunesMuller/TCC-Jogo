@@ -1,10 +1,14 @@
 using UnityEngine;
 
-[System.Serializable]
-public class Attack
+[CreateAssetMenu(fileName = "NovoAtaque", menuName = "RPG/Ataque")]
+public class Attack : ScriptableObject
 {
+    [Header("Configuração do Ataque")]
     public string nome;
     public int power;
     public int manaCost;
-    public bool isMagic; // true = usa magia, false = ataque físico
+    public bool isMagic; // true = mágico, false = físico
+
+    [TextArea]
+    public string descricao; // opcional, aparece em menus
 }

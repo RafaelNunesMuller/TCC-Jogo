@@ -59,7 +59,6 @@ public class CombatMenuController : MonoBehaviour
         {
             case 0:
                 attackMenu.gameObject.SetActive(true); // abre o painel de ataques
-                attackMenu.ShowAttacks(player);        // gera os botões
                 Menu.SetActive(false);                 // fecha o menu principal
                 Debug.Log("ATACAR!");
                 break;
