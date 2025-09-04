@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f61b90325da5734d9861257446f57fd
+guid: d88776ae9fc7a1e439f769299a51a7cf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7163940976096952355
-    second: Logo do tcc_0
+      213: -2234746894278307441
+    second: battle background_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Logo do tcc_0
+      name: battle background_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1024
+        width: 626
+        height: 282
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 320cf109c5e6b6360800000000000000
-      internalID: 7163940976096952355
+      spriteID: f8152a33a859cf0e0800000000000000
+      internalID: -2234746894278307441
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Logo do tcc_0: 7163940976096952355
+      battle background_0: -2234746894278307441
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
