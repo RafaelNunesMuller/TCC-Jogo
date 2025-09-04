@@ -20,9 +20,20 @@ public class EnemyStats : MonoBehaviour
     [Header("Experiência ao morrer")]
     public int experienceReward;
 
-    public void TakeDamage(int damage)
+    public event System.Action OnDeath;
+
+    // Método para limpar handlers antigos
+    public void ResetOnDeath()
     {
-        currentHP -= damage;
+        OnDeath = null;
+    }
+
+
+
+    public void TakeDamage(int dano)
+    {
+        currentHP -= dano;
+
         if (currentHP <= 0)
         {
             currentHP = 0;
@@ -33,8 +44,10 @@ public class EnemyStats : MonoBehaviour
     void Die()
     {
         Debug.Log(enemyName + " foi derrotado!");
+        OnDeath?.Invoke();   // 🔹 Chama apenas os inscritos
         Destroy(gameObject);
     }
+
 
     void Start()
     {
