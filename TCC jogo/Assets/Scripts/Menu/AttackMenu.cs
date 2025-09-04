@@ -3,42 +3,48 @@ using UnityEngine.UI;
 
 public class AttackMenu : MonoBehaviour
 {
-    public Button[] attackButtons;     // Botões de ataques
+    public Button[] attackButtons;     // Lista de ataques
     public RectTransform cursor;       // Cursor para navegação
     public TargetMenu targetMenu;
     public playerStats player;
+    public CombatMenuController combatMenu;
+    public GameObject menu;
 
-    private int indiceSelecionado = 0;   // índice do botão
-    private Attack ataqueAtual;          // ataque selecionado
-    public GameObject Menu;
+    private int ataqueSelecionado = 0;
 
     void OnEnable()
     {
-        indiceSelecionado = 0;
+        ataqueSelecionado = 0;
         AtualizarCursor();
+        combatMenu.enabled = false; // 🔹 desativa menu principal enquanto escolhe ataque
+    }
+
+    void OnDisable()
+    {
+        combatMenu.enabled = true; // 🔹 reativa menu principal ao fechar
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            indiceSelecionado = (indiceSelecionado + 1) % attackButtons.Length;
+            ataqueSelecionado = (ataqueSelecionado + 1) % attackButtons.Length;
             AtualizarCursor();
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            indiceSelecionado--;
-            if (indiceSelecionado < 0) indiceSelecionado = attackButtons.Length - 1;
+            ataqueSelecionado--;
+            if (ataqueSelecionado < 0) ataqueSelecionado = attackButtons.Length - 1;
             AtualizarCursor();
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             SelecionarAtaque();
         }
 
-        if (Input.GetKeyDown(KeyCode.X)) // botão voltar
+        if (Input.GetKeyDown(KeyCode.X)) // botão de voltar
         {
             VoltarParaMenu();
         }
@@ -46,33 +52,25 @@ public class AttackMenu : MonoBehaviour
 
     void AtualizarCursor()
     {
-        cursor.SetParent(attackButtons[indiceSelecionado].transform, true);
+        cursor.SetParent(attackButtons[ataqueSelecionado].transform, true);
         cursor.anchoredPosition = new Vector2(195, -15);
     }
 
     public void SelecionarAtaque()
     {
-        // Pega o ataque do botão atual
-        ataqueAtual = attackButtons[indiceSelecionado].GetComponent<AttackHolder>()?.attack;
+        Attack ataque = attackButtons[ataqueSelecionado].GetComponent<AttackReference>().attack;
+        if (ataque == null) return;
 
-        if (ataqueAtual == null)
-        {
-            Debug.LogWarning("Nenhum ataque configurado nesse botão!");
-            return;
-        }
-
-        // Acha os inimigos
         EnemyStats[] inimigos = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
         targetMenu.ConfigurarInimigos(inimigos);
 
-        // Abre o menu de seleção de alvo
-        targetMenu.AbrirSelecao(ataqueAtual, player);
-        gameObject.SetActive(false); // Fecha o menu de ataques
+        targetMenu.AbrirSelecao(ataque, player);
+        gameObject.SetActive(false);
     }
 
     public void VoltarParaMenu()
     {
         gameObject.SetActive(false); // fecha o Status
-        Menu.SetActive(true);        // reabre o menu principal
+        menu.SetActive(true);        // reabre o menu principal
     }
 }
