@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class EnemyStats : MonoBehaviour
 {
     [Header("Identificação")]
@@ -28,12 +28,9 @@ public class EnemyStats : MonoBehaviour
         OnDeath = null;
     }
 
-
-
-    public void TakeDamage(int dano)
+    public void TakeDamage(int damage)
     {
-        currentHP -= dano;
-
+        currentHP -= damage;
         if (currentHP <= 0)
         {
             currentHP = 0;
@@ -44,7 +41,11 @@ public class EnemyStats : MonoBehaviour
     void Die()
     {
         Debug.Log(enemyName + " foi derrotado!");
-        OnDeath?.Invoke();   // 🔹 Chama apenas os inscritos
+
+        // dispara evento só deste inimigo
+        OnDeath?.Invoke();
+
+        // destroi o inimigo da cena
         Destroy(gameObject);
     }
 
