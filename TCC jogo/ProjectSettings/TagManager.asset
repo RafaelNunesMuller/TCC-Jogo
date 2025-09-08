@@ -3,14 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - Mapa
-  - Lojinha
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Mapa
+  - Characters
   - Water
   - UI
   - Lojinha
@@ -43,11 +41,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Mapa
-    uniqueID: 2691426385
-    locked: 0
-  - name: Lojinha
-    uniqueID: 393319897
+  - name: Characters
+    uniqueID: 3544522249
     locked: 0
   m_RenderingLayers:
   - Default

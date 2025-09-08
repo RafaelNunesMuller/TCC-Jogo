@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 
 public class TargetMenu : MonoBehaviour
 {
-    public Button[] enemyButtons;   // Até 3 inimigos
-    public RectTransform cursor;    // Cursor
-    private int inimigoSelecionado = 0;
+    public Button[] enemyButtons;   // Botões de seleção
+    public RectTransform cursor;
 
+    private int inimigoSelecionado = 0;
     private Attack ataqueAtual;
     private playerStats player;
     private EnemyStats[] inimigos;
     public GameObject Menu;
-    public CombatMenuController combatMenu; // ref. ao menu principal
+    public CombatMenuController CombatMenuController;
 
     public void ConfigurarInimigos(EnemyStats[] inimigosAtivos)
     {
@@ -24,22 +23,17 @@ public class TargetMenu : MonoBehaviour
             {
                 enemyButtons[i].gameObject.SetActive(true);
 
+                // pega ou cria referência
                 var refInimigo = enemyButtons[i].GetComponent<EnemyReference>();
                 if (refInimigo == null)
                     refInimigo = enemyButtons[i].gameObject.AddComponent<EnemyReference>();
 
                 refInimigo.enemy = inimigos[i];
 
-                // 🔹 Limpa handlers antigos corretamente
-                inimigos[i].ResetOnDeath();
-
-                // 🔹 Captura a referência local
-                Button botao = enemyButtons[i];
-                EnemyStats inimigo = inimigos[i];
-
-                inimigo.OnDeath += () =>
+                int idx = i;
+                inimigos[i].OnDeath += () =>
                 {
-                    botao.gameObject.SetActive(false);
+                    enemyButtons[idx].gameObject.SetActive(false);
                 };
             }
             else
@@ -48,8 +42,6 @@ public class TargetMenu : MonoBehaviour
             }
         }
     }
-
-
 
     public void AbrirSelecao(Attack ataque, playerStats jogador)
     {
@@ -61,11 +53,6 @@ public class TargetMenu : MonoBehaviour
         {
             AtualizarCursor();
             gameObject.SetActive(true);
-            combatMenu.enabled = false; // ?? bloqueia menu principal
-        }
-        else
-        {
-            Debug.LogWarning("Nenhum inimigo encontrado para atacar!");
         }
     }
 
@@ -92,7 +79,7 @@ public class TargetMenu : MonoBehaviour
             AtacarInimigo(inimigoSelecionado);
         }
 
-        if (Input.GetKeyDown(KeyCode.X)) // botão de voltar
+        if (Input.GetKeyDown(KeyCode.X))
         {
             VoltarParaMenu();
         }
@@ -106,23 +93,20 @@ public class TargetMenu : MonoBehaviour
 
     void AtacarInimigo(int index)
     {
-        EnemyReference refInimigo = enemyButtons[index].GetComponent<EnemyReference>();
+        var refInimigo = enemyButtons[index].GetComponent<EnemyReference>();
         if (refInimigo == null || refInimigo.enemy == null) return;
 
         EnemyStats inimigo = refInimigo.enemy;
-
         int dano = Mathf.Max(1, (player.StrengthTotal + ataqueAtual.power) - inimigo.defense);
         inimigo.TakeDamage(dano);
 
         Debug.Log($"{player.name} usou {ataqueAtual.nome} em {inimigo.enemyName} e causou {dano} de dano! HP atual: {inimigo.currentHP}");
-
-        VoltarParaMenu(); // volta pro menu depois do ataque
     }
 
     public void VoltarParaMenu()
     {
         gameObject.SetActive(false);
         Menu.SetActive(true);
-        combatMenu.enabled = true; // ?? reativa menu principal
+        CombatMenuController.enabled = true;
     }
 }
