@@ -2,44 +2,48 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Prefabs dos inimigos (com SpriteRenderer + EnemyStats)")]
-    public EnemyStats[] enemyPrefabs;
+    [Header("Lista de prefabs possíveis (até 10 inimigos)")]
+    public GameObject[] enemyPrefabs;
 
-    [Header("Pontos de spawn")]
+    [Header("Locais de spawn (até 3 por batalha)")]
     public Transform[] spawnPoints;
 
-    [Header("Refer�ncia ao TargetMenu")]
+    [Header("Referências")]
     public TargetMenu targetMenu;
 
     void Start()
     {
-        SpawnEnemies();
+        SpawnarInimigosAleatorios();
     }
 
-    void SpawnEnemies()
+    void SpawnarInimigosAleatorios()
     {
-        int n = Mathf.Min(enemyPrefabs.Length, spawnPoints.Length);
-        EnemyStats[] ativos = new EnemyStats[n];
+        // Sorteia quantos inimigos vão aparecer (1 a 3)
+        int qtdInimigos = Random.Range(1, spawnPoints.Length + 1);
 
-        for (int i = 0; i < n; i++)
+        EnemyStats[] inimigosAtivos = new EnemyStats[qtdInimigos];
+
+        for (int i = 0; i < qtdInimigos; i++)
         {
-            if (enemyPrefabs[i] == null || spawnPoints[i] == null) continue;
+            // Sorteia um prefab da lista
+            int indexPrefab = Random.Range(0, enemyPrefabs.Length);
+            GameObject prefabEscolhido = enemyPrefabs[indexPrefab];
 
-            EnemyStats inst = Instantiate(enemyPrefabs[i], spawnPoints[i].position, Quaternion.identity);
+            // Instancia no ponto de spawn correspondente
+            GameObject inimigoObj = Instantiate(prefabEscolhido, spawnPoints[i].position, Quaternion.identity, transform);
 
-            // garantir que aparece
-            SpriteRenderer sr = inst.GetComponent<SpriteRenderer>();
-            if (sr != null)
-            {
-                sr.sortingLayerName = "Characters";
-                sr.sortingOrder = 5;
-            }
+            // Pega o EnemyStats desse inimigo
+            EnemyStats stats = inimigoObj.GetComponent<EnemyStats>();
 
-            ativos[i] = inst;
+            // Garante que o inimigo foi encontrado
+            if (stats != null)
+                inimigosAtivos[i] = stats;
+            else
+                Debug.LogError($"Prefab {prefabEscolhido.name} não tem EnemyStats!");
         }
 
-        // passa a lista de inimigos vivos para o TargetMenu
+        // Passa a lista para o TargetMenu
         if (targetMenu != null)
-            targetMenu.ConfigurarInimigos(ativos);
+            targetMenu.ConfigurarInimigos(inimigosAtivos);
     }
 }
