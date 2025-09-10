@@ -1,39 +1,48 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class TargetMenu : MonoBehaviour
 {
-    public Button[] enemyButtons;   // Botões de seleção
+    public Button[] enemyButtons;   // Slots da UI (até 3 ou mais)
     public RectTransform cursor;
-
     private int inimigoSelecionado = 0;
+
     private Attack ataqueAtual;
     private playerStats player;
-    private EnemyStats[] inimigos;
+
+    private List<EnemyStats> inimigos = new List<EnemyStats>();
+
     public GameObject Menu;
-    public CombatMenuController CombatMenuController;
+    public CombatMenuController combatMenu;
 
     public void ConfigurarInimigos(EnemyStats[] inimigosAtivos)
     {
-        inimigos = inimigosAtivos;
+        inimigos.Clear();
+        inimigos.AddRange(inimigosAtivos);
 
         for (int i = 0; i < enemyButtons.Length; i++)
         {
-            if (i < inimigos.Length && inimigos[i] != null)
+            if (i < inimigos.Count && inimigos[i] != null)
             {
                 enemyButtons[i].gameObject.SetActive(true);
 
-                // pega ou cria referência
+              
+
+                // Linka botão com o inimigo spawnado
                 var refInimigo = enemyButtons[i].GetComponent<EnemyReference>();
                 if (refInimigo == null)
                     refInimigo = enemyButtons[i].gameObject.AddComponent<EnemyReference>();
 
                 refInimigo.enemy = inimigos[i];
 
+               
+
                 int idx = i;
                 inimigos[i].OnDeath += () =>
                 {
                     enemyButtons[idx].gameObject.SetActive(false);
+                    inimigos[idx] = null; // remove referência
                 };
             }
             else
@@ -41,37 +50,42 @@ public class TargetMenu : MonoBehaviour
                 enemyButtons[i].gameObject.SetActive(false);
             }
         }
+
+        inimigoSelecionado = 0;
+        AtualizarCursor();
     }
 
     public void AbrirSelecao(Attack ataque, playerStats jogador)
     {
         ataqueAtual = ataque;
         player = jogador;
-        inimigoSelecionado = 0;
 
-        if (inimigos != null && inimigos.Length > 0)
+        if (inimigos.Count > 0)
         {
+            inimigoSelecionado = 0;
             AtualizarCursor();
             gameObject.SetActive(true);
+            combatMenu.enabled = false;
+        }
+        else
+        {
+            Debug.LogWarning("Nenhum inimigo encontrado para atacar!");
         }
     }
 
     void Update()
     {
-        if (!gameObject.activeSelf || inimigos == null || inimigos.Length == 0)
+        if (!gameObject.activeSelf || inimigos.Count == 0)
             return;
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            inimigoSelecionado = (inimigoSelecionado + 1) % inimigos.Length;
-            AtualizarCursor();
+            MoverCursor(1);
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            inimigoSelecionado--;
-            if (inimigoSelecionado < 0) inimigoSelecionado = inimigos.Length - 1;
-            AtualizarCursor();
+            MoverCursor(-1);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -85,28 +99,51 @@ public class TargetMenu : MonoBehaviour
         }
     }
 
+    void MoverCursor(int direcao)
+    {
+        int total = enemyButtons.Length;
+        int tentativas = 0;
+
+        do
+        {
+            inimigoSelecionado = (inimigoSelecionado + direcao + total) % total;
+            tentativas++;
+        }
+        while ((!enemyButtons[inimigoSelecionado].gameObject.activeSelf) && tentativas <= total);
+
+        AtualizarCursor();
+    }
+
     void AtualizarCursor()
     {
-        cursor.SetParent(enemyButtons[inimigoSelecionado].transform, true);
-        cursor.anchoredPosition = new Vector2(195, -15);
+        if (enemyButtons[inimigoSelecionado].gameObject.activeSelf)
+        {
+            cursor.SetParent(enemyButtons[inimigoSelecionado].transform, true);
+            cursor.anchoredPosition = new Vector2(195, -15);
+        }
     }
 
     void AtacarInimigo(int index)
     {
-        var refInimigo = enemyButtons[index].GetComponent<EnemyReference>();
+        if (index < 0 || index >= enemyButtons.Length) return;
+
+        EnemyReference refInimigo = enemyButtons[index].GetComponent<EnemyReference>();
         if (refInimigo == null || refInimigo.enemy == null) return;
 
         EnemyStats inimigo = refInimigo.enemy;
+
         int dano = Mathf.Max(1, (player.StrengthTotal + ataqueAtual.power) - inimigo.defense);
         inimigo.TakeDamage(dano);
 
         Debug.Log($"{player.name} usou {ataqueAtual.nome} em {inimigo.enemyName} e causou {dano} de dano! HP atual: {inimigo.currentHP}");
+
+        VoltarParaMenu();
     }
 
     public void VoltarParaMenu()
     {
         gameObject.SetActive(false);
         Menu.SetActive(true);
-        CombatMenuController.enabled = true;
+        combatMenu.enabled = true;
     }
 }
