@@ -11,6 +11,7 @@ public class CombatMenuController : MonoBehaviour
     public GameObject Menu;
     public GameObject InventarioItem;
     public AttackMenu attackMenu;
+    
 
     void Start()
     {
