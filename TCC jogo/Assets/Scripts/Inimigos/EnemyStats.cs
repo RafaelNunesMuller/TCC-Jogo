@@ -2,6 +2,8 @@ using UnityEngine;
 using System;
 public class EnemyStats : MonoBehaviour
 {
+    public DamagePopupSpawner popupSpawner;
+
     [Header("Identificação")]
     public string enemyName;
     public int level;
@@ -28,15 +30,20 @@ public class EnemyStats : MonoBehaviour
         OnDeath = null;
     }
 
-    public void TakeDamage(int damage)
+    
+
+    public void TakeDamage(int dano)
     {
-        currentHP -= damage;
+        currentHP -= dano;
+
+        if (popupSpawner != null)
+            popupSpawner.ShowDamage(dano);
+
         if (currentHP <= 0)
-        {
-            currentHP = 0;
             Die();
-        }
     }
+
+
 
     void Die()
     {

@@ -21,28 +21,31 @@ public class EnemySpawner : MonoBehaviour
         // Sorteia quantos inimigos vão aparecer (1 a 3)
         int qtdInimigos = Random.Range(1, spawnPoints.Length + 1);
 
+        // cria o array do tamanho correto
         EnemyStats[] inimigosAtivos = new EnemyStats[qtdInimigos];
 
         for (int i = 0; i < qtdInimigos; i++)
         {
             // Sorteia um prefab da lista
-            int indexPrefab = Random.Range(0, enemyPrefabs.Length);
-            GameObject prefabEscolhido = enemyPrefabs[indexPrefab];
+            GameObject prefabEscolhido = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
-            // Instancia no ponto de spawn correspondente
-            GameObject inimigoObj = Instantiate(prefabEscolhido, spawnPoints[i].position, Quaternion.identity, transform);
+            // Instancia no ponto de spawn
+            GameObject clone = Instantiate(prefabEscolhido, spawnPoints[i].position, Quaternion.identity, transform);
 
-            // Pega o EnemyStats desse inimigo
-            EnemyStats stats = inimigoObj.GetComponent<EnemyStats>();
+            // Pega o EnemyStats do clone
+            EnemyStats stats = clone.GetComponent<EnemyStats>();
 
-            // Garante que o inimigo foi encontrado
             if (stats != null)
+            {
                 inimigosAtivos[i] = stats;
+            }
             else
+            {
                 Debug.LogError($"Prefab {prefabEscolhido.name} não tem EnemyStats!");
+            }
         }
 
-        // Passa a lista para o TargetMenu
+        // Passa os inimigos spawnados para o TargetMenu
         if (targetMenu != null)
             targetMenu.ConfigurarInimigos(inimigosAtivos);
     }

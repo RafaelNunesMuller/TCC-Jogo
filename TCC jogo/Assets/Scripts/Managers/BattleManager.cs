@@ -4,16 +4,13 @@ public class BattleManager : MonoBehaviour
 {
     public TargetMenu targetMenu;
 
-    public AttackEffect attackEffect;
+   
     public DamagePopup damagePopupPrefab;
 
     public void PlayerAtacaInimigo(playerStats player, EnemyStats inimigo)
     {
         // 1. Calcula o dano
         int dano = Mathf.Max(0, player.strength - inimigo.defense);
-
-        // 2. Spawna efeito de ataque
-        attackEffect.PlayEffect(inimigo.transform.position);
 
         // 3. Spawna popup de dano
         DamagePopup popup = Instantiate(damagePopupPrefab, inimigo.transform.position, Quaternion.identity);

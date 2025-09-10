@@ -9,6 +9,7 @@ public class AttackMenu : MonoBehaviour
     public playerStats player;
     public CombatMenuController combatMenu;
     public GameObject menu;
+    public GameObject TargetMenu;
 
     private int ataqueSelecionado = 0;
 
@@ -17,6 +18,7 @@ public class AttackMenu : MonoBehaviour
         ataqueSelecionado = 0;
         AtualizarCursor();
         combatMenu.enabled = false; // 🔹 desativa menu principal enquanto escolhe ataque
+        
     }
 
     void OnDisable()
@@ -58,6 +60,7 @@ public class AttackMenu : MonoBehaviour
 
     public void SelecionarAtaque()
     {
+        TargetMenu.SetActive(true);
         Attack ataque = attackButtons[ataqueSelecionado].GetComponent<AttackReference>().attack;
         if (ataque == null) return;
 
