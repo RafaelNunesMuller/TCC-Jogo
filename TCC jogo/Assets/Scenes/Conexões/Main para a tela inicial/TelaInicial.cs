@@ -8,4 +8,5 @@ public class TelaInicial : MonoBehaviour
     {
         SceneManager.LoadScene(Telainicial);
     }
+
 }

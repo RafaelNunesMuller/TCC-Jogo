@@ -894,7 +894,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1516735488}
-  - component: {fileID: 1516735490}
   - component: {fileID: 1516735489}
   m_Layer: 0
   m_Name: SceneController
@@ -902,7 +901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1516735488
 Transform:
   m_ObjectHideFlags: 0
@@ -930,37 +929,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a27e66a682fd447b7ca8c1a62d5ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Frase: Frase
---- !u!114 &1516735490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516735487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Events:
-    m_Signals:
-    - {fileID: 11400000, guid: e08dad29d1cb1ad4ea71542d54739553, type: 2}
-    m_Events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1516735489}
-          m_TargetAssemblyTypeName: Frases, Assembly-CSharp
-          m_MethodName: Trigger
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1768364625
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,6 +981,7 @@ MonoBehaviour:
   - {fileID: 364105437}
   - {fileID: 1516735487}
   loop: 0
+  frases: {fileID: 1516735489}
 --- !u!1 &1844217058
 GameObject:
   m_ObjectHideFlags: 0

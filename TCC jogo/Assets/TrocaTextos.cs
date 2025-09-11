@@ -1,71 +1,67 @@
-// DialogueTypewriter.cs
+// TextCyclerObjects.cs
 using UnityEngine;
-using TMPro;        // troque pra UnityEngine.UI e Text se NÃO usar TextMeshPro
-using System.Collections;
 
-public class DialogueTypewriter : MonoBehaviour
+public class TextCyclerObjects : MonoBehaviour
 {
-    public TMP_Text uiText;           // arrasta aqui o TextMeshPro - Text (ou mude o tipo para Text)
-    [TextArea(2, 6)]
-    public string[] lines;            // linhas do diálogo
-    public float typeSpeed = 0.03f;   // tempo entre caracteres
 
-    private int index = 0;
-    private bool isTyping = false;
-    private Coroutine typingCoroutine;
+    [Tooltip("Arraste os 3 (ou mais) GameObjects de texto na ordem.")]
+    public GameObject[] textObjects; // coloca 3 aqui no Inspector
+
+    [Tooltip("Se true, volta pro primeiro texto depois do último.")]
+    public bool loop = false;
+
+    int index = 0;
+    bool finished = false;
 
     void Start()
     {
-        if (uiText == null) Debug.LogError("DialogueTypewriter: arraste o TMP_Text no inspector.");
-        if (lines == null || lines.Length == 0) return;
-        uiText.text = "";
-        StartTypingLine(index);
+        if (textObjects == null || textObjects.Length == 0)
+        {
+            Debug.LogWarning("TextCyclerObjects: nenhum texto atribuído.");
+            return;
+        }
+
+        // Ativa só o primeiro no começo
+        for (int i = 0; i < textObjects.Length; i++)
+            textObjects[i].SetActive(i == 0);
     }
 
     void Update()
     {
-        // clique do mouse (PC) ou toque (mobile)
+        // Detecta clique do mouse ou toque no início do frame
+        if (finished) return;
+
         if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
         {
-            if (isTyping)
+            ShowNext();
+        }
+    }
+
+    public void ShowNext()
+    {
+        if (textObjects == null || textObjects.Length == 0) return;
+
+        // desativa o atual
+        textObjects[index].SetActive(false);
+
+        index++;
+
+        if (index >= textObjects.Length)
+        {
+            if (loop)
             {
-                // termina a digitação instantaneamente
-                if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-                uiText.text = lines[index];
-                isTyping = false;
+                index = 0;
             }
             else
             {
-                // avança para a próxima linha
-                index++;
-                if (index < lines.Length)
-                {
-                    StartTypingLine(index);
-                }
-                else
-                {
-                    // terminou o diálogo
-                    Debug.Log("Dialogue finished");
-                    // ex.: uiText.gameObject.SetActive(false);
-                }
+                finished = true; // para depois do último
+                return;
             }
         }
-    }
 
-    void StartTypingLine(int i)
-    {
-        typingCoroutine = StartCoroutine(TypeText(lines[i]));
-    }
+        // ativa o próximo
+        textObjects[index].SetActive(true);
 
-    IEnumerator TypeText(string line)
-    {
-        isTyping = true;
-        uiText.text = "";
-        foreach (char c in line)
-        {
-            uiText.text += c;
-            yield return new WaitForSeconds(typeSpeed);
-        }
-        isTyping = false;
+        
     }
 }
