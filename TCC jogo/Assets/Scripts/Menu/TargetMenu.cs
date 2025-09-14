@@ -14,6 +14,8 @@ public class TargetMenu : MonoBehaviour
     private List<EnemyStats> inimigos = new List<EnemyStats>();
 
     public GameObject Menu;
+
+    public GameObject Cursor;
     public CombatMenuController combatMenu;
 
     public void ConfigurarInimigos(EnemyStats[] inimigosAtivos)
@@ -65,7 +67,7 @@ public class TargetMenu : MonoBehaviour
             inimigoSelecionado = 0;
             AtualizarCursor();
             gameObject.SetActive(true);
-            combatMenu.enabled = false;
+            
         }
         else
         {
@@ -75,6 +77,10 @@ public class TargetMenu : MonoBehaviour
 
     void Update()
     {
+        combatMenu.enabled = false;
+        Menu.SetActive(true);
+        Cursor.SetActive(false);
+
         if (!gameObject.activeSelf || inimigos.Count == 0)
             return;
 
@@ -145,5 +151,6 @@ public class TargetMenu : MonoBehaviour
         gameObject.SetActive(false);
         Menu.SetActive(true);
         combatMenu.enabled = true;
+        Cursor.SetActive(true);
     }
 }

@@ -508,10 +508,8 @@ GameObject:
   - component: {fileID: 185577959}
   - component: {fileID: 185577961}
   - component: {fileID: 185577960}
-
   - component: {fileID: 185577964}
   m_Layer: 0
- a39358ec8f7953e807ac462240121825c54ed843
   m_Name: Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2603,9 +2601,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-
 --- !u!19719996 &185577964
- a39358ec8f7953e807ac462240121825c54ed843
 TilemapCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
