@@ -1,72 +1,95 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public bool isMoving = false;
+
     private Vector2 movement;
-    private Vector3 targetPos;
     private Animator anim;
+    private Rigidbody2D rb;
+
+    [Header("Encontros")]
+    public LayerMask Perigolayer;
+    public int minSteps = 5;
+    public int maxSteps = 15;
+    private int stepsToNextEncounter;
+    public float stepDistance = 0.5f; // distância que conta como 1 passo
+    private Vector2 lastStepPosition;
+
     public GameObject menuUI;
     public GameObject MenuPanel;
-    public bool canMove = true; // ← controle de movimento
+    public bool canMove = true;
+
     void Start()
     {
         anim = GetComponent<Animator>();
-        targetPos = transform.position;
-    }
+        rb = GetComponent<Rigidbody2D>();
 
+        stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
+        lastStepPosition = rb.position;
+    }
 
     void Update()
     {
-        if (!canMove) // Bloqueia se menu está aberto
+        if (!canMove)
         {
             anim.SetBool("isMoving", false);
+            rb.linearVelocity = Vector2.zero;
             return;
         }
 
-        if (!isMoving)
+        // Movimento
+        movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        if (movement.x != 0) movement.y = 0;
+
+        anim.SetFloat("Horizontal", movement.x);
+        anim.SetFloat("Vertical", movement.y);
+
+        if (movement != Vector2.zero)
         {
-            // Captura da direção
-            movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            anim.SetFloat("LastMovex", movement.x);
+            anim.SetFloat("LastMovey", movement.y);
 
-            // Travar em uma direção por vez (como Pokémon)
-            if (movement.x != 0)
-                movement.y = 0;
-
-            if (movement != Vector2.zero)
+            // Checa se percorreu distância suficiente para ser um "passo"
+            float dist = Vector2.Distance(rb.position, lastStepPosition);
+            if (dist >= stepDistance)
             {
-                // Calcula o próximo bloco
-                targetPos = transform.position + new Vector3(movement.x, movement.y, 0);
-                StartCoroutine(Move());
+                Collider2D perigo = Physics2D.OverlapCircle(transform.position, 0.2f, Perigolayer);
+                if (perigo != null)
+                {
+                    HandleStep();
+                }
 
-                // Atualiza direção e "última direção"
-                anim.SetFloat("Horizontal", movement.x);
-                anim.SetFloat("Vertical", movement.y);
-                anim.SetFloat("LastMovex", movement.x);
-                anim.SetFloat("LastMovey", movement.y);
+                lastStepPosition = rb.position;
             }
         }
 
-        // Enquanto estiver andando, manter a animação ativa
-        anim.SetBool("isMoving", isMoving);
+        anim.SetBool("isMoving", movement != Vector2.zero);
     }
 
-    IEnumerator Move()
+    void FixedUpdate()
     {
-        isMoving = true;
-
-        while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        transform.position = targetPos;
-        isMoving = false;
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
-        
+
+    private void HandleStep()
+    {
+        stepsToNextEncounter--;
+
+        Debug.Log($"Passo contado. Restam {stepsToNextEncounter}");
+
+        if (stepsToNextEncounter <= 0)
+        {
+            if (Random.Range(1, 101) <= 35) // % de chance de encontrar uma batalha pode ser ajustado pelo codigo
+            {
+                Debug.Log("⚔️ Encontro de batalha!");
+                SceneManager.LoadScene("Battle");
+            }
+
+            stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
+            Debug.Log($"Novo contador: {stepsToNextEncounter}");
+        }
+    }
 }
