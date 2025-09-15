@@ -116,6 +116,27 @@ public class playerStats : MonoBehaviour
         Debug.Log("Level up! Agora n�vel " + level);
     }
 
+    
+
+    public void TakeDamage(int damage)
+    {
+        currentHP -= damage;
+        if (currentHP < 0) currentHP = 0;
+
+        Debug.Log($"💔 Player recebeu {damage} de dano! (HP: {currentHP}/{maxHP})");
+
+        if (currentHP <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log($"☠️ Player foi derrotado!");
+        // aqui você pode chamar Game Over, anim de morte, desativar controles, etc.
+    }
+
     // -------- START --------
     void Start()
     {

@@ -323,6 +323,8 @@ MonoBehaviour:
   maxHP: 150
   currentHP: 0
   experienceReward: 100
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &166441621
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -599,6 +601,8 @@ MonoBehaviour:
   maxHP: 80
   currentHP: 0
   experienceReward: 20
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &203839707
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1238,6 +1242,8 @@ MonoBehaviour:
   maxHP: 200
   currentHP: 0
   experienceReward: 50
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &368769511
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1658,6 +1664,8 @@ MonoBehaviour:
   maxHP: 150
   currentHP: 0
   experienceReward: 30
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &460299817
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1908,6 +1916,8 @@ MonoBehaviour:
   maxHP: 120
   currentHP: 0
   experienceReward: 50
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &559205472
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1973,6 +1983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 582762406}
   - component: {fileID: 582762407}
+  - component: {fileID: 582762408}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -2010,6 +2021,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMenu: {fileID: 1013274580}
   damagePopupPrefab: {fileID: 964999677}
+--- !u!114 &582762408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582762405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb928f48eda019459c1aaece106d1a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1625459444}
+  enemies:
+  - {fileID: 203839706}
+  - {fileID: 1763937424}
+  - {fileID: 1846709058}
+  - {fileID: 166441620}
+  - {fileID: 829067610}
+  - {fileID: 559205471}
+  - {fileID: 460299816}
+  - {fileID: 1830466666}
+  - {fileID: 848582473}
+  - {fileID: 368769510}
+  enemyAttackDelay: 0.7
 --- !u!1 &620408700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2576,6 +2612,8 @@ MonoBehaviour:
   maxHP: 50
   currentHP: 0
   experienceReward: 27
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &829067611
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2703,6 +2741,8 @@ MonoBehaviour:
   maxHP: 130
   currentHP: 0
   experienceReward: 75
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &848582474
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4073,7 +4113,7 @@ RectTransform:
   m_GameObject: {fileID: 1294913489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.010749749, y: 0.012429398, z: 0.013437186}
+  m_LocalScale: {x: 0.013980049, y: 0.016164431, z: 0.017475061}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 351203747}
@@ -5324,6 +5364,8 @@ MonoBehaviour:
   maxHP: 70
   currentHP: 0
   experienceReward: 30
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &1763937425
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5634,6 +5676,8 @@ MonoBehaviour:
   maxHP: 130
   currentHP: 0
   experienceReward: 80
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &1830466667
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5840,6 +5884,8 @@ MonoBehaviour:
   maxHP: 90
   currentHP: 0
   experienceReward: 50
+  attacks:
+  - {fileID: 11400000, guid: c9d1c07aa494c3e479ecbacd0e2f56bb, type: 2}
 --- !u!212 &1846709059
 SpriteRenderer:
   m_ObjectHideFlags: 0
