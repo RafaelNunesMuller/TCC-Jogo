@@ -3,10 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class TelaInicial : MonoBehaviour
 {
-    public string Telainicial;
+    public string Loading;
     public void Trigger()
     {
-        SceneManager.LoadScene(Telainicial);
+        SceneManager.LoadScene(Loading);
     }
 
 

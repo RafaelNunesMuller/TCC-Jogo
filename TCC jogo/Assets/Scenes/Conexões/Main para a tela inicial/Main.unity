@@ -29253,7 +29253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f038173aea95a47b2eba9ff878b6c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Telainicial: Telainicial
+  Loading: Loading
 --- !u!4 &1361457583
 Transform:
   m_ObjectHideFlags: 0
@@ -55947,8 +55947,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: RAFAEL E ALEJANDRO APRESENTAM
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
