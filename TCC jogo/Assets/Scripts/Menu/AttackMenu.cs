@@ -11,8 +11,15 @@ public class AttackMenu : MonoBehaviour
     public CombatMenuController combatMenu;
     public GameObject menu;
     public GameObject targetMenuUI;
+    public GameObject CursorAttack; 
 
     private int ataqueSelecionado = 0;
+
+
+    void Start()
+    {
+        CursorAttack.SetActive(true);
+    }
 
     void OnEnable()
     {
@@ -45,6 +52,8 @@ public class AttackMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             SelecionarAtaque();
+            targetMenu.enabled = true;
+
         }
 
         if (Input.GetKeyDown(KeyCode.X)) // botão de voltar

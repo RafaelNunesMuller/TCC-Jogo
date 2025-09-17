@@ -55,7 +55,7 @@ public class EnemyStats : MonoBehaviour
     private void Die()
     {
         Debug.Log($"☠️ {enemyName} foi derrotado!");
-        // aqui você pode desativar o inimigo do campo
+        gameObject.SetActive(false);
     }
 
     public Attack ChooseAttack()

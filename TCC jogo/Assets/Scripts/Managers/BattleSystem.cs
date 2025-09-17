@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BattleSystem : MonoBehaviour
 {
+    
+
     [Header("Referências")]
     public playerStats player;
     public List<EnemyStats> enemies; // lista dos inimigos da batalha
@@ -33,6 +35,7 @@ public class BattleSystem : MonoBehaviour
     {
 
         Debug.Log("👹 Turno dos inimigos!");
+        
 
         foreach (var inimigo in enemies)
         {
