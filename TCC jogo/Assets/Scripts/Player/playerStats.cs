@@ -125,6 +125,12 @@ public class playerStats : MonoBehaviour
 
         Debug.Log($"💔 Player recebeu {damage} de dano! (HP: {currentHP}/{maxHP})");
 
+        CameraShake camShake = Camera.main.GetComponent<CameraShake>();
+        if (camShake != null)
+        {
+            StartCoroutine(camShake.Shake(1.2f, 1.2f)); // duração, intensidade
+        }
+
         if (currentHP <= 0)
         {
             Die();

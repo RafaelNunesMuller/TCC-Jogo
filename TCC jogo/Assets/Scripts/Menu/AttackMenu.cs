@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class AttackMenu : MonoBehaviour
     public playerStats player;
     public CombatMenuController combatMenu;
     public GameObject menu;
-    public GameObject TargetMenu;
+    public GameObject targetMenuUI;
 
     private int ataqueSelecionado = 0;
 
@@ -60,14 +61,23 @@ public class AttackMenu : MonoBehaviour
 
     public void SelecionarAtaque()
     {
-        TargetMenu.SetActive(true);
+        // ativa o painel de seleção de alvo (UI)
+        if (targetMenuUI != null) targetMenuUI.SetActive(true);
+
         Attack ataque = attackButtons[ataqueSelecionado].GetComponent<AttackReference>().attack;
         if (ataque == null) return;
 
-        EnemyStats[] inimigos = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
-        targetMenu.ConfigurarInimigos(inimigos);
+        // pega todos inimigos ativos (array) e converte para List<EnemyStats>
+        EnemyStats[] inimigosArray = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
+        List<EnemyStats> inimigosList = new List<EnemyStats>(inimigosArray);
 
+        // configura TargetMenu com a lista correta (clones instanciados)
+        targetMenu.ConfigurarInimigos(inimigosList);
+
+        // abre a seleção passando o ataque e o player
         targetMenu.AbrirSelecao(ataque, player);
+
+        // fecha o menu de ataque
         gameObject.SetActive(false);
     }
 

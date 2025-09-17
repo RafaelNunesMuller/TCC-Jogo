@@ -4,85 +4,62 @@ using UnityEngine;
 
 public class BattleSystem : MonoBehaviour
 {
+    [Header("Referências")]
     public playerStats player;
-    public List<EnemyStats> enemies = new List<EnemyStats>(); // preencher via EnemySpawner ou Inspector
-    public float enemyAttackDelay = 0.7f; // tempo entre ataques inimigos
+    public List<EnemyStats> enemies; // lista dos inimigos da batalha
 
-    // evita executar vários turnos de inimigo simultaneamente
-    private bool isProcessingTurn = false;
+    // Chamado pelo Spawner quando a batalha começa
+    public void SetEnemies(List<EnemyStats> novosInimigos)
+    {
+        enemies = novosInimigos;
+        Debug.Log($"⚔️ {enemies.Count} inimigos entraram na batalha!");
+    }
 
+    // Player ataca um inimigo
     public void PlayerAttack(EnemyStats target, int damage)
     {
-        if (isProcessingTurn) return;           // protege reentrância
-        if (target == null || target.currentHP <= 0) return;
+        if (target == null || !target.IsAlive) return;
 
         int finalDamage = Mathf.Max(1, damage - target.defense);
-
-        // usa o método do Enemy para lidar com morte/efeitos
         target.TakeDamage(finalDamage);
 
-        Debug.Log($"🗡️ Player atacou {target.enemyName} e causou {finalDamage} de dano!");
+        Debug.Log($"🗡️  atacou {target.enemyName} e causou {finalDamage} de dano!");
 
-        // começa o turno dos inimigos
+        // Se ainda houver inimigos vivos → inimigos atacam
         StartCoroutine(EnemiesTurn());
     }
 
     private IEnumerator EnemiesTurn()
     {
-        if (isProcessingTurn) yield break;
-        isProcessingTurn = true;
 
-        // pequeno delay inicial (suaviza transições/efeitos)
-        yield return new WaitForSeconds(0.2f);
+        Debug.Log("👹 Turno dos inimigos!");
 
         foreach (var inimigo in enemies)
         {
-            if (inimigo == null) continue;
-            if (inimigo.currentHP <= 0) continue; // pular inimigos mortos
+            if (inimigo == null || !inimigo.IsAlive) continue;
 
-            // escolhe um ataque do inimigo (se existir)
-            Attack ataque = null;
-            if (inimigo.attacks != null && inimigo.attacks.Length > 0)
-                ataque = inimigo.ChooseAttack(); // ou escolhe aleatório dentro do EnemyStats
+            yield return new WaitForSeconds(1f);
 
-            int dano;
-            string nomeAtk;
+            Attack ataque = inimigo.ChooseAttack();
             if (ataque != null)
             {
-                nomeAtk = ataque.nome;
-                dano = Mathf.Max(1, inimigo.strength + ataque.power - player.DefenseTotal);
-                // aplica dano ao player
+                int dano = Mathf.Max(1, inimigo.strength + ataque.power - player.DefenseTotal);
                 player.TakeDamage(dano);
+
+                Debug.Log($"{inimigo.enemyName} usou {ataque.nome} e causou {dano} de dano em Player!");
             }
-            else
-            {
-                nomeAtk = "Ataque";
-                dano = Mathf.Max(1, inimigo.strength - player.DefenseTotal);
-                // aplica dano ao player
-                player.TakeDamage(dano);
-            }
-
-            
-            if (player.currentHP < 0) player.currentHP = 0;
-
-            Debug.Log($"{inimigo.enemyName} usou {nomeAtk} e causou {dano} de dano no player! (HP player {player.currentHP}/{player.maxHP})");
-
-            // se o player morrer, encerra a coroutine
-            if (player.currentHP <= 0)
-            {
-                Debug.Log("⚔️ Player derrotado!");
-                isProcessingTurn = false;
-                yield break;
-            }
-
-            // espera entre ataques para dar tempo a animações/popups
-            yield return new WaitForSeconds(enemyAttackDelay);
         }
 
-        // fim do turno inimigo — volta pro player
-        Debug.Log("✨ Turno do Player novamente!");
-        isProcessingTurn = false;
+        // Espera um pouquinho antes de devolver controle
+        yield return new WaitForSeconds(0.5f);
 
-        yield break;
+        // Reabre o menu do Player
+        if (player != null && player.GetComponent<CombatMenuController>() != null)
+        {
+            player.GetComponent<CombatMenuController>().enabled = true;
+        }
+
+        Debug.Log("✨ Turno do Player novamente!");
     }
+
 }

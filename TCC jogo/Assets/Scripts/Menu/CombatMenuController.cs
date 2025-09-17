@@ -11,7 +11,7 @@ public class CombatMenuController : MonoBehaviour
     public GameObject Menu;
     public GameObject InventarioItem;
     public AttackMenu attackMenu;
-    
+
 
     void Start()
     {
@@ -21,6 +21,7 @@ public class CombatMenuController : MonoBehaviour
     void Update()
     {
         if (!Menu.activeSelf) return; // 🔹 só lê input quando o menu principal está aberto
+
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
