@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerStats : MonoBehaviour
 {
@@ -140,7 +141,7 @@ public class playerStats : MonoBehaviour
     private void Die()
     {
         Debug.Log($"☠️ Player foi derrotado!");
-        // aqui você pode chamar Game Over, anim de morte, desativar controles, etc.
+        SceneManager.LoadScene("Game Over");
     }
 
     // -------- START --------

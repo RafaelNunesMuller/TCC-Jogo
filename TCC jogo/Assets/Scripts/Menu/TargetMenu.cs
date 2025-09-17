@@ -18,6 +18,7 @@ public class TargetMenu : MonoBehaviour
     private int inimigoSelecionado = 0;
     public GameObject Cursor;
 
+
     // Configura a lista de inimigos (chamado pelo spawner ou AttackMenu)
     public void ConfigurarInimigos(List<EnemyStats> inimigosAtivos)
     {
@@ -110,7 +111,7 @@ public class TargetMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             ConfirmarAlvo();
-            VoltarParaMenu();
+            
         }
 
         if (Input.GetKeyDown(KeyCode.X))
