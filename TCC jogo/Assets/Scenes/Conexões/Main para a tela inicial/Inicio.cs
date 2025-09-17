@@ -3,9 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class Inicio : MonoBehaviour
 {
-    public void CarregarCena(string nomeCena)
+    public string Frase_Inicial;
+    public void Trigger()
     {
-        SceneManager.LoadScene(nomeCena);
+        SceneManager.LoadScene(Frase_Inicial);
     }
 }
 

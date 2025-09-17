@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Timelines finalizadas/Main.unity
     guid: 3d7133263f26a904c83eb321e498180e
   - enabled: 1
-    path: Assets/Scenes/BackGround/Telainicial.unity
-    guid: 0de3a979523fd4142ae78eca1fc72191
+    path: "Assets/Scenes/Conex\xF5es/Main para a tela inicial/Telainicial.unity"
+    guid: 4371d65a8659c8e44a3b8d43c46614a3
   - enabled: 1
-    path: Assets/Scenes/Cutcene/Frases/Frase_Inicial.unity
-    guid: 24be4ed1ad453e0408a4a12cb025b750
+    path: "Assets/Scenes/Conex\xF5es/Tela Inicial para o jogo/Frase_Inicial.unity"
+    guid: 0881807cfb7c8544cad3e664a7877276
   - enabled: 1
     path: "Assets/Scenes/Conex\xF5es/Tela Inicial para o jogo/Casa.unity"
     guid: 25c4551e58eae2f45bbd1efcc83f9a22
