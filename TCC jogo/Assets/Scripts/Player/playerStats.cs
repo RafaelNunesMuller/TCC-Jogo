@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerStats : MonoBehaviour
 {
@@ -114,6 +115,33 @@ public class playerStats : MonoBehaviour
         maxHP += 5;
         currentHP = maxHP;
         Debug.Log("Level up! Agora n�vel " + level);
+    }
+
+    
+
+    public void TakeDamage(int damage)
+    {
+        currentHP -= damage;
+        if (currentHP < 0) currentHP = 0;
+
+        Debug.Log($"💔 Player recebeu {damage} de dano! (HP: {currentHP}/{maxHP})");
+
+        CameraShake camShake = Camera.main.GetComponent<CameraShake>();
+        if (camShake != null)
+        {
+            StartCoroutine(camShake.Shake(1.2f, 1.2f)); // duração, intensidade
+        }
+
+        if (currentHP <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log($"☠️ Player foi derrotado!");
+        SceneManager.LoadScene("Game Over");
     }
 
     // -------- START --------

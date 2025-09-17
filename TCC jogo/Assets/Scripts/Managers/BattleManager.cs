@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -23,12 +24,14 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         // Acha todos os inimigos ativos na cena
-        EnemyStats[] inimigos = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
+        // pega todos inimigos ativos (array) e converte para List<EnemyStats>
+        EnemyStats[] inimigosArray = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
+        List<EnemyStats> inimigosList = new List<EnemyStats>(inimigosArray);
 
         // Configura o TargetMenu
         if (targetMenu != null)
         {
-            targetMenu.ConfigurarInimigos(inimigos);
+            targetMenu.ConfigurarInimigos(inimigosList);
         }
         else
         {

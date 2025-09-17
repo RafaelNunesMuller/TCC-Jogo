@@ -30,6 +30,14 @@ public class Player : MonoBehaviour
         lastStepPosition = rb.position;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("SairDaCasa"))
+        {
+            SceneManager.LoadScene("Mapa");
+        }
+    }
+
     void Update()
     {
         if (!canMove)

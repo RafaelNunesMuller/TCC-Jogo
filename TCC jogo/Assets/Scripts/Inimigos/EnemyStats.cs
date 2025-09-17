@@ -1,5 +1,5 @@
 using UnityEngine;
-using System;
+using System.Collections.Generic;
 public class EnemyStats : MonoBehaviour
 {
     public DamagePopupSpawner popupSpawner;
@@ -24,36 +24,44 @@ public class EnemyStats : MonoBehaviour
 
     public event System.Action OnDeath;
 
+    [Header("Ataques disponíveis do inimigo")]
+    public Attack[] attacks; // arraste no Inspector
+
+    public bool IsAlive => currentHP > 0;
+
+
+
     // Método para limpar handlers antigos
     public void ResetOnDeath()
     {
         OnDeath = null;
     }
 
-    
 
-    public void TakeDamage(int dano)
+
+    public void TakeDamage(int damage)
     {
-        currentHP -= dano;
+        currentHP -= damage;
+        if (currentHP < 0) currentHP = 0;
 
-        if (popupSpawner != null)
-            popupSpawner.ShowDamage(dano);
+        Debug.Log($"💥 {enemyName} recebeu {damage} de dano! (HP: {currentHP}/{maxHP})");
 
-        if (currentHP <= 0)
+        if (!IsAlive)
+        {
             Die();
+        }
     }
 
-
-
-    void Die()
+    private void Die()
     {
-        Debug.Log(enemyName + " foi derrotado!");
+        Debug.Log($"☠️ {enemyName} foi derrotado!");
+        gameObject.SetActive(false);
+    }
 
-        // dispara evento só deste inimigo
-        OnDeath?.Invoke();
-
-        // destroi o inimigo da cena
-        Destroy(gameObject);
+    public Attack ChooseAttack()
+    {
+        if (attacks == null || attacks.Length == 0) return null;
+        return attacks[Random.Range(0, attacks.Length)];
     }
 
 
