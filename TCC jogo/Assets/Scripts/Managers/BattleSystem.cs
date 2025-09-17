@@ -49,7 +49,7 @@ public class BattleSystem : MonoBehaviour
                 int dano = Mathf.Max(1, inimigo.strength + ataque.power - player.DefenseTotal);
                 player.TakeDamage(dano);
 
-                Debug.Log($"{inimigo.enemyName} usou {ataque.nome} e causou {dano} de dano em Player!");
+                Debug.Log($"{inimigo.enemyName} usou {ataque.nome} e causou {dano} de dano no Player!");
             }
         }
 

@@ -33,14 +33,7 @@ public class TargetMenu : MonoBehaviour
             {
                 enemyButtons[i].gameObject.SetActive(true);
 
-                // Atualiza texto do botão (usa TMP se disponível, senão Text)
-                var tmp = enemyButtons[i].GetComponentInChildren<TMP_Text>();
-                if (tmp != null) tmp.text = inimigos[i].enemyName;
-                else
-                {
-                    var txt = enemyButtons[i].GetComponentInChildren<Text>();
-                    if (txt != null) txt.text = inimigos[i].enemyName;
-                }
+               
 
                 // liga referência do clone para o botão
                 var refInimigo = enemyButtons[i].GetComponent<EnemyReference>();
@@ -90,7 +83,7 @@ public class TargetMenu : MonoBehaviour
         AtualizarCursor();
 
         // ativa UI e bloqueia menu principal
-        gameObject.SetActive(true);
+        
         if (combatMenu != null) combatMenu.enabled = false;
     }
 
@@ -170,6 +163,7 @@ public class TargetMenu : MonoBehaviour
         {
             // fallback: aplica direto no inimigo (se não tiver BattleSystem)
             inimigo.TakeDamage(dano);
+        
         }
 
     }
