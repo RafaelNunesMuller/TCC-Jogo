@@ -447,7 +447,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1367464555}
   - component: {fileID: 1367464557}
-  - component: {fileID: 1367464556}
   m_Layer: 0
   m_Name: Loading
   m_TagString: Untagged
@@ -471,18 +470,6 @@ Transform:
   - {fileID: 739729242}
   m_Father: {fileID: 1882303307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1367464556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367464554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f2edce63eea7fa439147ce3d1f7334a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1367464557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e890c2f9df7ea0044a9a33bb0f212afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cenaParaCarregar: Frases
+  cenaParaCarregar: Frase_inicial
   tempoDeEspera: 5
   tempoEntreTextos: 0.3
   targetText: {fileID: 175785285}

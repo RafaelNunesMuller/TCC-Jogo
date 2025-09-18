@@ -3,10 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class Inicio : MonoBehaviour
 {
-    public string Frase_Inicial;
+    public string LoadingFrase;
     public void Trigger()
     {
-        SceneManager.LoadScene(Frase_Inicial);
+        SceneManager.LoadScene(LoadingFrase);
     }
 }
-
