@@ -319,7 +319,6 @@ MonoBehaviour:
   defense: 30
   magic: 10
   magicDefense: 30
-  speed: 5
   maxHP: 150
   currentHP: 0
   experienceReward: 100
@@ -597,7 +596,6 @@ MonoBehaviour:
   defense: 9
   magic: 1
   magicDefense: 0
-  speed: 6
   maxHP: 80
   currentHP: 0
   experienceReward: 20
@@ -1238,7 +1236,6 @@ MonoBehaviour:
   defense: 12
   magic: 20
   magicDefense: 25
-  speed: 8
   maxHP: 200
   currentHP: 0
   experienceReward: 50
@@ -1394,6 +1391,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382854565}
   m_CullTransparentMesh: 1
+--- !u!1 &390489724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 390489726}
+  - component: {fileID: 390489725}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &390489725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390489724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708808c1169fc4e4a8b5d07e7dd8c567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastScene: 
+  lastPlayerPosition: {x: 0, y: 0, z: 0}
+--- !u!4 &390489726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390489724}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.522419, y: -3.7111523, z: -0.10044856}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &440248668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,7 +1703,6 @@ MonoBehaviour:
   defense: 10
   magic: 9
   magicDefense: 15
-  speed: 6
   maxHP: 150
   currentHP: 0
   experienceReward: 30
@@ -1827,7 +1869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 489586159}
-  smoothSpeed: 1.02
+  smoothSpeed: 0.09
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &523948238
 GameObject:
@@ -1928,7 +1970,6 @@ MonoBehaviour:
   defense: 8
   magic: 5
   magicDefense: 4
-  speed: 7
   maxHP: 120
   currentHP: 0
   experienceReward: 50
@@ -2001,7 +2042,7 @@ GameObject:
   - component: {fileID: 582762407}
   - component: {fileID: 582762408}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: BattleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2050,7 +2091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1625459444}
-  enemies:
+  inimigosAtivos:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -2519,6 +2560,97 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740845943}
   m_CullTransparentMesh: 1
+--- !u!1 &776865233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 776865234}
+  - component: {fileID: 776865237}
+  - component: {fileID: 776865236}
+  - component: {fileID: 776865238}
+  m_Layer: 5
+  m_Name: DamageFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &776865234
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776865233}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 23.468, y: 23.468, z: 23.468}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2047282770}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &776865236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776865233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &776865237
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776865233}
+  m_CullTransparentMesh: 1
+--- !u!114 &776865238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776865233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe6ce5ecdeb45948bcd174b079e393c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashImage: {fileID: 776865236}
+  flashDuration: 0.2
+  fadeSpeed: 5
 --- !u!1 &790187756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,7 +2750,6 @@ MonoBehaviour:
   defense: 10
   magic: 5
   magicDefense: 25
-  speed: 7
   maxHP: 50
   currentHP: 0
   experienceReward: 27
@@ -2747,7 +2878,6 @@ MonoBehaviour:
   defense: 10
   magic: 5
   magicDefense: 25
-  speed: 7
   maxHP: 130
   currentHP: 0
   experienceReward: 75
@@ -4934,7 +5064,6 @@ MonoBehaviour:
   defense: 3
   magic: 1
   magicDefense: 1
-  speed: 6
   maxHP: 50
   currentHP: 0
   armaEquipada:
@@ -5371,7 +5500,6 @@ MonoBehaviour:
   defense: 8
   magic: 9
   magicDefense: 15
-  speed: 6
   maxHP: 70
   currentHP: 0
   experienceReward: 30
@@ -5683,7 +5811,6 @@ MonoBehaviour:
   defense: 6
   magic: 15
   magicDefense: 12
-  speed: 5
   maxHP: 130
   currentHP: 0
   experienceReward: 80
@@ -5891,7 +6018,6 @@ MonoBehaviour:
   defense: 10
   magic: 5
   magicDefense: 25
-  speed: 7
   maxHP: 90
   currentHP: 0
   experienceReward: 50
@@ -6282,6 +6408,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 912265981}
+  - {fileID: 776865234}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6333,3 +6460,4 @@ SceneRoots:
   - {fileID: 620408702}
   - {fileID: 1935009504}
   - {fileID: 1838956586}
+  - {fileID: 390489726}

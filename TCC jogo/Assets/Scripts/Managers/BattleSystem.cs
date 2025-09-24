@@ -1,20 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
-    
+
 
     [Header("Referências")]
     public playerStats player;
-    public List<EnemyStats> enemies; // lista dos inimigos da batalha
+    public List<EnemyStats> inimigosAtivos; // Use só esta lista!
+
+    void Update()
+    {
+        // Verifica se todos os inimigos morreram
+        if (TodosInimigosMortos())
+        {
+            VoltarParaCenaAnterior();
+        }
+    }
+
+
+    bool TodosInimigosMortos()
+    {
+        return inimigosAtivos.TrueForAll(e => e == null || !e.IsAlive);
+    }
+
+    void VoltarParaCenaAnterior()
+    {
+        SceneManager.LoadScene(GameManager.Instance.lastScene);
+    }
 
     // Chamado pelo Spawner quando a batalha começa
     public void SetEnemies(List<EnemyStats> novosInimigos)
     {
-        enemies = novosInimigos;
-        Debug.Log($"⚔️ {enemies.Count} inimigos entraram na batalha!");
+        inimigosAtivos = novosInimigos;
+        Debug.Log($"⚔️ {inimigosAtivos.Count} inimigos entraram na batalha!");
     }
 
     // Player ataca um inimigo
@@ -37,7 +58,7 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("👹 Turno dos inimigos!");
         
 
-        foreach (var inimigo in enemies)
+        foreach (var inimigo in inimigosAtivos)
         {
             if (inimigo == null || !inimigo.IsAlive) continue;
 
@@ -54,7 +75,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         // Espera um pouquinho antes de devolver controle
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3.5f);
 
         // Reabre o menu do Player
         if (player != null && player.GetComponent<CombatMenuController>() != null)
@@ -64,5 +85,7 @@ public class BattleSystem : MonoBehaviour
 
         Debug.Log("✨ Turno do Player novamente!");
     }
+
+    
 
 }

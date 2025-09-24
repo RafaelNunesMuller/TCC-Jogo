@@ -11,7 +11,6 @@ public class playerStats : MonoBehaviour
     public int defense = 3;
     public int magic = 1;
     public int magicDefense = 1;
-    public int speed = 6;
 
     [Header("HP/MP")]
     public int maxHP = 50;
@@ -111,7 +110,6 @@ public class playerStats : MonoBehaviour
         experience = 0;
         strength += 1;
         defense += 1;
-        speed += 1;
         maxHP += 5;
         currentHP = maxHP;
         Debug.Log("Level up! Agora n�vel " + level);
@@ -126,10 +124,12 @@ public class playerStats : MonoBehaviour
 
         Debug.Log($"💔 Player recebeu {damage} de dano! (HP: {currentHP}/{maxHP})");
 
+        FindAnyObjectByType<DamageFlash>()?.Flash();
+
         CameraShake camShake = Camera.main.GetComponent<CameraShake>();
         if (camShake != null)
         {
-            StartCoroutine(camShake.Shake(1.2f, 1.2f)); // duração, intensidade
+            StartCoroutine(camShake.Shake(1.2f, 0.2f)); // duração, intensidade
         }
 
         if (currentHP <= 0)

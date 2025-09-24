@@ -13,7 +13,6 @@ public class EnemyStats : MonoBehaviour
     public int defense;
     public int magic;
     public int magicDefense;
-    public int speed;
 
     [Header("HP")]
     public int maxHP;

@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
 
         if (stepsToNextEncounter <= 0)
         {
-            if (Random.Range(1, 101) <= 35) // % de chance de encontrar uma batalha pode ser ajustado pelo codigo
+            if (Random.Range(1, 101) <= 100) // % de chance de encontrar uma batalha pode ser ajustado pelo codigo
             {
                 Debug.Log("⚔️ Encontro de batalha!");
                 SceneManager.LoadScene("Battle");

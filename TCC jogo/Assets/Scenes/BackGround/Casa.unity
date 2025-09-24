@@ -1709,7 +1709,6 @@ MonoBehaviour:
   defense: 3
   magic: 1
   magicDefense: 1
-  speed: 6
   maxHP: 50
   currentHP: 0
   armaEquipada:
@@ -2154,7 +2153,7 @@ MonoBehaviour:
   - {fileID: 204685485}
   - {fileID: 742754487}
   menuUI: {fileID: 29185960}
-  playerScript: {fileID: 0}
+  playerScript: {fileID: 634963443}
   MenuPanel: {fileID: 29185960}
   menuItem: {fileID: 1679453127}
   inventario: {fileID: 1679453121}

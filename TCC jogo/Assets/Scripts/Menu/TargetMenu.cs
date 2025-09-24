@@ -12,7 +12,7 @@ public class TargetMenu : MonoBehaviour
     public CombatMenuController combatMenu; // opcional: bloquear menu principal
     public BattleSystem battleSystem; // referência opcional ao BattleSystem (pode deixar vazio e será procurado)
 
-    private List<EnemyStats> inimigos = new List<EnemyStats>();
+    private List<EnemyStats> inimigosAtivos = new List<EnemyStats>();
     private Attack ataqueAtual;
     private playerStats jogador;
     private int inimigoSelecionado = 0;
@@ -22,70 +22,65 @@ public class TargetMenu : MonoBehaviour
     // Configura a lista de inimigos (chamado pelo spawner ou AttackMenu)
     public void ConfigurarInimigos(List<EnemyStats> inimigosAtivos)
     {
-        inimigos.Clear();
-        if (inimigosAtivos != null)
-            inimigos.AddRange(inimigosAtivos);
-
-        // Atualiza botões de acordo com os inimigos presentes
-        for (int i = 0; i < enemyButtons.Length; i++)
+        if (inimigosAtivos.Count == 0)   // só na primeira vez
         {
-            if (i < inimigos.Count && inimigos[i] != null)
+            inimigosAtivos.Clear();
+            inimigosAtivos.AddRange(inimigosAtivos);
+
+            
+    
+
+            for (int i = 0; i < enemyButtons.Length; i++)
             {
-                enemyButtons[i].gameObject.SetActive(true);
-
-               
-
-                // liga referência do clone para o botão
-                var refInimigo = enemyButtons[i].GetComponent<EnemyReference>();
-                if (refInimigo == null) refInimigo = enemyButtons[i].gameObject.AddComponent<EnemyReference>();
-                refInimigo.enemy = inimigos[i];
-
-                // limpa handlers antigos só daquele inimigo
-                inimigos[i].ResetOnDeath();
-
-                // captura locais para a closure
-                EnemyStats localEnemy = inimigos[i];
-                Button localButton = enemyButtons[i];
-                int localIndex = i;
-
-                // quando esse inimigo morrer, desativa o botão e limpa a referência na lista
-                localEnemy.OnDeath += () =>
+                if (i < inimigosAtivos.Count && inimigosAtivos[i] != null)
                 {
-                    localButton.gameObject.SetActive(false);
-                    if (localIndex < inimigos.Count) inimigos[localIndex] = null;
-                };
-            }
-            else
-            {
-                enemyButtons[i].gameObject.SetActive(false);
-            }
-        }
+                    enemyButtons[i].gameObject.SetActive(true);
 
-        // posiciona cursor no primeiro botão ativo
-        inimigoSelecionado = FirstActiveButtonIndex();
-        AtualizarCursor();
+                    var refInimigo = enemyButtons[i].GetComponent<EnemyReference>();
+                    if (refInimigo == null) refInimigo = enemyButtons[i].gameObject.AddComponent<EnemyReference>();
+                    refInimigo.enemy = inimigosAtivos[i];
+
+                    EnemyStats localEnemy = inimigosAtivos[i];
+                    Button localButton = enemyButtons[i];
+                    int localIndex = i;
+
+                    localEnemy.OnDeath += () =>
+                    {
+                        localButton.gameObject.SetActive(false);
+                        if (localIndex < inimigosAtivos.Count) inimigosAtivos[localIndex] = null;
+                    };
+
+                    // Se quiser texto, atualize aqui (não esqueça TMP)
+                    var tmp = enemyButtons[i].GetComponentInChildren<TMP_Text>();
+                    if (tmp != null) tmp.text = localEnemy.enemyName;
+                }
+                else
+                {
+                    enemyButtons[i].gameObject.SetActive(false);
+                }
+            }
+
+            inimigoSelecionado = FirstActiveButtonIndex();
+            AtualizarCursor();
+        }
     }
+
 
     // Abre a seleção de alvo (chamada por AttackMenu)
     public void AbrirSelecao(Attack ataque, playerStats jogadorRef)
     {
-        this.ataqueAtual = ataque;
-        this.jogador = jogadorRef;
+        ataqueAtual = ataque;
+        jogador = jogadorRef;
 
-        // caso não haja inimigos
-        if (inimigos == null || CountAliveInimigos() == 0)
-        {
-            Debug.LogWarning("Nenhum inimigo encontrado para atacar!");
-            return;
-        }
+        if (CountAliveInimigos() == 0) return;
 
         inimigoSelecionado = FirstActiveButtonIndex();
         AtualizarCursor();
 
-        // ativa UI e bloqueia menu principal
-        
+        gameObject.SetActive(true);
         if (combatMenu != null) combatMenu.enabled = false;
     }
+
 
     void Update()
     {
@@ -185,7 +180,7 @@ public class TargetMenu : MonoBehaviour
     int CountAliveInimigos()
     {
         int c = 0;
-        foreach (var e in inimigos)
+        foreach (var e in inimigosAtivos)
             if (e != null && e.IsAlive) c++;
         return c;
     }
