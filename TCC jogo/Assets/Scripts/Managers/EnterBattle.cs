@@ -1,14 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EnterBattle : MonoBehaviour
 {
     public void StartBattle()
     {
-        GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
-        GameManager.Instance.lastPlayerPosition =
-            GameObject.FindWithTag("Player").transform.position;
 
+
+
+        // ✅ Salva cena atual
+        GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
+
+        // ✅ Salva posição atual do player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            GameManager.Instance.lastPlayerPosition = player.transform.position;
+
+        // ✅ Carrega cena de batalha
         SceneManager.LoadScene("BattleScene");
     }
 }

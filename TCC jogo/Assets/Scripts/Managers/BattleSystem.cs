@@ -28,8 +28,12 @@ public class BattleSystem : MonoBehaviour
 
     void VoltarParaCenaAnterior()
     {
-        SceneManager.LoadScene(GameManager.Instance.lastScene);
+        if (!string.IsNullOrEmpty(GameManager.Instance.lastScene))
+            SceneManager.LoadScene(GameManager.Instance.lastScene);
+        else
+            Debug.LogError("⚠️ lastScene não definido!");
     }
+
 
     // Chamado pelo Spawner quando a batalha começa
     public void SetEnemies(List<EnemyStats> novosInimigos)

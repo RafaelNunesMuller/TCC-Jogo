@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using static GameManager;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+     public static GameManager Instance;
 
-    [HideInInspector] public string lastScene;
-    [HideInInspector] public Vector3 lastPlayerPosition;
+     public string lastScene;
+     public Vector3 lastPlayerPosition;
+  
+
 
     void Awake()
     {
@@ -20,4 +23,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    
 }

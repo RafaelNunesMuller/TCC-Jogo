@@ -20,50 +20,45 @@ public class TargetMenu : MonoBehaviour
 
 
     // Configura a lista de inimigos (chamado pelo spawner ou AttackMenu)
-    public void ConfigurarInimigos(List<EnemyStats> inimigosAtivos)
+    public void ConfigurarInimigos(List<EnemyStats> inimigosAtivosRecebidos)
     {
-        if (inimigosAtivos.Count == 0)   // só na primeira vez
+        inimigosAtivos.Clear();
+        if (inimigosAtivosRecebidos != null)
+            inimigosAtivos.AddRange(inimigosAtivosRecebidos);
+
+        for (int i = 0; i < enemyButtons.Length; i++)
         {
-            inimigosAtivos.Clear();
-            inimigosAtivos.AddRange(inimigosAtivos);
-
-            
-    
-
-            for (int i = 0; i < enemyButtons.Length; i++)
+            if (i < inimigosAtivos.Count && inimigosAtivos[i] != null)
             {
-                if (i < inimigosAtivos.Count && inimigosAtivos[i] != null)
+                enemyButtons[i].gameObject.SetActive(true);
+
+                var refInimigo = enemyButtons[i].GetComponent<EnemyReference>();
+                if (refInimigo == null) refInimigo = enemyButtons[i].gameObject.AddComponent<EnemyReference>();
+                refInimigo.enemy = inimigosAtivos[i];
+
+                EnemyStats localEnemy = inimigosAtivos[i];
+                Button localButton = enemyButtons[i];
+                int localIndex = i;
+
+                localEnemy.OnDeath += () =>
                 {
-                    enemyButtons[i].gameObject.SetActive(true);
+                    localButton.gameObject.SetActive(false);
+                    if (localIndex < inimigosAtivos.Count) inimigosAtivos[localIndex] = null;
+                };
 
-                    var refInimigo = enemyButtons[i].GetComponent<EnemyReference>();
-                    if (refInimigo == null) refInimigo = enemyButtons[i].gameObject.AddComponent<EnemyReference>();
-                    refInimigo.enemy = inimigosAtivos[i];
-
-                    EnemyStats localEnemy = inimigosAtivos[i];
-                    Button localButton = enemyButtons[i];
-                    int localIndex = i;
-
-                    localEnemy.OnDeath += () =>
-                    {
-                        localButton.gameObject.SetActive(false);
-                        if (localIndex < inimigosAtivos.Count) inimigosAtivos[localIndex] = null;
-                    };
-
-                    // Se quiser texto, atualize aqui (não esqueça TMP)
-                    var tmp = enemyButtons[i].GetComponentInChildren<TMP_Text>();
-                    if (tmp != null) tmp.text = localEnemy.enemyName;
-                }
-                else
-                {
-                    enemyButtons[i].gameObject.SetActive(false);
-                }
+                var tmp = enemyButtons[i].GetComponentInChildren<TMP_Text>();
+                if (tmp != null) tmp.text = localEnemy.enemyName;
             }
-
-            inimigoSelecionado = FirstActiveButtonIndex();
-            AtualizarCursor();
+            else
+            {
+                enemyButtons[i].gameObject.SetActive(false);
+            }
         }
+
+        inimigoSelecionado = FirstActiveButtonIndex();
+        AtualizarCursor();
     }
+
 
 
     // Abre a seleção de alvo (chamada por AttackMenu)
@@ -168,6 +163,7 @@ public class TargetMenu : MonoBehaviour
         gameObject.SetActive(false);
         Menu.SetActive(true);
         combatMenu.enabled = true;
+        Cursor.SetActive(true);
     }
 
     int FirstActiveButtonIndex()

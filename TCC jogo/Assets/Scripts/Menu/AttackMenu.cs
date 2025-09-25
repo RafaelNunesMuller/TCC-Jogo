@@ -14,6 +14,7 @@ public class AttackMenu : MonoBehaviour
     public GameObject CursorAttack;
 
 
+
     private int ataqueSelecionado = 0;
 
 
@@ -37,6 +38,8 @@ public class AttackMenu : MonoBehaviour
 
     void Update()
     {
+
+
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             ataqueSelecionado = (ataqueSelecionado + 1) % attackButtons.Length;
@@ -70,8 +73,17 @@ public class AttackMenu : MonoBehaviour
 
     public void SelecionarAtaque()
     {
-        if (targetMenuUI != null) targetMenuUI.SetActive(true);
-
+        if (targetMenuUI != null)
+        {
+            targetMenuUI.SetActive(true);
+            targetMenu.enabled = true;
+        }
+        else
+        {
+            targetMenu.enabled=false;
+        }
+            
+        
         Attack ataque = attackButtons[ataqueSelecionado]
                            .GetComponent<AttackReference>().attack;
         if (ataque == null) return;

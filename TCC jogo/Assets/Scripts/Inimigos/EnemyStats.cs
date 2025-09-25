@@ -54,7 +54,8 @@ public class EnemyStats : MonoBehaviour
     private void Die()
     {
         Debug.Log($"☠️ {enemyName} foi derrotado!");
-        gameObject.SetActive(false);
+        OnDeath?.Invoke();       // ✅ dispara o evento
+        Destroy(gameObject);
     }
 
     public Attack ChooseAttack()
