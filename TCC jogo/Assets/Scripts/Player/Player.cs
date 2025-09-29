@@ -53,10 +53,7 @@ public class Player : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         // Se está se movendo, salva a posição atual
-        if (input != Vector2.zero)
-        {
-            GameManager.Instance.lastPlayerPosition = transform.position;
-        }
+        //
 
         // Movimento
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
