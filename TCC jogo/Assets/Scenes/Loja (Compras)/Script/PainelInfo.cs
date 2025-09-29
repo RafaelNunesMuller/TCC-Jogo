@@ -1,41 +1,47 @@
+// ItemInfoUI.cs
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
-public class ItemPopup : MonoBehaviour
+public class ItemInfoUI : MonoBehaviour
 {
-    [Header("Referências do UI")]
-    public GameObject panelPopup;
-    public GameObject panelFundoEscuro;
-    public TMP_Text nomeText;
-    public TMP_Text descricaoText;
-    public TMP_Text precoText;
-    public Button botaoComprar;
-    public Button botaoSair;
+    public GameObject panel;
+    public GameObject itens;
+    public Image itemImage;
+    public TMP_Text itemNameText;
+    public TMP_Text itemDescriptionText;
+    public TMP_Text itemPriceText;
+    public Button buyButton;
+    public Button exitButton;
 
-    // Exemplo de método para abrir o popup
-    public void AbrirPopup(string nome, string descricao, string preco)
+    private void Awake()
     {
-        panelFundoEscuro.SetActive(true);
-        panelPopup.SetActive(true);
-
-        nomeText.text = nome;
-        descricaoText.text = descricao;
-        precoText.text = preco;
-
-        botaoComprar.gameObject.SetActive(true);
-        botaoSair.gameObject.SetActive(true);
-
-        // Configura botão sair para fechar
-        botaoSair.onClick.RemoveAllListeners();
-        botaoSair.onClick.AddListener(FecharPopup);
+        itens.SetActive(true);
+        panel.SetActive(false);
+        
+        exitButton.onClick.AddListener(() => panel.SetActive(false));
+        exitButton.onClick.AddListener(() => itens.SetActive(true));
+        
     }
 
-    public void FecharPopup()
+    public void ShowItem(Sprite sprite, string name, string description, int price)
     {
-        panelPopup.SetActive(false);
-        panelFundoEscuro.SetActive(false);
-        botaoComprar.gameObject.SetActive(false);
-        botaoSair.gameObject.SetActive(false);
+        itens.SetActive(false);
+        panel.SetActive(true);
+     
+        itemImage.sprite = sprite;
+        itemNameText.text = name;
+        itemDescriptionText.text = description;
+        itemPriceText.text = "Preço: " + price;
+
+
+        itemNameText.gameObject.SetActive(true);
+        itemDescriptionText.gameObject.SetActive(true);
+        itemPriceText.gameObject.SetActive(true);
+        buyButton.gameObject.SetActive(true);
+        exitButton.gameObject.SetActive(true);
+
+
+
     }
 }
