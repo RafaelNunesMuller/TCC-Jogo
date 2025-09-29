@@ -1,16 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemButton : MonoBehaviour
+public class ItemSlot : MonoBehaviour
 {
-    public string nomeItem;
-    [TextArea] public string descricaoItem;
-    public Sprite iconeItem;
+    public Sprite itemSprite;
+    public GameObject itemImageGO; 
+    public string itemName;
+    [TextArea] public string itemDescription;
+    public int itemPrice;
 
-    public PainelItemUI painelInfoUI; // arraste o painel no inspector
+    public Button itemButton;     // botão do item
+    public ItemInfoUI infoUI;     // referência ao painel
 
-    public void AoClicar()
+    private void Awake()
     {
-        painelInfoUI.AbrirPainel(nomeItem, descricaoItem, iconeItem);
+        if (itemButton == null) itemButton = GetComponent<Button>();
+        if (infoUI == null) infoUI = Object.FindFirstObjectByType<ItemInfoUI>();
+
+        if (itemButton != null)
+            itemButton.onClick.AddListener(OpenPanel);
+    }
+
+    public void OpenPanel()
+    {
+        if (infoUI != null)
+            infoUI.ShowItem(itemSprite, itemName, itemDescription, itemPrice);
+            itemImageGO.SetActive(true);
     }
 }
