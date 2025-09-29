@@ -5,7 +5,9 @@ public enum ItemTipo
     Consumivel,
     Arma,
     Armadura,
-    Acessorio
+    Acessorio,
+    Luva,
+    Elmo
 }
 
 [System.Serializable]

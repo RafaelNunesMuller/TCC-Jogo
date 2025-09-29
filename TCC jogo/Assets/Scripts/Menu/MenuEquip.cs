@@ -15,6 +15,8 @@ public class MenuEquip : MonoBehaviour
 
     [Header("Slot Buttons")]
     public Button weaponButton;
+    public Button healmetButton;
+    public Button gloveButton;
     public Button armorButton;
     public Button accessoryButton;
 
@@ -30,6 +32,8 @@ public class MenuEquip : MonoBehaviour
     private bool navegandoSlots = true; // true = cursor nos botões, false = cursor nos itens
     private List<RectTransform> botoesSlots = new List<RectTransform>();
 
+    public GameObject EquipItemPrefab;
+
     void Start()
     {
         Sprite espadaComum = Resources.Load<Sprite>("Icones/sword_02a");
@@ -38,11 +42,23 @@ public class MenuEquip : MonoBehaviour
         Sprite espadaEpica = Resources.Load<Sprite>("Icones/sword_02d");
         Sprite espadaLendaria = Resources.Load<Sprite>("Icones/sword_02e");
 
+        Sprite elmoComum = Resources.Load<Sprite>("Icones/Helmet_02a");
+        Sprite elmoIncomum = Resources.Load<Sprite>("Icones/Helmet_02b");
+        Sprite elmoRara = Resources.Load<Sprite>("Icones/Helmet_02c");
+        Sprite elmoEpica = Resources.Load<Sprite>("Icones/Helmet_02d");
+        Sprite elmoLendaria = Resources.Load<Sprite>("Icones/Helmet_02e");
+
         Sprite armaduraComum = Resources.Load<Sprite>("Icones/armor_01a");
         Sprite armaduraIncomum = Resources.Load<Sprite>("Icones/armor_01b");
         Sprite armaduraRara = Resources.Load<Sprite>("Icones/armor_01c");
         Sprite armaduraEpica = Resources.Load<Sprite>("Icones/armor_01d");
         Sprite armaduraLendaria = Resources.Load<Sprite>("Icones/armor_01e");
+
+        Sprite luvaComum = Resources.Load<Sprite>("Icones/Gloves_01a");
+        Sprite luvaIncomum = Resources.Load<Sprite>("Icones/Gloves_01b");
+        Sprite luvaRara = Resources.Load<Sprite>("Icones/Gloves_01c");
+        Sprite luvaEpica = Resources.Load<Sprite>("Icones/Gloves_01d");
+        Sprite luvaLendaria = Resources.Load<Sprite>("Icones/Gloves_01e");
 
         Sprite acessorioComum = Resources.Load<Sprite>("Icones/necklace_01a");
         Sprite acessorioIncomum = Resources.Load<Sprite>("Icones/necklace_01b");
@@ -61,7 +77,9 @@ public class MenuEquip : MonoBehaviour
 
         // Guardar botões como slots
         botoesSlots.Add(weaponButton.GetComponent<RectTransform>());
-        botoesSlots.Add(armorButton.GetComponent<RectTransform>());
+        botoesSlots.Add(healmetButton.GetComponent<RectTransform>());
+        botoesSlots.Add(gloveButton.GetComponent<RectTransform>());
+        botoesSlots.Add(armorButton.GetComponent<RectTransform>());    
         botoesSlots.Add(accessoryButton.GetComponent<RectTransform>());
 
         
@@ -104,9 +122,13 @@ public class MenuEquip : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Z))
             {
+                equipItemPrefab.SetActive(true);
+
                 if (cursorIndex == 0) SelecionarSlot("Arma");
-                else if (cursorIndex == 1) SelecionarSlot("Armadura");
-                else if (cursorIndex == 2) SelecionarSlot("Acessorio");
+                else if (cursorIndex == 1) SelecionarSlot("Elmo");
+                else if (cursorIndex == 2) SelecionarSlot("Luva");
+                else if (cursorIndex == 3) SelecionarSlot("Armadura");
+                else if (cursorIndex == 4) SelecionarSlot("Acessorio");
             }
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -163,7 +185,10 @@ public class MenuEquip : MonoBehaviour
         {
             if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
                 (slotSelecionado == "Armadura" && item.tipo == ItemTipo.Armadura) ||
-                (slotSelecionado == "Acessorio" && item.tipo == ItemTipo.Acessorio))
+                (slotSelecionado == "Acessorio" && item.tipo == ItemTipo.Acessorio) ||
+                (slotSelecionado == "Elmo" && item.tipo == ItemTipo.Elmo) ||
+                (slotSelecionado == "Luva" && item.tipo == ItemTipo.Luva))
+
             {
                 GameObject obj = Instantiate(equipItemPrefab, equipListParent);
                 ItemEquipUI ui = obj.GetComponent<ItemEquipUI>();
@@ -214,6 +239,10 @@ public class MenuEquip : MonoBehaviour
             playerStats.EquiparArma(item);
         else if (slotSelecionado == "Armadura")
             playerStats.EquiparArmadura(item);
+        else if (slotSelecionado == "Elmo")
+            playerStats.EquiparArmadura(item);
+        else if (slotSelecionado == "Luva")
+            playerStats.EquiparArmadura(item);
         else if (slotSelecionado == "Acessorio")
             playerStats.EquiparAcessorio(item);
 
@@ -226,7 +255,9 @@ public class MenuEquip : MonoBehaviour
     {
         EquipamentoAtual.text =
             $"Arma: {playerStats.armaEquipada.nome}\n" +
+            $"Elmo: {playerStats.elmoEquipada.nome}\n" +
             $"Armadura: {playerStats.armaduraEquipada.nome}\n" +
+            $"Luva: {playerStats.luvaEquipada.nome}\n" +
             $"Acessório: {playerStats.acessorioEquipado.nome}";
     }
 }

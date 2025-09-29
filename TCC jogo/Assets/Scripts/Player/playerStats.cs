@@ -20,6 +20,8 @@ public class playerStats : MonoBehaviour
     public Equipamento armaEquipada;
     public Equipamento armaduraEquipada;
     public Equipamento acessorioEquipado;
+    public Equipamento elmoEquipada;
+    public Equipamento luvaEquipada;
 
     [Header("Ataques Disponíveis")]
     public Attack[] ataques;
@@ -54,6 +56,29 @@ public class playerStats : MonoBehaviour
         armaduraEquipada = new Equipamento(armadura.nome, armadura.bonusForca, armadura.bonusDefesa, armadura.icone);
         defense += armaduraEquipada.bonusDefesa;
         Debug.Log("Equipou armadura: " + armadura.nome);
+    }
+
+    public void EquiparElmo(Item elmo)
+    {
+        // Remove b�nus da arma anterior
+        if (elmoEquipada != null)
+            strength -= elmoEquipada.bonusForca;
+
+        elmoEquipada = new Equipamento(elmo.nome, elmo.bonusForca, elmo.bonusDefesa, elmo.icone);
+        defense += elmoEquipada.bonusDefesa;
+        Debug.Log("Equipou o elmo: " + elmo.nome);
+    }
+
+
+    public void EquiparLuva(Item luva)
+    {
+        // Remove b�nus da arma anterior
+        if (luvaEquipada != null)
+            strength -= luvaEquipada.bonusForca;
+
+        luvaEquipada = new Equipamento(luva.nome, luva.bonusForca, luva.bonusDefesa, luva.icone);
+        defense += luvaEquipada.bonusDefesa;
+        Debug.Log("Equipou o elmo: " + luva.nome);
     }
 
     public void EquiparAcessorio(Item acessorio)
