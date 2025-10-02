@@ -167,6 +167,8 @@ public class playerStats : MonoBehaviour
     {
         Debug.Log($"☠️ Player foi derrotado!");
         SceneManager.LoadScene("Game Over");
+
+        
     }
 
     // -------- START --------

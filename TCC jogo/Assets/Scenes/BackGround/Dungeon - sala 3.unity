@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36460b13e500cdd478b66546c3bee080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  andar: Dungeon - sala 2
+  andar: Dungeon - sala 3
 --- !u!19719996 &235941075
 TilemapCollider2D:
   m_ObjectHideFlags: 0

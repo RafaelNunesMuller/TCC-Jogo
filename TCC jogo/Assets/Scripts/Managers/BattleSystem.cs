@@ -69,6 +69,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             Attack ataque = inimigo.ChooseAttack();
+            
             if (ataque != null)
             {
                 int dano = Mathf.Max(1, inimigo.strength + ataque.power - player.DefenseTotal);
@@ -76,6 +77,8 @@ public class BattleSystem : MonoBehaviour
 
                 Debug.Log($"{inimigo.enemyName} usou {ataque.nome} e causou {dano} de dano no Player!");
             }
+
+
         }
 
         // Espera um pouquinho antes de devolver controle

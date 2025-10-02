@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,42 +9,28 @@ public class Inventario : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
-
-        CarregarItensIniciais();
+        DontDestroyOnLoad(gameObject); // persiste entre cenas
     }
 
-    void CarregarItensIniciais()
+    public void Adicionar(Item item)
     {
-        itens.Add(new Potion(3));
-        itens.Add(new StrenghPotion(4));
-        itens.Add(new DefensePotion(4));
+        itens.Add(item);
+        Debug.Log($"Adicionado: {item.nome}");
     }
 
-    public void funcItens(int index)
+    public void Remover(Item item)
     {
-        if (index < 0 || index >= itens.Count) return;
-
-        Item item = itens[index];
-
-        // Busca o PlayerStats na cena
-        playerStats player = FindFirstObjectByType<playerStats>();
-        if (player != null)
-        {
-            item.Usar(player); // passa o player
-        }
-
-        // Diminui quantidade
-        item.quantidade--;
-        if (item.quantidade <= 0)
-        {
-            itens.RemoveAt(index);
-        }
+        itens.Remove(item);
+        Debug.Log($"Removido: {item.nome}");
     }
 
+    public void Usar(Item item, playerStats player)
+    {
+        item.Usar(player); // cada item sabe o que faz
+        if (item.consumivel)
+            Remover(item);
+    }
 }
