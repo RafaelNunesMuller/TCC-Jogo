@@ -13,8 +13,10 @@ public class ItemInfoUI : MonoBehaviour
     public TMP_Text itemPriceText;
     public Button buyButton;
     public Button exitButton;
-    public Button unavailableButton;
     public GameObject exit;
+    public Button IndButton;
+    public GameObject Vendedor;
+    public Button Okay;
 
 
     private void Awake()
@@ -29,16 +31,19 @@ public class ItemInfoUI : MonoBehaviour
         exitButton.onClick.AddListener(() => exit.SetActive(true));
 
         buyButton.onClick.AddListener(BuyItem);
+        buyButton.onClick.AddListener(() => IndButton.gameObject.SetActive(true));
 
     }
 
     private void BuyItem()
     {
         Debug.Log("Item comprado!");
-        // Aqui você pode colocar lógica de inventário, descontar moedas, etc.
-        panel.SetActive(false);
-        itens.SetActive(true);
-        exit.gameObject.SetActive(true);
+        buyButton.gameObject.SetActive(false);
+        Vendedor.SetActive(true);
+        Okay.gameObject.SetActive(true);
+        Okay.onClick.AddListener(() => Vendedor.SetActive(false));
+        
+
     }
 
     public void ShowItem(Sprite sprite, string name, string description, int price)
@@ -50,7 +55,8 @@ public class ItemInfoUI : MonoBehaviour
         itemImage.sprite = sprite;
         itemNameText.text = name;
         itemDescriptionText.text = description;
-        itemPriceText.text = "Preço: " + price;
+        itemPriceText.text = "R$ " + price;
+
 
 
         itemNameText.gameObject.SetActive(true);
