@@ -18,6 +18,8 @@ public class ItemInfoUI : MonoBehaviour
     public GameObject Vendedor;
     public Button Okay;
 
+    public static Inventario instance;
+
 
     private void Awake()
     {   

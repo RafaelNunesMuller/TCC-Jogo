@@ -12,7 +12,8 @@ public class ItemSlot : MonoBehaviour
 
 
     public Button itemButton;     // botão do item
-    public ItemInfoUI infoUI;      // referência ao painel
+    public ItemInfoUI infoUI;
+    public Item itemDentro;
 
     private void Awake()
     {

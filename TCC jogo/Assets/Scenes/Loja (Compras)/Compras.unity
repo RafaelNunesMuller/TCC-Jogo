@@ -333,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 165860527550927914, guid: a09d590f1f79c8a409e0e66fac212ea3, type: 3}
   itemImageGO: {fileID: 29648662}
-  itemName: Capacete Inicial
+  itemName: Capacete Enferrujado
   itemDescription: "Um capacete simples de metal leve, com prote\xE7\xF5es b\xE1sicas
     para a cabe\xE7a e a parte de tr\xE1s do pesco\xE7o. Suas bordas s\xE3o arredondadas
     e levemente desgastadas, oferecendo defesa suficiente para treinos e combates
@@ -341,6 +341,7 @@ MonoBehaviour:
   itemPrice: 18
   itemButton: {fileID: 29648662}
   infoUI: {fileID: 2132557481}
+  itemDentro: {fileID: 11400000, guid: d4e0c4304f31a6340b995fe43ddc40b1, type: 2}
 --- !u!1 &40933919
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +418,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40933919}
   m_CullTransparentMesh: 1
+--- !u!1 &49899463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 49899465}
+  - component: {fileID: 49899464}
+  m_Layer: 0
+  m_Name: "Invent\xE1rio"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &49899464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49899463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2159a13ccdf304388ad77f5112861d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itens: []
+--- !u!4 &49899465
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49899463}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &51313525
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,6 +606,7 @@ MonoBehaviour:
   itemPrice: 600
   itemButton: {fileID: 51313527}
   infoUI: {fileID: 2132557481}
+  itemDentro: {fileID: 11400000, guid: f8d3d239c1c0d63429b47bf6972ba435, type: 2}
 --- !u!1 &56901018
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,13 +941,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: -2693528012177461458, guid: 79fc3043054563d45879100ebc498ffe, type: 3}
   itemImageGO: {fileID: 84676411}
-  itemName: Luva Inicial
+  itemName: Luvas de Couro
   itemDescription: "Feitas de couro resistente e male\xE1vel, estas luvas cobrem
     as m\xE3os at\xE9 os pulsos, protegendo contra impactos leves e abras\xF5es.
     Simples e funcionais, s\xE3o perfeitas para iniciantes em combate ou treino f\xEDsico."
   itemPrice: 15
   itemButton: {fileID: 84676411}
   infoUI: {fileID: 2132557481}
+  itemDentro: {fileID: 11400000, guid: 5f10d627722b9ad4c95cc0f370d71c22, type: 2}
 --- !u!1 &91387885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,6 +1501,7 @@ MonoBehaviour:
   itemPrice: 30
   itemButton: {fileID: 266652674}
   infoUI: {fileID: 2132557481}
+  itemDentro: {fileID: 11400000, guid: 86e7546e51a6301408153a8f704915ff, type: 2}
 --- !u!1 &271883532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,7 +1638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 6516178239082597138, guid: 6a869a0d3e70ba84da9d50c0a30f756b, type: 3}
   itemImageGO: {fileID: 271883534}
-  itemName: Espada Inicial
+  itemName: Espada de Treino
   itemDescription: "Feita de carvalho leve, sua l\xE2mina \xE9 reta e sem fio, polida
     apenas o suficiente para n\xE3o causar farpas nas m\xE3os. O cabo \xE9 envolto
     por tiras de couro gasto, oferecendo uma pegada firme, embora desconfort\xE1vel
@@ -1599,6 +1648,7 @@ MonoBehaviour:
   itemPrice: 13
   itemButton: {fileID: 271883534}
   infoUI: {fileID: 2132557481}
+  itemDentro: {fileID: 11400000, guid: fd577b847b9f9d1489c1f6566de8fa14, type: 2}
 --- !u!1 &301936235
 GameObject:
   m_ObjectHideFlags: 0
@@ -4555,7 +4605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 2913249149326906964, guid: 3292cd2a6d33fdc46ad4a833d4110392, type: 3}
   itemImageGO: {fileID: 1074721228}
-  itemName: Armadura Inicial
+  itemName: Armadura de Couro
   itemDescription: "Feita de couro grosso e costuras refor\xE7adas, esta armadura
     oferece prote\xE7\xE3o b\xE1sica sem comprometer a mobilidade. Suas marcas de
     uso indicam treinos frequentes, mas ainda cumpre seu papel de manter o portador
@@ -4563,6 +4613,7 @@ MonoBehaviour:
   itemPrice: 20
   itemButton: {fileID: 1074721228}
   infoUI: {fileID: 2132557481}
+  itemDentro: {fileID: 11400000, guid: 96033d5bfcb272543aaa177d157f684f, type: 2}
 --- !u!1 &1081819844
 GameObject:
   m_ObjectHideFlags: 0
@@ -6891,6 +6942,7 @@ MonoBehaviour:
   itemPrice: 600
   itemButton: {fileID: 1665932682}
   infoUI: {fileID: 2132557481}
+  itemDentro: {fileID: 11400000, guid: 6702c905a4773d6478695a960e7e8b51, type: 2}
 --- !u!1 &1678403292
 GameObject:
   m_ObjectHideFlags: 0
@@ -7776,6 +7828,7 @@ MonoBehaviour:
   itemPrice: 1
   itemButton: {fileID: 1772990199}
   infoUI: {fileID: 2132557481}
+  itemDentro: {fileID: 11400000, guid: cbea7ddf4ec17ab4382e443c202e1f07, type: 2}
 --- !u!1 &1929899150
 GameObject:
   m_ObjectHideFlags: 0
@@ -9010,3 +9063,4 @@ SceneRoots:
   - {fileID: 853869613}
   - {fileID: 1986202921}
   - {fileID: 963568964}
+  - {fileID: 49899465}
