@@ -1,4 +1,4 @@
-// ItemInfoUI.cs
+﻿// ItemInfoUI.cs
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -31,19 +31,18 @@ public class ItemInfoUI : MonoBehaviour
         exitButton.onClick.AddListener(() => exit.SetActive(true));
 
         buyButton.onClick.AddListener(BuyItem);
-        buyButton.onClick.AddListener(() => IndButton.gameObject.SetActive(true));
+        //buyButton.onClick.AddListener(() => IndButton.gameObject.SetActive(true));
 
     }
 
     private void BuyItem()
     {
         Debug.Log("Item comprado!");
-        buyButton.gameObject.SetActive(false);
+        //buyButton.gameObject.SetActive(false);
         Vendedor.SetActive(true);
         Okay.gameObject.SetActive(true);
         Okay.onClick.AddListener(() => Vendedor.SetActive(false));
         
-
     }
 
     public void ShowItem(Sprite sprite, string name, string description, int price)
@@ -56,7 +55,6 @@ public class ItemInfoUI : MonoBehaviour
         itemNameText.text = name;
         itemDescriptionText.text = description;
         itemPriceText.text = "R$ " + price;
-
 
 
         itemNameText.gameObject.SetActive(true);
