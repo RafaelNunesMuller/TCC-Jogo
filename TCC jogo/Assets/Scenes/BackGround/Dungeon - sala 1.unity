@@ -198,6 +198,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56460363}
   m_CullTransparentMesh: 1
+--- !u!1 &73728129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 73728131}
+  - component: {fileID: 73728130}
+  m_Layer: 0
+  m_Name: InvetarioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &73728130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73728129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2159a13ccdf304388ad77f5112861d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itens: []
+--- !u!4 &73728131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73728129}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.522419, y: -3.7111523, z: -0.10044856}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &156037424
 GameObject:
   m_ObjectHideFlags: 0
@@ -8241,7 +8286,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 17
-      m_TileSpriteIndex: 26
+      m_TileSpriteIndex: 28
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -8251,7 +8296,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 16
-      m_TileSpriteIndex: 25
+      m_TileSpriteIndex: 26
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -8581,7 +8626,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 26
-      m_TileSpriteIndex: 23
+      m_TileSpriteIndex: 25
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -8766,18 +8811,18 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 6507091897339716211, guid: 2d5e779ba47ed5e41882a49eaa3bb1b2, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 5673910272569780926, guid: 2d5e779ba47ed5e41882a49eaa3bb1b2, type: 3}
   - m_RefCount: 1
+    m_Data: {fileID: 6507091897339716211, guid: 2d5e779ba47ed5e41882a49eaa3bb1b2, type: 3}
+  - m_RefCount: 1
     m_Data: {fileID: -2073153692, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 780276298, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
-  - m_RefCount: 1
     m_Data: {fileID: -138476494, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 780276298, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -745889853, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
   m_TileMatrixArray:
@@ -12962,6 +13007,7 @@ GameObject:
   - component: {fileID: 2147393431}
   - component: {fileID: 2147393433}
   - component: {fileID: 2147393432}
+  - component: {fileID: 2147393434}
   m_Layer: 0
   m_Name: bauM01
   m_TagString: Untagged
@@ -13085,6 +13131,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2147393434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147393430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 11400000, guid: 198d3f7887d48ab4bbc0807ba7cc6feb, type: 2}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -13094,5 +13156,6 @@ SceneRoots:
   - {fileID: 2027303776}
   - {fileID: 1641361672}
   - {fileID: 807419508}
+  - {fileID: 73728131}
   - {fileID: 1426226086}
   - {fileID: 735847981}

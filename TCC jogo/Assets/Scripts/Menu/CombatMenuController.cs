@@ -13,6 +13,8 @@ public class CombatMenuController : MonoBehaviour
     public AttackMenu attackMenu;
 
     private MenuItem menuItemScript;
+    public BattleItemMenu battleItemMenu;
+
 
     void Start()
     {
@@ -62,14 +64,12 @@ public class CombatMenuController : MonoBehaviour
                 Menu.SetActive(false);
                 break;
 
-            case 1: // Item
-                if (menuItemScript != null)
-                {
-                    InventarioItem.SetActive(true);
-                    menuItemScript.Open();   // ✅ Abre inventário com slots atualizados
-                }
+            case 1:
+                battleItemMenu.gameObject.SetActive(true);
+                battleItemMenu.AbrirInventario();
                 Menu.SetActive(false);
                 break;
+
 
             case 2: // Fugir
                 Debug.Log("FUGIR!");

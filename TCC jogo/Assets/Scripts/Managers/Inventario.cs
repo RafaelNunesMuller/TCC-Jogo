@@ -1,36 +1,33 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Inventario : MonoBehaviour
 {
-    public static Inventario instance;
-
+    public static Inventario instance; // Singleton global
     public List<Item> itens = new List<Item>();
 
     void Awake()
     {
-        if (instance == null) instance = this;
-        else Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject); // persiste entre cenas
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // ?? Mantém entre cenas
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Adicionar(Item item)
     {
         itens.Add(item);
-        Debug.Log($"Adicionado: {item.nome}");
-    }
-
-    public void Remover(Item item)
-    {
-        itens.Remove(item);
-        Debug.Log($"Removido: {item.nome}");
     }
 
     public void Usar(Item item, playerStats player)
     {
-        item.Usar(player); // cada item sabe o que faz
-        if (item.consumivel)
-            Remover(item);
+        item.Usar(player);
+        item.quantidade--;
+        if (item.quantidade <= 0) itens.Remove(item);
     }
 }

@@ -1,16 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class MenuItem : MonoBehaviour
+public class BattleItemMenu : MonoBehaviour
 {
-    public GameObject itemSlotPrefab;       // Prefab do slot de item
-    public Transform itemSlotContainer;     // Container dos slots (pai)
-    public RectTransform cursor;            // Cursor que indica o slot selecionado
-    public GameObject inventarioPainel;     // Painel do inventário
-
-    [Header("Referências")]
-    public GameObject menuPanel; // arrasta o MenuPanel no inspector
+    public GameObject itemSlotPrefab;
+    public Transform itemSlotContainer;
+    public RectTransform cursor;
+    public GameObject inventarioPainel;
+    public CombatMenuController combatMenu;
+    public BattleSystem battleSystem;
 
     private List<RectTransform> itemSlots = new List<RectTransform>();
     private int cursorIndex = 0;
@@ -18,7 +17,7 @@ public class MenuItem : MonoBehaviour
 
     void Update()
     {
-        if (!inventarioPainel.activeSelf) return; // Só responde se o inventário estiver aberto
+        if (!inventarioPainel.activeSelf) return;
 
         HandleInput();
 
@@ -28,21 +27,15 @@ public class MenuItem : MonoBehaviour
         }
     }
 
-    public void VoltarParaMenu()
-    {
-        gameObject.SetActive(false);
-        menuPanel.SetActive(true);
-    }
-
     void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             cursorIndex = Mathf.Min(cursorIndex + 1, itemSlots.Count - 1);
             MoveCursor(cursorIndex);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             cursorIndex = Mathf.Max(cursorIndex - 1, 0);
             MoveCursor(cursorIndex);
@@ -50,26 +43,20 @@ public class MenuItem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            UseItem(cursorIndex);
+            UsarItem(cursorIndex);
         }
     }
 
-    // Abre o inventário e cria/atualiza os slots dos itens
-    public void Open()
+    public void AbrirInventario()
     {
-
-
-        itensAtuais = new List<Item>(Inventario.instance.itens);  // ✅ sempre pega do Inventario central
+        itensAtuais = new List<Item>(Inventario.instance.itens);
         inventarioPainel.SetActive(true);
 
-        // Limpa os slots antigos
         foreach (Transform child in itemSlotContainer)
             Destroy(child.gameObject);
-
         itemSlots.Clear();
 
-        // Cria até 30 slots
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 25; i++)
         {
             GameObject newSlot = Instantiate(itemSlotPrefab, itemSlotContainer);
             newSlot.transform.localScale = Vector3.one;
@@ -85,35 +72,37 @@ public class MenuItem : MonoBehaviour
 
         cursorIndex = 0;
         MoveCursor(cursorIndex);
-
-
     }
 
     void MoveCursor(int index)
     {
         if (index < 0 || index >= itemSlots.Count) return;
-
         RectTransform targetSlot = itemSlots[index];
         cursor.anchoredPosition = targetSlot.anchoredPosition;
     }
 
-    // Usa o item selecionado
-    public void UseItem(int index)
+    void UsarItem(int index)
     {
         if (index < 0 || index >= itensAtuais.Count)
             return;
 
         Item item = itensAtuais[index];
-        playerStats player = FindFirstObjectByType<playerStats>();
+        playerStats player = battleSystem.player;
 
         if (player != null)
         {
-            // ✅ Usa via Inventario.instance
             Inventario.instance.Usar(item, player);
+            Debug.Log($"?? Player usou {item.nome} em batalha!");
         }
 
-        // Atualiza visual
-        Open();
-        MoveCursor(cursorIndex);
+        // Fecha menu de item e devolve o turno aos inimigos
+        inventarioPainel.SetActive(false);
+        StartCoroutine(battleSystem.EnemiesTurn());
+    }
+
+    public void VoltarParaMenu()
+    {
+        inventarioPainel.SetActive(false);
+        combatMenu.gameObject.SetActive(true);
     }
 }

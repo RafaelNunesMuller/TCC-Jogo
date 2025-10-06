@@ -2434,9 +2434,9 @@ GameObject:
   - component: {fileID: 740845944}
   - component: {fileID: 740845949}
   - component: {fileID: 740845948}
-  - component: {fileID: 740845947}
   - component: {fileID: 740845946}
   - component: {fileID: 740845945}
+  - component: {fileID: 740845950}
   m_Layer: 5
   m_Name: InventarioItem
   m_TagString: Untagged
@@ -2505,23 +2505,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &740845947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 740845943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aaed5c248504224388de4310cbddcfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSlotPrefab: {fileID: 382854565}
-  itemSlotContainer: {fileID: 440248669}
-  cursor: {fileID: 1677574318}
-  inventarioPainel: {fileID: 740845943}
-  menuPanel: {fileID: 445989065}
 --- !u!114 &740845948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2560,6 +2543,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740845943}
   m_CullTransparentMesh: 1
+--- !u!114 &740845950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740845943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbfca65bddc7af4fac51aea8828831f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSlotPrefab: {fileID: 382854565}
+  itemSlotContainer: {fileID: 440248669}
+  cursor: {fileID: 1677574318}
+  inventarioPainel: {fileID: 740845943}
+  combatMenu: {fileID: 1485643001}
+  battleSystem: {fileID: 582762408}
 --- !u!1 &776865233
 GameObject:
   m_ObjectHideFlags: 0
@@ -4090,6 +4091,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1830466664}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1198939686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1198939688}
+  - component: {fileID: 1198939687}
+  m_Layer: 0
+  m_Name: InventarioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1198939687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198939686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2159a13ccdf304388ad77f5112861d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1198939688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198939686}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2356648, y: 1.1190262, z: 1.5128756}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1218422845
 GameObject:
   m_ObjectHideFlags: 0
@@ -4652,6 +4697,7 @@ MonoBehaviour:
   Menu: {fileID: 445989065}
   InventarioItem: {fileID: 740845943}
   attackMenu: {fileID: 662554891}
+  battleItemMenu: {fileID: 740845950}
 --- !u!224 &1485643002
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4715,7 +4761,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1485643005
 Canvas:
   m_ObjectHideFlags: 0
@@ -5077,6 +5123,16 @@ MonoBehaviour:
     bonusDefesa: 0
     sprite: {fileID: 0}
   acessorioEquipado:
+    nome: 
+    bonusForca: 0
+    bonusDefesa: 0
+    sprite: {fileID: 0}
+  elmoEquipada:
+    nome: 
+    bonusForca: 0
+    bonusDefesa: 0
+    sprite: {fileID: 0}
+  luvaEquipada:
     nome: 
     bonusForca: 0
     bonusDefesa: 0
@@ -6461,3 +6517,4 @@ SceneRoots:
   - {fileID: 1935009504}
   - {fileID: 1838956586}
   - {fileID: 390489726}
+  - {fileID: 1198939688}

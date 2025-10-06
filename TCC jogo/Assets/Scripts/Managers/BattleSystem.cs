@@ -56,7 +56,7 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(EnemiesTurn());
     }
 
-    private IEnumerator EnemiesTurn()
+    public IEnumerator EnemiesTurn()
     {
 
         Debug.Log("👹 Turno dos inimigos!");
