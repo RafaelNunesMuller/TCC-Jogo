@@ -12,16 +12,22 @@ public class CombatMenuController : MonoBehaviour
     public GameObject InventarioItem;
     public AttackMenu attackMenu;
 
+    private MenuItem menuItemScript;
+    public BattleItemMenu battleItemMenu;
+
 
     void Start()
     {
         AtualizarCursor();
+
+        // pega o script MenuItem do objeto InventarioItem
+        if (InventarioItem != null)
+            menuItemScript = InventarioItem.GetComponent<MenuItem>();
     }
 
     void Update()
     {
         if (!Menu.activeSelf) return; // 🔹 só lê input quando o menu principal está aberto
-
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -53,15 +59,19 @@ public class CombatMenuController : MonoBehaviour
     {
         switch (opcao)
         {
-            case 0:
+            case 0: // Atacar
                 attackMenu.gameObject.SetActive(true);
                 Menu.SetActive(false);
                 break;
+
             case 1:
-                InventarioItem.SetActive(true);
+                battleItemMenu.gameObject.SetActive(true);
+                battleItemMenu.AbrirInventario();
                 Menu.SetActive(false);
                 break;
-            case 2:
+
+
+            case 2: // Fugir
                 Debug.Log("FUGIR!");
                 break;
         }

@@ -13,7 +13,6 @@ public class EnemyStats : MonoBehaviour
     public int defense;
     public int magic;
     public int magicDefense;
-    public int speed;
 
     [Header("HP")]
     public int maxHP;
@@ -55,7 +54,8 @@ public class EnemyStats : MonoBehaviour
     private void Die()
     {
         Debug.Log($"☠️ {enemyName} foi derrotado!");
-        gameObject.SetActive(false);
+        OnDeath?.Invoke();       // ✅ dispara o evento
+        Destroy(gameObject);
     }
 
     public Attack ChooseAttack()

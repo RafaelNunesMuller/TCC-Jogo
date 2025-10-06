@@ -28,6 +28,12 @@ public class Player : MonoBehaviour
 
         stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
         lastStepPosition = rb.position;
+
+        // Se GameManager tem posição salva, aplica
+        if (GameManager.Instance != null && GameManager.Instance.lastPlayerPosition != Vector3.zero)
+        {
+            transform.position = GameManager.Instance.lastPlayerPosition;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,12 +46,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!canMove)
-        {
-            anim.SetBool("isMoving", false);
-            rb.linearVelocity = Vector2.zero;
-            return;
-        }
+
+
+        if (!canMove) return;
+
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        // Se está se movendo, salva a posição atual
+        //
 
         // Movimento
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

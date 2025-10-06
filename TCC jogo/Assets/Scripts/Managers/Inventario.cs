@@ -1,51 +1,33 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Inventario : MonoBehaviour
 {
-    public static Inventario instance;
-
+    public static Inventario instance; // Singleton global
     public List<Item> itens = new List<Item>();
 
     void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(gameObject); // ?? Mantém entre cenas
+        }
         else
+        {
             Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject);
-
-        CarregarItensIniciais();
-    }
-
-    void CarregarItensIniciais()
-    {
-        itens.Add(new Potion(3));
-        itens.Add(new StrenghPotion(4));
-        itens.Add(new DefensePotion(4));
-    }
-
-    public void funcItens(int index)
-    {
-        if (index < 0 || index >= itens.Count) return;
-
-        Item item = itens[index];
-
-        // Busca o PlayerStats na cena
-        playerStats player = FindFirstObjectByType<playerStats>();
-        if (player != null)
-        {
-            item.Usar(player); // passa o player
         }
+    }
 
-        // Diminui quantidade
+    public void Adicionar(Item item)
+    {
+        itens.Add(item);
+    }
+
+    public void Usar(Item item, playerStats player)
+    {
+        item.Usar(player);
         item.quantidade--;
-        if (item.quantidade <= 0)
-        {
-            itens.RemoveAt(index);
-        }
+        if (item.quantidade <= 0) itens.Remove(item);
     }
-
 }
