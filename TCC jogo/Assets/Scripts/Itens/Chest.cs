@@ -8,7 +8,7 @@ public class Chest : MonoBehaviour
     public Sprite baulFechado;              // sprite do baú fechado
     public Sprite baulAberto;               // sprite do baú aberto
     private SpriteRenderer spriteRenderer;  // renderizador do baú
-
+    private bool playerPerto = false;
 
     void Start()
     {
@@ -23,12 +23,20 @@ public class Chest : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
+            playerPerto = true;
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+            playerPerto = false;
+    }
+
+    void Update()
+    {
+        if (playerPerto && !foiAberto && Input.GetKeyDown(KeyCode.Z))
         {
-            // Se o jogador encostar e o baú ainda não foi aberto
-            if (!foiAberto)
-            {
-                AbrirBau();
-            }
+            AbrirBau();
         }
     }
 
@@ -40,13 +48,11 @@ public class Chest : MonoBehaviour
         if (spriteRenderer != null && baulAberto != null)
             spriteRenderer.sprite = baulAberto;
 
-        
 
-        // Adiciona o item ao inventário
-        if (Inventario.instance != null && itemDentro != null)
+        if (itemDentro != null)
         {
             Inventario.instance.Adicionar(itemDentro);
-            Debug.Log($"?? Você obteve: {itemDentro.nome}!");
+            Debug.Log($"Você encontrou {itemDentro.nome}!");
         }
         else
         {
