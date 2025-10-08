@@ -117,7 +117,15 @@ public class playerStats : MonoBehaviour
     // -------- XP e LEVEL --------
     public void GainExperience(int xp)
     {
-        experience += xp;
+        if (level == 10)
+        {
+            experience = 0;
+        }
+        else
+        {
+           experience += xp; 
+        }
+
         if (experience >= ExperienceToNextLevel())
         {
             LevelUp();
