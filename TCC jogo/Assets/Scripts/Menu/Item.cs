@@ -35,6 +35,5 @@ public enum ItemTipo
     Armadura,
     Acessorio,
     Elmo,
-    Luva,
-    Pocao
+    Luva
 }

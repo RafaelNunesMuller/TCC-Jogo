@@ -67,11 +67,7 @@ public class MenuEquip : MonoBehaviour
         Sprite acessorioLendaria = Resources.Load<Sprite>("Icones/necklace_01e");
 
 
-        inventario.Add(new Item("Espada Comum", ItemTipo.Arma, 1, espadaComum, bonusForca: 5));
-        inventario.Add(new Item("Espada Lendária", ItemTipo.Arma, 1, espadaLendaria, bonusForca: 20));
-        inventario.Add(new Item("Armadura de Couro", ItemTipo.Armadura, 1, armaduraComum, bonusDefesa: 3));
-        inventario.Add(new Item("Armadura de Aço", ItemTipo.Armadura, 1, armaduraIncomum, bonusDefesa: 8));
-        inventario.Add(new Item("Anel da Vida", ItemTipo.Acessorio, 1, acessorioComum, bonusDefesa: 10));
+        
 
 
 
