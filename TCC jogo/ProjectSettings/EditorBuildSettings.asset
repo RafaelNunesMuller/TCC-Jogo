@@ -23,11 +23,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BackGround/Game Over.unity
     guid: 724037453225afe4cb152dbd3379e57d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BackGround/GameOverEspecial.unity
     guid: d3caca29998f8d44f824824375bfe540
   - enabled: 1
-    path: Assets/Scenes/BackGround/Casa.unity
+    path: Assets/Scenes/BackGround/Casa/Casa.unity
     guid: 0800b273c4392d6459a69dc93eae35d9
   - enabled: 1
     path: Assets/Scenes/BackGround/Mapa.unity
