@@ -54,6 +54,8 @@ public class Chest : MonoBehaviour
         }
         else
         {
+            string mensagem = $"Você encontrou nada!";
+            MessageUI.instance.ShowMessage(mensagem);
             Debug.LogWarning("O baú não tem item dentro!");
         }
     }
