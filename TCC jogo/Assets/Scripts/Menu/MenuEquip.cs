@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+Ôªøusing System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -20,7 +20,7 @@ public class MenuEquip : MonoBehaviour
     public Button armorButton;
     public Button accessoryButton;
 
-    [Header("ReferÍncias")]
+    [Header("Refer√™ncias")]
     public GameObject menuPanel; // arrasta o MenuPanel no inspector
 
     private List<Item> inventario = new List<Item>();
@@ -29,10 +29,13 @@ public class MenuEquip : MonoBehaviour
     private int cursorIndex = 0;
     private string slotSelecionado = "";
 
-    private bool navegandoSlots = true; // true = cursor nos botıes, false = cursor nos itens
+    private bool navegandoSlots = true; // true = cursor nos bot√µes, false = cursor nos itens
     private List<RectTransform> botoesSlots = new List<RectTransform>();
 
     public GameObject EquipItemPrefab;
+
+    private Inventario inventarioCentral;
+
 
     void Start()
     {
@@ -67,11 +70,12 @@ public class MenuEquip : MonoBehaviour
         Sprite acessorioLendaria = Resources.Load<Sprite>("Icones/necklace_01e");
 
 
-        
+
+        inventarioCentral = Inventario.instance;
 
 
 
-        // Guardar botıes como slots
+        // Guardar bot√µes como slots
         botoesSlots.Add(weaponButton.GetComponent<RectTransform>());
         botoesSlots.Add(healmetButton.GetComponent<RectTransform>());
         botoesSlots.Add(gloveButton.GetComponent<RectTransform>());
@@ -81,7 +85,7 @@ public class MenuEquip : MonoBehaviour
         
         AtualizarEquip();
 
-        // ComeÁa no primeiro bot„o
+        // Come√ßa no primeiro bot√£o
         cursorIndex = 0;
         MoveCursor(cursorIndex);
     }
@@ -105,7 +109,7 @@ public class MenuEquip : MonoBehaviour
     {
         if (navegandoSlots)
         {
-            // NavegaÁ„o entre os botıes
+            // Navega√ß√£o entre os bot√µes
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 cursorIndex = Mathf.Min(cursorIndex + 1, botoesSlots.Count - 1);
@@ -133,7 +137,7 @@ public class MenuEquip : MonoBehaviour
         }
         else
         {
-            // NavegaÁ„o dentro da lista de itens
+            // Navega√ß√£o dentro da lista de itens
             if (equipSlots.Count == 0) return;
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -153,7 +157,7 @@ public class MenuEquip : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.X))
             {
-                // Volta para os botıes
+                // Volta para os bot√µes
                 navegandoSlots = true;
                 cursorIndex = 0;
                 MoveCursor(cursorIndex);
@@ -169,14 +173,16 @@ public class MenuEquip : MonoBehaviour
 
     void MostrarListaEquip()
     {
-        // Limpa lista antiga
         foreach (Transform child in equipListParent)
             Destroy(child.gameObject);
 
         equipSlots.Clear();
         itensAtuais.Clear();
 
-        // Filtra itens
+        // ‚úÖ Pega direto do invent√°rio global
+        inventario = inventarioCentral.itens;
+
+        // Filtra itens conforme o tipo do slot selecionado
         foreach (Item item in inventario)
         {
             if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
@@ -184,7 +190,6 @@ public class MenuEquip : MonoBehaviour
                 (slotSelecionado == "Acessorio" && item.tipo == ItemTipo.Acessorio) ||
                 (slotSelecionado == "Elmo" && item.tipo == ItemTipo.Elmo) ||
                 (slotSelecionado == "Luva" && item.tipo == ItemTipo.Luva))
-
             {
                 GameObject obj = Instantiate(equipItemPrefab, equipListParent);
                 ItemEquipUI ui = obj.GetComponent<ItemEquipUI>();
@@ -203,6 +208,7 @@ public class MenuEquip : MonoBehaviour
         else
             cursor.gameObject.SetActive(false);
     }
+
 
     void MoveCursor(int index)
     {
@@ -254,6 +260,6 @@ public class MenuEquip : MonoBehaviour
             $"Elmo: {playerStats.elmoEquipada.nome}\n" +
             $"Armadura: {playerStats.armaduraEquipada.nome}\n" +
             $"Luva: {playerStats.luvaEquipada.nome}\n" +
-            $"AcessÛrio: {playerStats.acessorioEquipado.nome}";
+            $"Acess√≥rio: {playerStats.acessorioEquipado.nome}";
     }
 }

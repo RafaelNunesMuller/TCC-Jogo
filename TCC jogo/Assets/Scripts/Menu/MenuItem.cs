@@ -71,6 +71,9 @@ public class MenuItem : MonoBehaviour
         // Cria até 30 slots
         for (int i = 0; i < 30; i++)
         {
+
+
+
             GameObject newSlot = Instantiate(itemSlotPrefab, itemSlotContainer);
             newSlot.transform.localScale = Vector3.one;
 
@@ -104,16 +107,26 @@ public class MenuItem : MonoBehaviour
             return;
 
         Item item = itensAtuais[index];
-        playerStats player = FindFirstObjectByType<playerStats>();
 
-        if (player != null)
+        // 🔹 Bloqueia uso de itens que não são consumíveis
+        if (item.tipo != ItemTipo.Consumivel)
         {
-            // ✅ Usa via Inventario.instance
-            Inventario.instance.Usar(item, player);
+            Debug.Log($"❌ {item.nome} não pode ser usado aqui. Vá até o menu de Equipar!");
+            MessageUI.instance.ShowMessage($"{item.nome} só pode ser equipado no menu de Equipar!");
+            return;
         }
 
-        // Atualiza visual
+        // 🔹 Procura o player e usa o item
+        playerStats player = FindFirstObjectByType<playerStats>();
+        if (player != null)
+        {
+            Inventario.instance.Usar(item, player);
+            Debug.Log($"💊 {item.nome} foi usado!");
+        }
+
+        // 🔹 Atualiza interface
         Open();
         MoveCursor(cursorIndex);
     }
+
 }
