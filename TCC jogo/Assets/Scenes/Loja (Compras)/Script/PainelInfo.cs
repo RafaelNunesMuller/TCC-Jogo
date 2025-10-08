@@ -42,10 +42,11 @@ public class ItemInfoUI : MonoBehaviour
         Debug.Log("Item comprado!");
         //buyButton.gameObject.SetActive(false);
         panel.SetActive(false);
-        //itens.SetActive(true);
+        itens.SetActive(false);
         Vendedor.SetActive(true);
         Okay.gameObject.SetActive(true);
         Okay.onClick.AddListener(() => Vendedor.SetActive(false));
+        Okay.onClick.AddListener(() => itens.SetActive(true));
         
     }
 
