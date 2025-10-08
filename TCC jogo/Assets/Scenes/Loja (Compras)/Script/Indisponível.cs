@@ -1,9 +1,8 @@
-﻿// ItemInfoUI.cs
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ItemInfoUI : MonoBehaviour
+public class Indisponível : MonoBehaviour
 {
     public GameObject panel;
     public GameObject itens;
@@ -11,39 +10,34 @@ public class ItemInfoUI : MonoBehaviour
     public TMP_Text itemNameText;
     public TMP_Text itemDescriptionText;
     public TMP_Text itemPriceText;
-    public Button buyButton;
+    public Button IndButton;
     public Button exitButton;
     public GameObject exit;
-    public Button IndButton;
     public GameObject Vendedor;
     public Button Okay;
 
-    public static Inventario instance;
 
 
     private void Awake()
-    {   
-        
+    {
+
         itens.SetActive(true);
         panel.SetActive(false);
         exit.gameObject.SetActive(true);
-  
+
         exitButton.onClick.AddListener(() => panel.SetActive(false));
         exitButton.onClick.AddListener(() => itens.SetActive(true));
         exitButton.onClick.AddListener(() => exit.SetActive(true));
-
-        buyButton.onClick.AddListener(BuyItem);
-        //buyButton.onClick.AddListener(() => IndButton.gameObject.SetActive(true));
+        IndButton.onClick.AddListener(IndItem);
 
     }
 
-    private void BuyItem()
+    private void IndItem()
     {
-        Debug.Log("Item comprado!");
-        //buyButton.gameObject.SetActive(false);
         Vendedor.SetActive(true);
         Okay.gameObject.SetActive(true);
         Okay.onClick.AddListener(() => Vendedor.SetActive(false));
+        
         
     }
 
@@ -52,7 +46,7 @@ public class ItemInfoUI : MonoBehaviour
         itens.SetActive(false);
         panel.SetActive(true);
         exit.gameObject.SetActive(false);
-     
+
         itemImage.sprite = sprite;
         itemNameText.text = name;
         itemDescriptionText.text = description;
@@ -62,10 +56,8 @@ public class ItemInfoUI : MonoBehaviour
         itemNameText.gameObject.SetActive(true);
         itemDescriptionText.gameObject.SetActive(true);
         itemPriceText.gameObject.SetActive(true);
-        buyButton.gameObject.SetActive(true);
+        IndButton.gameObject.SetActive(true);
         exitButton.gameObject.SetActive(true);
-      
-
         exitButton.gameObject.SetActive(true);
     }
 
@@ -73,4 +65,3 @@ public class ItemInfoUI : MonoBehaviour
 
 
 }
-

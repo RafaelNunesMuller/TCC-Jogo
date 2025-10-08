@@ -4,13 +4,16 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     public Sprite itemSprite;
-    public GameObject itemImageGO; 
+    public Button itemImageGO; 
     public string itemName;
     [TextArea] public string itemDescription;
     public int itemPrice;
 
+
+
     public Button itemButton;     // botão do item
-    public ItemInfoUI infoUI;     // referência ao painel
+    public ItemInfoUI infoUI;
+    public Item itemDentro;
 
     private void Awake()
     {
@@ -25,6 +28,6 @@ public class ItemSlot : MonoBehaviour
     {
         if (infoUI != null)
             infoUI.ShowItem(itemSprite, itemName, itemDescription, itemPrice);
-            itemImageGO.SetActive(true);
+            itemImageGO.gameObject.SetActive(true);
     }
 }
