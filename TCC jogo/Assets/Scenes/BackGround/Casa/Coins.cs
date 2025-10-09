@@ -10,7 +10,9 @@ public class CoinsCasa : MonoBehaviour
     private bool playerPerto = false;
     public CoinManager Coins;
     public GameObject FalaPlayer;
+    public GameObject Vasculhado;
     public Button ok;
+    public Button okVas;
 
 
 
@@ -38,7 +40,15 @@ public class CoinsCasa : MonoBehaviour
             AddCoins();
             FalaPlayer.SetActive(true);
             ok.onClick.AddListener(() => FalaPlayer.SetActive(false));
+            foiAberto = true;
         }
+
+        else
+        {
+            Aberto();
+        }
+
+        
     }
     private void AddCoins()
     {
@@ -47,8 +57,20 @@ public class CoinsCasa : MonoBehaviour
 
         if (Coins != null)
             Coins.ShowCoins(Coins.Coins);
+        
             
     }
+
+    private void Aberto()
+    {
+        if (playerPerto && foiAberto && Input.GetKeyDown(KeyCode.Z))
+        {
+            Vasculhado.SetActive(true);
+            okVas.onClick.AddListener(() => Vasculhado.SetActive(false));
+        }
+    }
+
+
 
     
 }
