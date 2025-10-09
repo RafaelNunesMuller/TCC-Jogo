@@ -29,12 +29,18 @@ public class Player : MonoBehaviour
         stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
         lastStepPosition = rb.position;
 
-        // Se GameManager tem posição salva, aplica
         if (GameManager.Instance != null && GameManager.Instance.lastPlayerPosition != Vector3.zero)
         {
             transform.position = GameManager.Instance.lastPlayerPosition;
         }
+
     }
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -98,9 +104,16 @@ public class Player : MonoBehaviour
 
         if (stepsToNextEncounter <= 0)
         {
-            if (Random.Range(1, 101) <= 35) // % de chance de encontrar uma batalha pode ser ajustado pelo codigo
+            if (Random.Range(1, 101) <= 35) // 35% de chance de batalha
             {
                 Debug.Log("⚔️ Encontro de batalha!");
+
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
+                    GameManager.Instance.lastPlayerPosition = transform.position;
+                }
+
                 SceneManager.LoadScene("Battle");
             }
 
@@ -108,4 +121,5 @@ public class Player : MonoBehaviour
             Debug.Log($"Novo contador: {stepsToNextEncounter}");
         }
     }
+
 }

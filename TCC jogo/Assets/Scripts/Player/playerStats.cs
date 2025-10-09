@@ -183,7 +183,7 @@ public class playerStats : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
-
+        DontDestroyOnLoad(gameObject); // 🔹 mantém o player entre cenas
     }
 
     

@@ -27,9 +27,8 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator FinalizarBatalha()
     {
-        Debug.Log("🎉 Todos os inimigos foram derrotados!");
+        yield return new WaitForSeconds(1f); // pausa dramática 😎
 
-        // Soma toda a XP dos inimigos
         int totalXP = 0;
         foreach (var inimigo in inimigosAtivos)
         {
@@ -37,27 +36,29 @@ public class BattleSystem : MonoBehaviour
                 totalXP += inimigo.experienceReward;
         }
 
-        // Dá XP ao jogador
+        // Salva status antigos para comparar depois
+        int oldLevel = player.level;
+        int oldStr = player.strength;
+        int oldDef = player.defense;
+        int oldHP = player.maxHP;
+
         player.GainExperience(totalXP);
         Debug.Log($"💫 Player ganhou {totalXP} XP!");
 
-        // Mostra stats atualizados
-        Debug.Log($"📈 Level: {player.level}, Força: {player.strength}, Defesa: {player.defense}, HP: {player.maxHP}");
+        // Chama tela de vitória
+        var victoryUI = FindFirstObjectByType<VictoryUI>();
+        if (victoryUI != null)
+        {
+            yield return victoryUI.MostrarVitoria(player, totalXP, oldLevel, oldStr, oldDef, oldHP);
+        }
 
-        // Aguarda confirmação do jogador
-        Debug.Log("Pressione Z para continuar...");
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z));
-
-        // Retorna para a cena anterior
+        // 🔹 Depois de apertar Z na tela de vitória, volta pra cena anterior
         if (!string.IsNullOrEmpty(GameManager.Instance.lastScene))
         {
             SceneManager.LoadScene(GameManager.Instance.lastScene);
         }
-        else
-        {
-            Debug.LogError("⚠️ lastScene não definido!");
-        }
     }
+
 
     public void SetEnemies(List<EnemyStats> novosInimigos)
     {
