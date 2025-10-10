@@ -11,7 +11,6 @@ public class playerStats : MonoBehaviour
     public int defense = 3;
     public int magic = 1;
     public int magicDefense = 1;
-    public int speed = 6;
 
     [Header("HP/MP")]
     public int maxHP = 50;
@@ -21,6 +20,8 @@ public class playerStats : MonoBehaviour
     public Equipamento armaEquipada;
     public Equipamento armaduraEquipada;
     public Equipamento acessorioEquipado;
+    public Equipamento elmoEquipada;
+    public Equipamento luvaEquipada;
 
     [Header("Ataques Disponíveis")]
     public Attack[] ataques;
@@ -55,6 +56,29 @@ public class playerStats : MonoBehaviour
         armaduraEquipada = new Equipamento(armadura.nome, armadura.bonusForca, armadura.bonusDefesa, armadura.icone);
         defense += armaduraEquipada.bonusDefesa;
         Debug.Log("Equipou armadura: " + armadura.nome);
+    }
+
+    public void EquiparElmo(Item elmo)
+    {
+        // Remove b�nus da arma anterior
+        if (elmoEquipada != null)
+            strength -= elmoEquipada.bonusForca;
+
+        elmoEquipada = new Equipamento(elmo.nome, elmo.bonusForca, elmo.bonusDefesa, elmo.icone);
+        defense += elmoEquipada.bonusDefesa;
+        Debug.Log("Equipou o elmo: " + elmo.nome);
+    }
+
+
+    public void EquiparLuva(Item luva)
+    {
+        // Remove b�nus da arma anterior
+        if (luvaEquipada != null)
+            strength -= luvaEquipada.bonusForca;
+
+        luvaEquipada = new Equipamento(luva.nome, luva.bonusForca, luva.bonusDefesa, luva.icone);
+        defense += luvaEquipada.bonusDefesa;
+        Debug.Log("Equipou o elmo: " + luva.nome);
     }
 
     public void EquiparAcessorio(Item acessorio)
@@ -93,7 +117,15 @@ public class playerStats : MonoBehaviour
     // -------- XP e LEVEL --------
     public void GainExperience(int xp)
     {
-        experience += xp;
+        if (level == 10)
+        {
+            experience = 0;
+        }
+        else
+        {
+           experience += xp; 
+        }
+
         if (experience >= ExperienceToNextLevel())
         {
             LevelUp();
@@ -111,7 +143,6 @@ public class playerStats : MonoBehaviour
         experience = 0;
         strength += 1;
         defense += 1;
-        speed += 1;
         maxHP += 5;
         currentHP = maxHP;
         Debug.Log("Level up! Agora n�vel " + level);
@@ -126,10 +157,12 @@ public class playerStats : MonoBehaviour
 
         Debug.Log($"💔 Player recebeu {damage} de dano! (HP: {currentHP}/{maxHP})");
 
+        FindAnyObjectByType<DamageFlash>()?.Flash();
+
         CameraShake camShake = Camera.main.GetComponent<CameraShake>();
         if (camShake != null)
         {
-            StartCoroutine(camShake.Shake(1.2f, 1.2f)); // duração, intensidade
+            StartCoroutine(camShake.Shake(1.2f, 0.2f)); // duração, intensidade
         }
 
         if (currentHP <= 0)
@@ -142,11 +175,16 @@ public class playerStats : MonoBehaviour
     {
         Debug.Log($"☠️ Player foi derrotado!");
         SceneManager.LoadScene("Game Over");
+
+        
     }
 
     // -------- START --------
     void Start()
     {
         currentHP = maxHP;
+
     }
+
+    
 }

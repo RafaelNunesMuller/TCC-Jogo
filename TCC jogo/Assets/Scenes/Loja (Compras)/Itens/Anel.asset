@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be649d2219faf8438162be5b96d743d, type: 3}
+  m_Name: Anel
+  m_EditorClassIdentifier: 
+  nome: Anel Inicial
+  tipo: 3
+  quantidade: 1
+  icone: {fileID: -5959828144380127873, guid: 025fa0d582096c844a409ee45e18887d, type: 3}
+  consumivel: 0
+  bonusForca: 5
+  bonusDefesa: 5
