@@ -1,12 +1,17 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CoinManager : MonoBehaviour
 {
     public static CoinManager instance;
     public TMP_Text coinsText;
     public int Coins = 0;
+    public Button buyButton;
+    public int itemPrice;
+    public GameObject NoCoins;
+    public Button OkayCoins;
 
     void Awake()
     {
@@ -26,8 +31,7 @@ public class CoinManager : MonoBehaviour
     {
         // tenta encontrar o novo texto automaticamente
         if (coinsText == null)
-            coinsText = Object.FindAnyObjectByType<TMP_Text>();
-
+            coinsText = GameObject.Find("Mostrar Coins").GetComponent<TMP_Text>();
 
         ShowCoins(Coins);
     }

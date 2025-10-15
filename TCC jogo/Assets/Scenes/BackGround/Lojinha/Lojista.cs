@@ -1,9 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Lojista : MonoBehaviour
 {
     private bool Vendedor = false;
+    public GameObject Fala;
+    public Button Okay;
+    public Button Exit;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -23,8 +28,9 @@ public class Lojista : MonoBehaviour
     {
         if (Vendedor && Input.GetKeyDown(KeyCode.Z))
         {
-            SceneManager.LoadScene("Compras");
-            Debug.Log("Item clicado");
+            Fala.SetActive(true);
+            Exit.onClick.AddListener(() => Fala.SetActive(false));
+            Okay.onClick.AddListener(() => SceneManager.LoadScene("Compras"));
         }
     }
 }

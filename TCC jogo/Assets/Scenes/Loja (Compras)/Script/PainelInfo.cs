@@ -19,6 +19,7 @@ public class ItemInfoUI : MonoBehaviour
     public Button Okay;
 
     public static Inventario instance;
+    public static CoinManager Coins;
 
 
     private void Awake()
@@ -47,8 +48,10 @@ public class ItemInfoUI : MonoBehaviour
         Okay.gameObject.SetActive(true);
         Okay.onClick.AddListener(() => Vendedor.SetActive(false));
         Okay.onClick.AddListener(() => itens.SetActive(true));
-        
+        Okay.onClick.AddListener(() => exit.SetActive(true));
+
     }
+
 
     public void ShowItem(Sprite sprite, string name, string description, int price)
     {

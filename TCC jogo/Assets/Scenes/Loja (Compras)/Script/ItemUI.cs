@@ -11,7 +11,7 @@ public class ItemSlot : MonoBehaviour
 
 
 
-    public Button itemButton;     // botão do item
+    public Button itemButton;
     public ItemInfoUI infoUI;
     public Item itemDentro;
 
@@ -23,6 +23,8 @@ public class ItemSlot : MonoBehaviour
         if (itemButton != null)
             itemButton.onClick.AddListener(OpenPanel);
     }
+
+
 
     public void OpenPanel()
     {
