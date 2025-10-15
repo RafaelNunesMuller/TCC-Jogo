@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public string lastScene;
     public Vector3 playerPosition;
+    internal Vector3 lastPlayerPosition;
 
     void Awake()
     {

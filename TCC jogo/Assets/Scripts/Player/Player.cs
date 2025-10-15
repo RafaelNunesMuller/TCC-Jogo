@@ -40,10 +40,6 @@ public class Player : MonoBehaviour
 
     }
 
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
