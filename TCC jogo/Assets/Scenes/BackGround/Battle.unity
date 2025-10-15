@@ -1557,8 +1557,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708808c1169fc4e4a8b5d07e7dd8c567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastScene: 
+  playerStats: {fileID: 0}
   lastPlayerPosition: {x: 0, y: 0, z: 0}
+  lastScene: 
+  playerCameraPrefab: {fileID: 0}
+  menuPrefab: {fileID: 0}
 --- !u!4 &390489726
 Transform:
   m_ObjectHideFlags: 0
@@ -1587,7 +1590,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victoryPanel: {fileID: 1769381518}
-  messageText: {fileID: 363605913}
+  textoMensagem: {fileID: 363605913}
+  textoStats: {fileID: 363605913}
+  foiConfirmado: 0
 --- !u!1 &440248668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,7 +1724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04184afa12f23ae4ebcd3e88cbb879ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 1625459444}
+  playerStats: {fileID: 0}
   healthBar: {fileID: 445989068}
 --- !u!114 &445989068
 MonoBehaviour:
@@ -1746,7 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b727a7bc4b13140b31a1fd4a1d60cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 1625459444}
+  playerStats: {fileID: 0}
   PlayerHP: {fileID: 1356698555}
 --- !u!114 &445989070
 MonoBehaviour:
@@ -2241,7 +2246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb928f48eda019459c1aaece106d1a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1625459444}
   inimigosAtivos:
   - {fileID: 0}
   - {fileID: 0}
@@ -2374,7 +2378,7 @@ MonoBehaviour:
   - {fileID: 1775208974}
   cursor: {fileID: 1407840009}
   targetMenu: {fileID: 1013274580}
-  player: {fileID: 1625459444}
+  player: {fileID: 0}
   combatMenu: {fileID: 1485643001}
   menu: {fileID: 445989065}
   targetMenuUI: {fileID: 1013274579}
@@ -5237,7 +5241,6 @@ GameObject:
   - component: {fileID: 1625459447}
   - component: {fileID: 1625459446}
   - component: {fileID: 1625459445}
-  - component: {fileID: 1625459444}
   m_Layer: 5
   m_Name: Player
   m_TagString: Untagged
@@ -5245,52 +5248,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1625459444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625459443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110daca23c1d39548a4227d3f13c8fa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
-  experience: 0
-  strength: 5
-  defense: 3
-  magic: 1
-  magicDefense: 1
-  maxHP: 50
-  currentHP: 0
-  armaEquipada:
-    nome: 
-    bonusForca: 0
-    bonusDefesa: 0
-    sprite: {fileID: 0}
-  armaduraEquipada:
-    nome: 
-    bonusForca: 0
-    bonusDefesa: 0
-    sprite: {fileID: 0}
-  acessorioEquipado:
-    nome: 
-    bonusForca: 0
-    bonusDefesa: 0
-    sprite: {fileID: 0}
-  elmoEquipada:
-    nome: 
-    bonusForca: 0
-    bonusDefesa: 0
-    sprite: {fileID: 0}
-  luvaEquipada:
-    nome: 
-    bonusForca: 0
-    bonusDefesa: 0
-    sprite: {fileID: 0}
-  ataques: []
 --- !u!114 &1625459445
 MonoBehaviour:
   m_ObjectHideFlags: 0

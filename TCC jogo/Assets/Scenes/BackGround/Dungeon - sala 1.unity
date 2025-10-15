@@ -4778,8 +4778,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708808c1169fc4e4a8b5d07e7dd8c567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: {fileID: 0}
+  lastPlayerPosition: {x: 0, y: 0, z: 0}
   lastScene: Dungeon - sala 1
-  lastPlayerPosition: {x: -1.45, y: 7.52, z: 0}
+  playerCameraPrefab: {fileID: 2027303769}
+  menuPrefab: {fileID: 1426226081}
 --- !u!4 &807419508
 Transform:
   m_ObjectHideFlags: 0
@@ -10979,8 +10982,8 @@ MonoBehaviour:
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  menuUI: {fileID: 0}
-  MenuPanel: {fileID: 0}
+  menuUI: {fileID: 1426226081}
+  MenuPanel: {fileID: 1826405365}
   canMove: 1
 --- !u!95 &2027303772
 Animator:

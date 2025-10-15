@@ -21,6 +21,23 @@ public class AttackMenu : MonoBehaviour
     void Start()
     {
         CursorAttack.SetActive(true);
+
+        // 🔹 Busca o player persistente
+        if (GameManager.Instance != null)
+        {
+            player = GameManager.Instance.playerStats;
+        }
+        else
+        {
+            player = FindAnyObjectByType<playerStats>();
+        }
+
+        if (player == null)
+        {
+            Debug.LogError("❌ Nenhum playerStats encontrado na cena!");
+            enabled = false;
+            return;
+        }
     }
 
     void OnEnable()

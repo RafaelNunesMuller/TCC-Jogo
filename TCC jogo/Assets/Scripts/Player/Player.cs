@@ -2,8 +2,6 @@
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
-
-
 {
     //Ver se consegue arrumar o posicionamento quando ele entra e sai de um local, pois está torto
 
@@ -40,7 +38,28 @@ public class Player : MonoBehaviour
 
     }
 
+    void Awake()
+    {
+        var players = FindObjectsByType<Player>(FindObjectsSortMode.None);
 
+        if (players.Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
+        // ✅ Garante que o GameManager tenha referência ao playerStats real
+        if (GameManager.Instance != null)
+        {
+            var stats = GetComponent<playerStats>();
+            if (stats != null)
+            {
+                GameManager.Instance.playerStats = stats;
+            }
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -100,11 +119,9 @@ public class Player : MonoBehaviour
     {
         stepsToNextEncounter--;
 
-        Debug.Log($"Passo contado. Restam {stepsToNextEncounter}");
-
         if (stepsToNextEncounter <= 0)
         {
-            if (Random.Range(1, 101) <= 35) // 35% de chance de batalha
+            if (Random.Range(1, 101) <= 35)
             {
                 Debug.Log("⚔️ Encontro de batalha!");
 
@@ -118,8 +135,8 @@ public class Player : MonoBehaviour
             }
 
             stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
-            Debug.Log($"Novo contador: {stepsToNextEncounter}");
         }
     }
+
 
 }

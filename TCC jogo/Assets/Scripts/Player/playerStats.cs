@@ -26,6 +26,11 @@ public class playerStats : MonoBehaviour
     [Header("Ataques Disponíveis")]
     public Attack[] ataques;
 
+
+
+    
+
+
     // -------- PROPRIEDADES --------
     public int StrengthTotal => strength + (armaEquipada != null ? armaEquipada.bonusForca : 0);
     public int DefenseTotal => defense +
@@ -183,7 +188,7 @@ public class playerStats : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
-        DontDestroyOnLoad(gameObject); // 🔹 mantém o player entre cenas
+        
     }
 
     

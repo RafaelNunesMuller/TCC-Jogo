@@ -1,56 +1,37 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
-using System.Collections;
 
 public class VictoryUI : MonoBehaviour
 {
+    [Header("Referências de UI")]
     public GameObject victoryPanel;
-    public TMP_Text messageText;
+    public TMP_Text textoMensagem;
+    public TMP_Text textoStats;
 
-    private bool readyToContinue = false;
+    public bool foiConfirmado = false;
 
-    public IEnumerator MostrarVitoria(playerStats player, int xpTotal, int oldLevel, int oldStr, int oldDef, int oldHP)
+    public void MostrarVitoria(playerStats player, int xpTotal, int oldLevel, int oldStr, int oldDef, int oldHP)
     {
         victoryPanel.SetActive(true);
-        readyToContinue = false;
+        foiConfirmado = false;
 
-        // Mensagem formatada
-        messageText.text =
-            $"Vitória!\n\n" +
-            $"Ganhou {xpTotal} XP!\n\n" +
-            $" Nível: {oldLevel}->" +
-            $" Nível: {player.level}\n"+
-            $" Força: {oldStr}->" +
-            $" Força: {player.strength}\n" +
-            $" Defesa: {oldDef}->" +
-            $" Defesa: {player.defense}\n" +
-            $" HP Máx: {oldHP}->" +            
-            $" HP Máx: {player.maxHP}\n" +
-            $"Pressione [Z] para continuar...";
+        string msg = $"🏆 Vitória!\n\n" +
+                     $"Ganhou {xpTotal} XP!\n\n" +
+                     $"Level: {oldLevel} → {player.level}\n" +
+                     $"Força: {oldStr} → {player.strength}\n" +
+                     $"Defesa: {oldDef} → {player.defense}\n" +
+                     $"HP Máx: {oldHP} → {player.maxHP}";
 
-        // Espera o jogador confirmar
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z));
-
-        victoryPanel.SetActive(false);
+        textoMensagem.text = msg;
     }
 
     void Update()
     {
         if (victoryPanel.activeSelf && Input.GetKeyDown(KeyCode.Z))
         {
-            readyToContinue = true;
-            Fechar();
+            foiConfirmado = true;
+            victoryPanel.SetActive(false);
         }
-    }
-
-    void Fechar()
-    {
-        victoryPanel.SetActive(false);
-
-        // Volta para a cena anterior
-        if (!string.IsNullOrEmpty(GameManager.Instance.lastScene))
-            SceneManager.LoadScene(GameManager.Instance.lastScene);
     }
 }

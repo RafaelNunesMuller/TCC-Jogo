@@ -1,27 +1,40 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class CombatUi : MonoBehaviour
 {
-
-    public playerStats playerStats;
-    
     public TMP_Text PlayerHP;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private playerStats playerStats;
+
     void Start()
     {
-        
+        // 🔹 Pega o player atual do GameManager
+        if (GameManager.Instance != null)
+        {
+            playerStats = GameManager.Instance.playerStats;
+        }
+        else
+        {
+            // fallback (caso o GameManager não esteja carregado ainda)
+            playerStats = FindAnyObjectByType<playerStats>();
+        }
+
+        if (playerStats == null)
+        {
+            Debug.LogError("❌ Nenhum playerStats encontrado na cena!");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        AtualizarStatus();
+        if (playerStats != null)
+        {
+            AtualizarStatus();
+        }
     }
+
     void AtualizarStatus()
     {
-        PlayerHP.text =
-            $"HP: {playerStats.currentHP}/{playerStats.maxHP}";
-        
+        PlayerHP.text = $"HP: {playerStats.currentHP}/{playerStats.maxHP}";
     }
 }

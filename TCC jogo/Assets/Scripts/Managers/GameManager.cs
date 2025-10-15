@@ -4,33 +4,51 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    [Header("Dados do Player")]
+    public playerStats playerStats;
+    public Vector3 lastPlayerPosition;
     public string lastScene;
-    public Vector3 playerPosition;
-    internal Vector3 lastPlayerPosition;
+
+    [Header("Referências de UI e câmera")]
+    public GameObject playerCameraPrefab;
+    public GameObject menuPrefab;
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
 
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (GameManager.Instance != null)
+        // Quando voltar pro mundo, restaura HUD e câmera
+        if (scene.name == lastScene && scene.name != "Battle")
         {
-            var player = FindFirstObjectByType<playerStats>();
-            if (player != null)
-                player.transform.position = GameManager.Instance.playerPosition;
+            RestaurarCameraEMenus();
         }
     }
 
+    public void RestaurarCameraEMenus()
+    {
+        // Recria câmera se não existir
+        if (Camera.main == null && playerCameraPrefab != null)
+        {
+            Instantiate(playerCameraPrefab);
+        }
+
+        // Recria menus se não existir
+        if (GameObject.FindAnyObjectByType<MenuController>() == null && menuPrefab != null)
+        {
+            Instantiate(menuPrefab);
+        }
+    }
 }

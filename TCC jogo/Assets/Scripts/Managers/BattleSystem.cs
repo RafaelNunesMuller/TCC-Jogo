@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class BattleSystem : MonoBehaviour
 {
     [Header("Referências")]
-    public playerStats player;
     public List<EnemyStats> inimigosAtivos;
+    public playerStats player => GameManager.Instance.playerStats;
 
     private bool batalhaEncerrada = false;
 
@@ -27,37 +27,48 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator FinalizarBatalha()
     {
-        yield return new WaitForSeconds(1f); // pausa dramática 😎
+        yield return new WaitForSeconds(1.5f); // tempo antes de mostrar vitória
 
+        // 🎯 pega referência ao player e ao XP ganho
+        int xpGanho = CalcularXPInimigos(); // cria esse método abaixo
+        var player = GameManager.Instance.playerStats;
+
+        // Salva os status antigos (antes do level up)
+        int oldLevel = player.level;
+        int oldStr = player.strength;
+        int oldDef = player.defense;
+        int oldHP = player.maxHP;
+
+        // Aplica XP e level up
+        player.GainExperience(xpGanho);
+
+        // Mostra tela de vitória
+        VictoryUI victory = FindAnyObjectByType<VictoryUI>();
+        if (victory != null)
+        {
+            victory.MostrarVitoria(player, xpGanho, oldLevel, oldStr, oldDef, oldHP);
+            yield return new WaitUntil(() => victory.foiConfirmado);
+        }
+
+        // ✅ Garante que os stats salvos sejam mantidos
+        GameManager.Instance.playerStats = player;
+
+        // ✅ Volta pra última cena
+        SceneManager.LoadScene(GameManager.Instance.lastScene);
+    }
+
+    int CalcularXPInimigos()
+    {
         int totalXP = 0;
         foreach (var inimigo in inimigosAtivos)
         {
             if (inimigo != null)
                 totalXP += inimigo.experienceReward;
         }
-
-        // Salva status antigos para comparar depois
-        int oldLevel = player.level;
-        int oldStr = player.strength;
-        int oldDef = player.defense;
-        int oldHP = player.maxHP;
-
-        player.GainExperience(totalXP);
-        Debug.Log($"💫 Player ganhou {totalXP} XP!");
-
-        // Chama tela de vitória
-        var victoryUI = FindFirstObjectByType<VictoryUI>();
-        if (victoryUI != null)
-        {
-            yield return victoryUI.MostrarVitoria(player, totalXP, oldLevel, oldStr, oldDef, oldHP);
-        }
-
-        // 🔹 Depois de apertar Z na tela de vitória, volta pra cena anterior
-        if (!string.IsNullOrEmpty(GameManager.Instance.lastScene))
-        {
-            SceneManager.LoadScene(GameManager.Instance.lastScene);
-        }
+        return totalXP;
     }
+
+
 
 
     public void SetEnemies(List<EnemyStats> novosInimigos)
