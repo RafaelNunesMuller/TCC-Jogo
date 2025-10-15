@@ -27,13 +27,13 @@ EditorBuildSettings:
     path: Assets/Scenes/BackGround/GameOverEspecial.unity
     guid: d3caca29998f8d44f824824375bfe540
   - enabled: 1
-    path: Assets/Scenes/BackGround/Casa.unity
+    path: Assets/Scenes/BackGround/Casa/Casa.unity
     guid: 0800b273c4392d6459a69dc93eae35d9
   - enabled: 1
     path: Assets/Scenes/BackGround/Mapa.unity
     guid: ff0d581f599423d459ff430e9025e435
   - enabled: 1
-    path: Assets/Scenes/BackGround/Lojinha.unity
+    path: Assets/Scenes/BackGround/Lojinha/Lojinha.unity
     guid: bf936213542ee694ab5f875cee0d31ff
   - enabled: 1
     path: Assets/Scenes/BackGround/Dungeon - sala 1.unity
@@ -59,6 +59,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BackGround/Battle.unity
     guid: 0d6296fda33daac4b90ebe18605b1d8f
+  - enabled: 1
+    path: Assets/Scenes/Loja (Compras)/Compras.unity
+    guid: 9cf357c59a7563a48878f6be9cbab828
+  - enabled: 1
+    path: Assets/Scenes/Loja (Compras)/Compras (Masmorra).unity
+    guid: d30c93c40ce09f14b9b56bf327181c4b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0

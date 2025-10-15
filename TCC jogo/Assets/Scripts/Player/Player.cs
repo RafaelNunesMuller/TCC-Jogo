@@ -2,7 +2,11 @@
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
+
+
 {
+    //Ver se consegue arrumar o posicionamento quando ele entra e sai de um local, pois está torto
+
     public float moveSpeed = 5f;
 
     private Vector2 movement;
