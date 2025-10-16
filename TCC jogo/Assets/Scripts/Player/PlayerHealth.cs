@@ -2,7 +2,7 @@
 
 public class PlayerHealth : MonoBehaviour
 {
-    private playerStats playerStats;
+    public playerStats playerStats;
     public HealthBar healthBar;
 
     private int lastHP;

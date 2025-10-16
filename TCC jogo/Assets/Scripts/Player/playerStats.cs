@@ -188,7 +188,7 @@ public class playerStats : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
-        
+        DontDestroyOnLoad(gameObject);
     }
 
     

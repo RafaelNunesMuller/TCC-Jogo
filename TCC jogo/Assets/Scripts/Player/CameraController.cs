@@ -5,11 +5,17 @@ using UnityEngine;
 public class CameraContoller : MonoBehaviour
 {
     [SerializeField]
-    private Transform target;
+    public Transform target;
 
 
     private void LateUpdate()
     {
         transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
     }
+
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+    }
+
 }
