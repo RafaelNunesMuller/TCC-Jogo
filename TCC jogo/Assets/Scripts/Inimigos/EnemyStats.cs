@@ -13,7 +13,6 @@ public class EnemyStats : MonoBehaviour
     public int defense;
     public int magic;
     public int magicDefense;
-    public int speed;
 
     [Header("HP")]
     public int maxHP;
@@ -49,14 +48,30 @@ public class EnemyStats : MonoBehaviour
         if (!IsAlive)
         {
             Die();
+           
         }
     }
 
+    
     private void Die()
     {
         Debug.Log($"☠️ {enemyName} foi derrotado!");
+
+        // Notifica o BattleSystem antes de destruir o inimigo
+        BattleSystem bs = FindAnyObjectByType<BattleSystem>();
+        if (bs != null)
+        {
+            if (!bs.inimigosAtivos.Contains(this))
+                bs.inimigosAtivos.Add(this); // garante que está na lista
+
+            // Marca HP como zero mas NÃO destrói ainda — BattleSystem cuidará disso
+            currentHP = 0;
+        }
+
+        // Apenas desativa o inimigo visualmente (não destrói ainda)
         gameObject.SetActive(false);
     }
+
 
     public Attack ChooseAttack()
     {

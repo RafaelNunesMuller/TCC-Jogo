@@ -1,32 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+
 public class MenuItem : MonoBehaviour
 {
     public GameObject itemSlotPrefab;       // Prefab do slot de item
     public Transform itemSlotContainer;     // Container dos slots (pai)
-    public RectTransform cursor;             // Cursor que indica o slot selecionado
+    public RectTransform cursor;            // Cursor que indica o slot selecionado
     public GameObject inventarioPainel;     // Painel do inventário
 
     [Header("Referências")]
     public GameObject menuPanel; // arrasta o MenuPanel no inspector
 
-    private List<RectTransform> itemSlots = new List<RectTransform>();  // Lista dos slots
-    private int cursorIndex = 0;             // Índice do cursor
-    private List<Item> itensAtuais = new List<Item>();  // Lista atual dos itens mostrados
-
-
-    public static List<Item> inventario = new List<Item>();
-
-    void Start()
-    {
-        // Exemplo de inicialização
-        inventario.Add(new Item("Poção de Vida", ItemTipo.Consumivel, 5));
-        inventario.Add(new Item("Espada de Ferro", ItemTipo.Arma, 1, null, bonusForca: 5));
-        inventario.Add(new Item("Espada Lendária", ItemTipo.Arma, 1, null, bonusForca: 15));
-        inventario.Add(new Item("Armadura de Couro", ItemTipo.Armadura, 1, null, bonusDefesa: 3));
-        inventario.Add(new Item("Armadura de Aço", ItemTipo.Armadura, 1, null, bonusDefesa: 8));
-    }
+    private List<RectTransform> itemSlots = new List<RectTransform>();
+    private int cursorIndex = 0;
+    private List<Item> itensAtuais = new List<Item>();
 
     void Update()
     {
@@ -42,8 +30,8 @@ public class MenuItem : MonoBehaviour
 
     public void VoltarParaMenu()
     {
-        gameObject.SetActive(false); // fecha o Status
-        menuPanel.SetActive(true);        // reabre o menu principal
+        gameObject.SetActive(false);
+        menuPanel.SetActive(true);
     }
 
     void HandleInput()
@@ -67,9 +55,11 @@ public class MenuItem : MonoBehaviour
     }
 
     // Abre o inventário e cria/atualiza os slots dos itens
-    public void Open(List<Item> itens)
+    public void Open()
     {
-        itensAtuais = itens;  // Guarda a lista atual para uso posterior
+
+
+        itensAtuais = new List<Item>(Inventario.instance.itens);  // ✅ sempre pega do Inventario central
         inventarioPainel.SetActive(true);
 
         // Limpa os slots antigos
@@ -78,11 +68,14 @@ public class MenuItem : MonoBehaviour
 
         itemSlots.Clear();
 
-        // Cria 25 slots, preenchendo com os itens disponíveis ou "---" se vazio
+        // Cria até 30 slots
         for (int i = 0; i < 30; i++)
         {
+
+
+
             GameObject newSlot = Instantiate(itemSlotPrefab, itemSlotContainer);
-            newSlot.transform.localScale = Vector3.one; // garante escala correta
+            newSlot.transform.localScale = Vector3.one;
 
             Text text = newSlot.GetComponentInChildren<Text>();
             if (i < itensAtuais.Count)
@@ -95,10 +88,9 @@ public class MenuItem : MonoBehaviour
 
         cursorIndex = 0;
         MoveCursor(cursorIndex);
+
+
     }
-
-    // Move o cursor para o slot selecionado
-
 
     void MoveCursor(int index)
     {
@@ -108,38 +100,33 @@ public class MenuItem : MonoBehaviour
         cursor.anchoredPosition = targetSlot.anchoredPosition;
     }
 
-
     // Usa o item selecionado
     public void UseItem(int index)
     {
         if (index < 0 || index >= itensAtuais.Count)
             return;
 
-        // Obtém o item
         Item item = itensAtuais[index];
 
-        // Procura o player para aplicar o efeito
+        // 🔹 Bloqueia uso de itens que não são consumíveis
+        if (item.tipo != ItemTipo.Consumivel)
+        {
+            Debug.Log($"❌ {item.nome} não pode ser usado aqui. Vá até o menu de Equipar!");
+            MessageUI.instance.ShowMessage($"{item.nome} só pode ser equipado no menu de Equipar!");
+            return;
+        }
+
+        // 🔹 Procura o player e usa o item
         playerStats player = FindFirstObjectByType<playerStats>();
         if (player != null)
-            item.Usar(player);
+        {
+            Inventario.instance.Usar(item, player);
+            Debug.Log($"💊 {item.nome} foi usado!");
+        }
 
-        // Diminui quantidade
-        item.quantidade--;
-
-        // Remove se acabou
-        if (item.quantidade <= 0)
-            itensAtuais.RemoveAt(index);
-
-        // Ajusta índice do cursor para não sair do limite
-        if (cursorIndex >= itensAtuais.Count)
-            cursorIndex = Mathf.Max(0, itensAtuais.Count - 1);
-
-        // Reabre/atualiza inventário visual
-        Open(itensAtuais);
-
-        // Reposiciona cursor
+        // 🔹 Atualiza interface
+        Open();
         MoveCursor(cursorIndex);
     }
-
 
 }

@@ -28,8 +28,8 @@ public class MenuStatus : MonoBehaviour
             $"STRENGTH: {playerStats.strength}\n" +
             $"DEFENSE: {playerStats.defense}\n" +
             $"MAGIC: {playerStats.magic}\n" +
-            $"MAGIC DEFENSE: {playerStats.magicDefense}\n" +
-            $"SPEED: {playerStats.speed}";
+            $"MAGIC DEFENSE: {playerStats.magicDefense}\n";
+
     }
 
     // --- Função para o botão ---

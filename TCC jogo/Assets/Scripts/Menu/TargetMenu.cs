@@ -6,61 +6,56 @@ using TMPro;
 public class TargetMenu : MonoBehaviour
 {
     [Header("UI")]
-    public Button[] enemyButtons;   // botões de seleção (UI) — tamanho fixo (ex.: 3)
-    public RectTransform cursor;    // cursor visual
-    public GameObject Menu; // painel do menu principal para reabrir
-    public CombatMenuController combatMenu; // opcional: bloquear menu principal
-    public BattleSystem battleSystem; // referência opcional ao BattleSystem (pode deixar vazio e será procurado)
+    public Button[] enemyButtons;   // botões fixos
+    public RectTransform cursor;
+    public GameObject Menu;
+    public CombatMenuController combatMenu;
+    public BattleSystem battleSystem;
 
-    private List<EnemyStats> inimigos = new List<EnemyStats>();
+    private List<EnemyStats> inimigosAtivos = new List<EnemyStats>();
     private Attack ataqueAtual;
     private playerStats jogador;
     private int inimigoSelecionado = 0;
     public GameObject Cursor;
 
-
-    // Configura a lista de inimigos (chamado pelo spawner ou AttackMenu)
-    public void ConfigurarInimigos(List<EnemyStats> inimigosAtivos)
+    // =============================
+    // CONFIGURAÇÃO DOS INIMIGOS
+    // =============================
+    public void ConfigurarInimigos(List<EnemyStats> inimigosAtivosRecebidos)
     {
-        inimigos.Clear();
-        if (inimigosAtivos != null)
-            inimigos.AddRange(inimigosAtivos);
+        inimigosAtivos.Clear();
+        if (inimigosAtivosRecebidos != null)
+            inimigosAtivos.AddRange(inimigosAtivosRecebidos);
 
-        // Atualiza botões de acordo com os inimigos presentes
         for (int i = 0; i < enemyButtons.Length; i++)
         {
-            if (i < inimigos.Count && inimigos[i] != null)
+            if (i < inimigosAtivos.Count && inimigosAtivos[i] != null)
             {
+                var inimigo = inimigosAtivos[i];
                 enemyButtons[i].gameObject.SetActive(true);
 
-                // Atualiza texto do botão (usa TMP se disponível, senão Text)
-                var tmp = enemyButtons[i].GetComponentInChildren<TMP_Text>();
-                if (tmp != null) tmp.text = inimigos[i].enemyName;
-                else
-                {
-                    var txt = enemyButtons[i].GetComponentInChildren<Text>();
-                    if (txt != null) txt.text = inimigos[i].enemyName;
-                }
-
-                // liga referência do clone para o botão
                 var refInimigo = enemyButtons[i].GetComponent<EnemyReference>();
-                if (refInimigo == null) refInimigo = enemyButtons[i].gameObject.AddComponent<EnemyReference>();
-                refInimigo.enemy = inimigos[i];
+                if (refInimigo == null)
+                    refInimigo = enemyButtons[i].gameObject.AddComponent<EnemyReference>();
+                refInimigo.enemy = inimigo;
 
-                // limpa handlers antigos só daquele inimigo
-                inimigos[i].ResetOnDeath();
+                // Atualiza nome do inimigo
+                var tmp = enemyButtons[i].GetComponentInChildren<TMP_Text>();
+                if (tmp != null)
+                    tmp.text = inimigo.enemyName;
 
-                // captura locais para a closure
-                EnemyStats localEnemy = inimigos[i];
-                Button localButton = enemyButtons[i];
                 int localIndex = i;
 
-                // quando esse inimigo morrer, desativa o botão e limpa a referência na lista
-                localEnemy.OnDeath += () =>
+                // Evento quando o inimigo morre → botão desativa
+                inimigo.OnDeath += () =>
                 {
-                    localButton.gameObject.SetActive(false);
-                    if (localIndex < inimigos.Count) inimigos[localIndex] = null;
+                    enemyButtons[localIndex].gameObject.SetActive(false);
+                    inimigosAtivos[localIndex] = null;
+                    // se o inimigo atual morreu, move o cursor pro próximo
+                    if (localIndex == inimigoSelecionado)
+                        MoveToNext(1);
                 };
+
             }
             else
             {
@@ -68,130 +63,135 @@ public class TargetMenu : MonoBehaviour
             }
         }
 
-        // posiciona cursor no primeiro botão ativo
         inimigoSelecionado = FirstActiveButtonIndex();
         AtualizarCursor();
     }
 
-    // Abre a seleção de alvo (chamada por AttackMenu)
+    // =============================
+    // ABRIR SELEÇÃO DE ALVO
+    // =============================
     public void AbrirSelecao(Attack ataque, playerStats jogadorRef)
     {
-        this.ataqueAtual = ataque;
-        this.jogador = jogadorRef;
+        ataqueAtual = ataque;
+        jogador = jogadorRef;
 
-        // caso não haja inimigos
-        if (inimigos == null || CountAliveInimigos() == 0)
+        if (CountAliveInimigos() == 0)
         {
-            Debug.LogWarning("Nenhum inimigo encontrado para atacar!");
+            Debug.LogWarning("⚠ Nenhum inimigo vivo para atacar!");
             return;
         }
 
         inimigoSelecionado = FirstActiveButtonIndex();
         AtualizarCursor();
 
-        // ativa UI e bloqueia menu principal
         gameObject.SetActive(true);
-        if (combatMenu != null) combatMenu.enabled = false;
+        if (combatMenu != null)
+            combatMenu.enabled = false;
     }
 
+    // =============================
+    // UPDATE
+    // =============================
     void Update()
     {
-        Menu.SetActive(true);
-        Cursor.SetActive(false);
-
         if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
             MoveToNext(1);
-        }
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
             MoveToNext(-1);
-        }
 
         if (Input.GetKeyDown(KeyCode.Z))
-        {
             ConfirmarAlvo();
-            
-        }
 
         if (Input.GetKeyDown(KeyCode.X))
-        {
             VoltarParaMenu();
-        }
     }
 
+    // =============================
+    // MOVIMENTO DO CURSOR
+    // =============================
     void MoveToNext(int dir)
     {
-        int attempts = 0;
+        if (enemyButtons.Length == 0) return;
+
         int len = enemyButtons.Length;
+        int attempts = 0;
+
         do
         {
             inimigoSelecionado = (inimigoSelecionado + dir + len) % len;
             attempts++;
-        } while (!enemyButtons[inimigoSelecionado].gameObject.activeSelf && attempts <= len);
+        }
+        while (
+            (inimigoSelecionado < inimigosAtivos.Count &&
+             (inimigosAtivos[inimigoSelecionado] == null || !inimigosAtivos[inimigoSelecionado].IsAlive))
+            && attempts < len);
+
         AtualizarCursor();
     }
 
     void AtualizarCursor()
     {
         if (enemyButtons.Length == 0) return;
-        if (!enemyButtons[inimigoSelecionado].gameObject.activeSelf)
-        {
+
+        if (inimigoSelecionado < 0 || inimigoSelecionado >= enemyButtons.Length)
             inimigoSelecionado = FirstActiveButtonIndex();
-            if (inimigoSelecionado < 0) return;
-        }
+
+        if (inimigoSelecionado < 0) return;
+
         cursor.SetParent(enemyButtons[inimigoSelecionado].transform, true);
         cursor.anchoredPosition = new Vector2(195, -15);
     }
 
+    // =============================
+    // CONFIRMAR ALVO
+    // =============================
     void ConfirmarAlvo()
     {
-        EnemyReference refInimigo = enemyButtons[inimigoSelecionado].GetComponent<EnemyReference>();
-        if (refInimigo == null || refInimigo.enemy == null)
+        if (inimigoSelecionado >= inimigosAtivos.Count)
+            return;
+
+        EnemyStats inimigo = inimigosAtivos[inimigoSelecionado];
+        if (inimigo == null || !inimigo.IsAlive)
         {
-            Debug.LogWarning("Alvo inválido.");
+            Debug.LogWarning("❌ Esse inimigo já está morto!");
+            MoveToNext(1);
             return;
         }
 
-        EnemyStats inimigo = refInimigo.enemy;
-
-        // Calcula dano a partir do Attack ScriptableObject + força do player
         int dano = jogador.StrengthTotal + ataqueAtual.power;
-  
 
-
-        // chama o BattleSystem -> usa PlayerAttack(inimigo, dano)
         BattleSystem bs = battleSystem != null ? battleSystem : FindAnyObjectByType<BattleSystem>();
         if (bs != null)
-        {
             bs.PlayerAttack(inimigo, dano);
-        }
         else
-        {
-            // fallback: aplica direto no inimigo (se não tiver BattleSystem)
             inimigo.TakeDamage(dano);
-        }
-
     }
 
+    // =============================
+    // VOLTAR AO MENU PRINCIPAL
+    // =============================
     public void VoltarParaMenu()
     {
         gameObject.SetActive(false);
         Menu.SetActive(true);
-        combatMenu.enabled = true;
+        if (combatMenu != null)
+            combatMenu.enabled = true;
+        Cursor.SetActive(true);
     }
 
     int FirstActiveButtonIndex()
     {
         for (int i = 0; i < enemyButtons.Length; i++)
-            if (enemyButtons[i].gameObject.activeSelf) return i;
+            if (enemyButtons[i].gameObject.activeSelf)
+                return i;
         return -1;
     }
 
     int CountAliveInimigos()
     {
         int c = 0;
-        foreach (var e in inimigos)
+        foreach (var e in inimigosAtivos)
             if (e != null && e.IsAlive) c++;
         return c;
     }

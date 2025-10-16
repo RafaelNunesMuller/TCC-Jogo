@@ -11,7 +11,9 @@ public class AttackMenu : MonoBehaviour
     public CombatMenuController combatMenu;
     public GameObject menu;
     public GameObject targetMenuUI;
-    public GameObject CursorAttack; 
+    public GameObject CursorAttack;
+
+
 
     private int ataqueSelecionado = 0;
 
@@ -19,6 +21,23 @@ public class AttackMenu : MonoBehaviour
     void Start()
     {
         CursorAttack.SetActive(true);
+
+        // 🔹 Busca o player persistente
+        if (GameManager.Instance != null)
+        {
+            player = GameManager.Instance.playerStats;
+        }
+        else
+        {
+            player = FindAnyObjectByType<playerStats>();
+        }
+
+        if (player == null)
+        {
+            Debug.LogError("❌ Nenhum playerStats encontrado na cena!");
+            enabled = false;
+            return;
+        }
     }
 
     void OnEnable()
@@ -36,6 +55,8 @@ public class AttackMenu : MonoBehaviour
 
     void Update()
     {
+
+
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             ataqueSelecionado = (ataqueSelecionado + 1) % attackButtons.Length;
@@ -52,7 +73,6 @@ public class AttackMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             SelecionarAtaque();
-            targetMenu.enabled = true;
 
         }
 
@@ -70,25 +90,30 @@ public class AttackMenu : MonoBehaviour
 
     public void SelecionarAtaque()
     {
-        // ativa o painel de seleção de alvo (UI)
-        if (targetMenuUI != null) targetMenuUI.SetActive(true);
-
-        Attack ataque = attackButtons[ataqueSelecionado].GetComponent<AttackReference>().attack;
+        if (targetMenuUI != null)
+        {
+            targetMenuUI.SetActive(true);
+            targetMenu.enabled = true;
+        }
+        else
+        {
+            targetMenu.enabled=false;
+        }
+            
+        
+        Attack ataque = attackButtons[ataqueSelecionado]
+                           .GetComponent<AttackReference>().attack;
         if (ataque == null) return;
 
-        // pega todos inimigos ativos (array) e converte para List<EnemyStats>
-        EnemyStats[] inimigosArray = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
-        List<EnemyStats> inimigosList = new List<EnemyStats>(inimigosArray);
+        BattleSystem bs = FindFirstObjectByType<BattleSystem>();
+        if (bs != null && bs.inimigosAtivos != null)
+            targetMenu.ConfigurarInimigos(bs.inimigosAtivos);  // ✅ clones corretos
 
-        // configura TargetMenu com a lista correta (clones instanciados)
-        targetMenu.ConfigurarInimigos(inimigosList);
-
-        // abre a seleção passando o ataque e o player
         targetMenu.AbrirSelecao(ataque, player);
-
-        // fecha o menu de ataque
         gameObject.SetActive(false);
     }
+
+
 
     public void VoltarParaMenu()
     {

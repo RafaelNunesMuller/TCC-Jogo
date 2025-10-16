@@ -1,23 +1,82 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
-    
-
     [Header("Referências")]
-    public playerStats player;
-    public List<EnemyStats> enemies; // lista dos inimigos da batalha
+    public List<EnemyStats> inimigosAtivos;
+    public playerStats player => GameManager.Instance.playerStats;
 
-    // Chamado pelo Spawner quando a batalha começa
-    public void SetEnemies(List<EnemyStats> novosInimigos)
+    private bool batalhaEncerrada = false;
+
+    void Update()
     {
-        enemies = novosInimigos;
-        Debug.Log($"⚔️ {enemies.Count} inimigos entraram na batalha!");
+        if (!batalhaEncerrada && TodosInimigosMortos())
+        {
+            batalhaEncerrada = true;
+            StartCoroutine(FinalizarBatalha());
+        }
     }
 
-    // Player ataca um inimigo
+    bool TodosInimigosMortos()
+    {
+        return inimigosAtivos.TrueForAll(e => e == null || !e.IsAlive);
+    }
+
+    IEnumerator FinalizarBatalha()
+    {
+        yield return new WaitForSeconds(1.5f); // tempo antes de mostrar vitória
+
+        //  pega referência ao player e ao XP ganho
+        int xpGanho = CalcularXPInimigos(); // cria esse método abaixo
+        var player = GameManager.Instance.playerStats;
+
+        // Salva os status antigos (antes do level up)
+        int oldLevel = player.level;
+        int oldStr = player.strength;
+        int oldDef = player.defense;
+        int oldHP = player.maxHP;
+
+        // Aplica XP e level up
+        player.GainExperience(xpGanho);
+
+        // Mostra tela de vitória
+        VictoryUI victory = FindAnyObjectByType<VictoryUI>();
+        if (victory != null)
+        {
+            victory.MostrarVitoria(player, xpGanho, oldLevel, oldStr, oldDef, oldHP);
+            yield return new WaitUntil(() => victory.foiConfirmado);
+        }
+
+        //  Garante que os stats salvos sejam mantidos
+        GameManager.Instance.playerStats = player;
+
+        //  Volta pra última cena
+        SceneManager.LoadScene(GameManager.Instance.lastScene);
+    }
+
+    int CalcularXPInimigos()
+    {
+        int totalXP = 0;
+        foreach (var inimigo in inimigosAtivos)
+        {
+            if (inimigo != null)
+                totalXP += inimigo.experienceReward;
+        }
+        return totalXP;
+    }
+
+
+
+
+    public void SetEnemies(List<EnemyStats> novosInimigos)
+    {
+        inimigosAtivos = novosInimigos;
+        Debug.Log($" {inimigosAtivos.Count} inimigos entraram na batalha!");
+    }
+
     public void PlayerAttack(EnemyStats target, int damage)
     {
         if (target == null || !target.IsAlive) return;
@@ -25,19 +84,16 @@ public class BattleSystem : MonoBehaviour
         int finalDamage = Mathf.Max(1, damage - target.defense);
         target.TakeDamage(finalDamage);
 
-        Debug.Log($"🗡️  atacou {target.enemyName} e causou {finalDamage} de dano!");
+        Debug.Log($" Player atacou {target.enemyName} e causou {finalDamage} de dano!");
 
-        // Se ainda houver inimigos vivos → inimigos atacam
         StartCoroutine(EnemiesTurn());
     }
 
-    private IEnumerator EnemiesTurn()
+    public IEnumerator EnemiesTurn()
     {
+        Debug.Log(" Turno dos inimigos!");
 
-        Debug.Log("👹 Turno dos inimigos!");
-        
-
-        foreach (var inimigo in enemies)
+        foreach (var inimigo in inimigosAtivos)
         {
             if (inimigo == null || !inimigo.IsAlive) continue;
 
@@ -49,20 +105,11 @@ public class BattleSystem : MonoBehaviour
                 int dano = Mathf.Max(1, inimigo.strength + ataque.power - player.DefenseTotal);
                 player.TakeDamage(dano);
 
-                Debug.Log($"{inimigo.enemyName} usou {ataque.nome} e causou {dano} de dano em Player!");
+                Debug.Log($"{inimigo.enemyName} usou {ataque.nome} e causou {dano} de dano!");
             }
         }
 
-        // Espera um pouquinho antes de devolver controle
-        yield return new WaitForSeconds(0.5f);
-
-        // Reabre o menu do Player
-        if (player != null && player.GetComponent<CombatMenuController>() != null)
-        {
-            player.GetComponent<CombatMenuController>().enabled = true;
-        }
-
+        yield return new WaitForSeconds(1.5f);
         Debug.Log("✨ Turno do Player novamente!");
     }
-
 }

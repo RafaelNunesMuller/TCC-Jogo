@@ -81,7 +81,7 @@ public class MenuController : MonoBehaviour
             case 0:
                 menuUI.SetActive(false); // Fecha o menu principal
                 playerScript.canMove = false; // Bloqueia movimento
-                menuItem.Open(Inventario.instance.itens); // Abre inventário
+                menuItem.Open(); // Abre inventário
                 Debug.Log("Abrir ITEM");
                 break;
 

@@ -24,7 +24,7 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         // Acha todos os inimigos ativos na cena
-        // pega todos inimigos ativos (array) e converte para List<EnemyStats>
+        // pega todos inimigos ativos (lista) e converte para List<EnemyStats>
         EnemyStats[] inimigosArray = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
         List<EnemyStats> inimigosList = new List<EnemyStats>(inimigosArray);
 

@@ -1,11 +1,18 @@
+using UnityEngine;
+
 public class Potion : Item
 {
-    public int curarHP;
+    public int cura;
 
-    public Potion(int quantidade) : base("Potion", ItemTipo.Consumivel, quantidade)
+    public Potion(string nome, int qtd, Sprite icone, int cura)
+        : base(nome, ItemTipo.Consumivel, qtd, icone, 0, 0, true)
     {
-        curarHP = 20; // Quantidade que vai curar
+        this.cura = cura;
     }
 
-    
+    public override void Usar(playerStats player)
+    {
+        player.Curar(cura);
+        Debug.Log($"{nome} curou {cura} HP!");
+    }
 }
