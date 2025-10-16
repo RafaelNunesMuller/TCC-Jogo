@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class BattleSystem : MonoBehaviour
 {
     [Header("Referências")]
-    public playerStats player;
     public List<EnemyStats> inimigosAtivos;
+    public playerStats player => GameManager.Instance.playerStats;
 
     private bool batalhaEncerrada = false;
 
@@ -27,42 +27,54 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator FinalizarBatalha()
     {
-        Debug.Log("🎉 Todos os inimigos foram derrotados!");
+        yield return new WaitForSeconds(1.5f); // tempo antes de mostrar vitória
 
-        // Soma toda a XP dos inimigos
+        //  pega referência ao player e ao XP ganho
+        int xpGanho = CalcularXPInimigos(); // cria esse método abaixo
+        var player = GameManager.Instance.playerStats;
+
+        // Salva os status antigos (antes do level up)
+        int oldLevel = player.level;
+        int oldStr = player.strength;
+        int oldDef = player.defense;
+        int oldHP = player.maxHP;
+
+        // Aplica XP e level up
+        player.GainExperience(xpGanho);
+
+        // Mostra tela de vitória
+        VictoryUI victory = FindAnyObjectByType<VictoryUI>();
+        if (victory != null)
+        {
+            victory.MostrarVitoria(player, xpGanho, oldLevel, oldStr, oldDef, oldHP);
+            yield return new WaitUntil(() => victory.foiConfirmado);
+        }
+
+        //  Garante que os stats salvos sejam mantidos
+        GameManager.Instance.playerStats = player;
+
+        //  Volta pra última cena
+        SceneManager.LoadScene(GameManager.Instance.lastScene);
+    }
+
+    int CalcularXPInimigos()
+    {
         int totalXP = 0;
         foreach (var inimigo in inimigosAtivos)
         {
             if (inimigo != null)
                 totalXP += inimigo.experienceReward;
         }
-
-        // Dá XP ao jogador
-        player.GainExperience(totalXP);
-        Debug.Log($"💫 Player ganhou {totalXP} XP!");
-
-        // Mostra stats atualizados
-        Debug.Log($"📈 Level: {player.level}, Força: {player.strength}, Defesa: {player.defense}, HP: {player.maxHP}");
-
-        // Aguarda confirmação do jogador
-        Debug.Log("Pressione Z para continuar...");
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z));
-
-        // Retorna para a cena anterior
-        if (!string.IsNullOrEmpty(GameManager.Instance.lastScene))
-        {
-            SceneManager.LoadScene(GameManager.Instance.lastScene);
-        }
-        else
-        {
-            Debug.LogError("⚠️ lastScene não definido!");
-        }
+        return totalXP;
     }
+
+
+
 
     public void SetEnemies(List<EnemyStats> novosInimigos)
     {
         inimigosAtivos = novosInimigos;
-        Debug.Log($"⚔️ {inimigosAtivos.Count} inimigos entraram na batalha!");
+        Debug.Log($" {inimigosAtivos.Count} inimigos entraram na batalha!");
     }
 
     public void PlayerAttack(EnemyStats target, int damage)
@@ -72,14 +84,14 @@ public class BattleSystem : MonoBehaviour
         int finalDamage = Mathf.Max(1, damage - target.defense);
         target.TakeDamage(finalDamage);
 
-        Debug.Log($"🗡️ Player atacou {target.enemyName} e causou {finalDamage} de dano!");
+        Debug.Log($" Player atacou {target.enemyName} e causou {finalDamage} de dano!");
 
         StartCoroutine(EnemiesTurn());
     }
 
     public IEnumerator EnemiesTurn()
     {
-        Debug.Log("👹 Turno dos inimigos!");
+        Debug.Log(" Turno dos inimigos!");
 
         foreach (var inimigo in inimigosAtivos)
         {

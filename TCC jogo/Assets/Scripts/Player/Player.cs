@@ -2,8 +2,6 @@
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
-
-
 {
     //Ver se consegue arrumar o posicionamento quando ele entra e sai de um local, pois está torto
 
@@ -33,20 +31,76 @@ public class Player : MonoBehaviour
         stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
         lastStepPosition = rb.position;
 
-        // Se GameManager tem posição salva, aplica
         if (GameManager.Instance != null && GameManager.Instance.lastPlayerPosition != Vector3.zero)
         {
             transform.position = GameManager.Instance.lastPlayerPosition;
         }
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void Awake()
     {
-        if (collision.gameObject.CompareTag("SairDaCasa"))
+        var players = FindObjectsByType<Player>(FindObjectsSortMode.None);
+
+        if (players.Length > 1)
         {
-            SceneManager.LoadScene("Mapa");
+            
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
+        //  Garante que o GameManager tenha referência ao playerStats real
+        if (GameManager.Instance != null)
+        {
+            var stats = GetComponent<playerStats>();
+            if (stats != null)
+            {
+                GameManager.Instance.playerStats = stats;
+            }
         }
     }
+
+    void OnEnable()
+    {
+        // Quando a cena de batalha for carregada, checa se é "Battle"
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene cena, LoadSceneMode modo)
+    {
+        if (cena.name == "Battle")
+        {
+            // 🔹 Deixa o player invisível
+            var sr = GetComponent<SpriteRenderer>();
+            if (sr != null)
+                sr.enabled = false;
+
+            // 🔹 Opcional: desativa o colisor também
+            var col = GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = false;
+        }
+        else
+        {
+            // 🔹 Quando voltar pro mapa, reativa o player
+            var sr = GetComponent<SpriteRenderer>();
+            if (sr != null)
+                sr.enabled = true;
+
+            var col = GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = true;
+        }
+    }
+
+
 
     void Update()
     {
@@ -57,7 +111,7 @@ public class Player : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         // Se está se movendo, salva a posição atual
-        //
+        
 
         // Movimento
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -98,18 +152,24 @@ public class Player : MonoBehaviour
     {
         stepsToNextEncounter--;
 
-        Debug.Log($"Passo contado. Restam {stepsToNextEncounter}");
-
         if (stepsToNextEncounter <= 0)
         {
-            if (Random.Range(1, 101) <= 35) // % de chance de encontrar uma batalha pode ser ajustado pelo codigo
+            if (Random.Range(1, 101) <= 35)
             {
-                Debug.Log("⚔️ Encontro de batalha!");
+                Debug.Log(" Encontro de batalha!");
+
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
+                    GameManager.Instance.lastPlayerPosition = transform.position;
+                }
+
                 SceneManager.LoadScene("Battle");
             }
 
             stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
-            Debug.Log($"Novo contador: {stepsToNextEncounter}");
         }
     }
+
+
 }
