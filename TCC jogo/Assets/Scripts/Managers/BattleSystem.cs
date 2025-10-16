@@ -29,7 +29,7 @@ public class BattleSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f); // tempo antes de mostrar vitória
 
-        // 🎯 pega referência ao player e ao XP ganho
+        //  pega referência ao player e ao XP ganho
         int xpGanho = CalcularXPInimigos(); // cria esse método abaixo
         var player = GameManager.Instance.playerStats;
 
@@ -50,10 +50,10 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitUntil(() => victory.foiConfirmado);
         }
 
-        // ✅ Garante que os stats salvos sejam mantidos
+        //  Garante que os stats salvos sejam mantidos
         GameManager.Instance.playerStats = player;
 
-        // ✅ Volta pra última cena
+        //  Volta pra última cena
         SceneManager.LoadScene(GameManager.Instance.lastScene);
     }
 
@@ -74,7 +74,7 @@ public class BattleSystem : MonoBehaviour
     public void SetEnemies(List<EnemyStats> novosInimigos)
     {
         inimigosAtivos = novosInimigos;
-        Debug.Log($"⚔️ {inimigosAtivos.Count} inimigos entraram na batalha!");
+        Debug.Log($" {inimigosAtivos.Count} inimigos entraram na batalha!");
     }
 
     public void PlayerAttack(EnemyStats target, int damage)
@@ -84,14 +84,14 @@ public class BattleSystem : MonoBehaviour
         int finalDamage = Mathf.Max(1, damage - target.defense);
         target.TakeDamage(finalDamage);
 
-        Debug.Log($"🗡️ Player atacou {target.enemyName} e causou {finalDamage} de dano!");
+        Debug.Log($" Player atacou {target.enemyName} e causou {finalDamage} de dano!");
 
         StartCoroutine(EnemiesTurn());
     }
 
     public IEnumerator EnemiesTurn()
     {
-        Debug.Log("👹 Turno dos inimigos!");
+        Debug.Log(" Turno dos inimigos!");
 
         foreach (var inimigo in inimigosAtivos)
         {

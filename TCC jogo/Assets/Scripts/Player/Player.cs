@@ -44,13 +44,14 @@ public class Player : MonoBehaviour
 
         if (players.Length > 1)
         {
+            
             Destroy(gameObject);
             return;
         }
 
         DontDestroyOnLoad(gameObject);
 
-        // ✅ Garante que o GameManager tenha referência ao playerStats real
+        //  Garante que o GameManager tenha referência ao playerStats real
         if (GameManager.Instance != null)
         {
             var stats = GetComponent<playerStats>();
@@ -61,13 +62,45 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnEnable()
     {
-        if (collision.gameObject.CompareTag("SairDaCasa"))
+        // Quando a cena de batalha for carregada, checa se é "Battle"
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene cena, LoadSceneMode modo)
+    {
+        if (cena.name == "Battle")
         {
-            SceneManager.LoadScene("Mapa");
+            // 🔹 Deixa o player invisível
+            var sr = GetComponent<SpriteRenderer>();
+            if (sr != null)
+                sr.enabled = false;
+
+            // 🔹 Opcional: desativa o colisor também
+            var col = GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = false;
+        }
+        else
+        {
+            // 🔹 Quando voltar pro mapa, reativa o player
+            var sr = GetComponent<SpriteRenderer>();
+            if (sr != null)
+                sr.enabled = true;
+
+            var col = GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = true;
         }
     }
+
+
 
     void Update()
     {
@@ -78,7 +111,7 @@ public class Player : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         // Se está se movendo, salva a posição atual
-        //
+        
 
         // Movimento
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -123,7 +156,7 @@ public class Player : MonoBehaviour
         {
             if (Random.Range(1, 101) <= 35)
             {
-                Debug.Log("⚔️ Encontro de batalha!");
+                Debug.Log(" Encontro de batalha!");
 
                 if (GameManager.Instance != null)
                 {
