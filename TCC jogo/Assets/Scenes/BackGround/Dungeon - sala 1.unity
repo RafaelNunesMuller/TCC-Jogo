@@ -4779,10 +4779,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
-  lastPlayerPosition: {x: 0, y: 0, z: 0}
   lastScene: Dungeon - sala 1
-  playerCameraPrefab: {fileID: 2027303769}
-  menuPrefab: {fileID: 1426226081}
+  lastPlayerPosition: {x: -1.45, y: 7.52, z: 0}
 --- !u!4 &807419508
 Transform:
   m_ObjectHideFlags: 0
@@ -7431,10 +7429,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5f1af153f447e4faada10882b4ddf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 2027303770}
+  menuPanel: {fileID: 1826405365}
   cursor: {fileID: 798665182}
   statusText: {fileID: 968316512}
-  menuPanel: {fileID: 1826405365}
+  playerStats: {fileID: 2027303770}
 --- !u!114 &1651378588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10976,6 +10974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  playerStats: {fileID: 0}
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128

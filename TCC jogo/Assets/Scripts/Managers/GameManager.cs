@@ -5,14 +5,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("Dados do Player")]
     public playerStats playerStats;
-    public Vector3 lastPlayerPosition;
     public string lastScene;
-
-    [Header("Referências de UI e câmera")]
-    public GameObject playerCameraPrefab;
-    public GameObject menuPrefab;
+    public Vector3 lastPlayerPosition;
 
     void Awake()
     {
@@ -30,25 +25,42 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Quando voltar pro mundo, restaura HUD e câmera
-        if (scene.name == lastScene && scene.name != "Battle")
+        if (scene.name != "Battle")
         {
-            RestaurarCameraEMenus();
+            RestaurarReferenciasCena();
         }
     }
 
-    public void RestaurarCameraEMenus()
+    private void RestaurarReferenciasCena()
     {
-        // Recria câmera se não existir
-        if (Camera.main == null && playerCameraPrefab != null)
+        var player = FindAnyObjectByType<Player>();
+        if (player != null && playerStats != null)
         {
-            Instantiate(playerCameraPrefab);
+            playerStats.transform.position = lastPlayerPosition;
         }
 
-        // Recria menus se não existir
-        if (GameObject.FindAnyObjectByType<MenuController>() == null && menuPrefab != null)
+        var camFollow = Camera.main?.GetComponent<CameraContoller>();
+        if (camFollow != null && player != null)
         {
-            Instantiate(menuPrefab);
+            camFollow.SetTarget(player.transform); // ✅ usa o método público
+            camFollow.transform.position = new Vector3(
+                player.transform.position.x,
+                player.transform.position.y,
+                camFollow.transform.position.z
+            );
         }
+
+        foreach (var ui in FindObjectsByType<CombatUi>(FindObjectsSortMode.None))
+            ui.playerStats = playerStats;
+
+        foreach (var hp in FindObjectsByType<PlayerHealth>(FindObjectsSortMode.None))
+            hp.playerStats = playerStats;
+
+        foreach (var status in FindObjectsByType<MenuStatus>(FindObjectsSortMode.None))
+            status.playerStats = playerStats;
+
+        Debug.Log("✅ Referências de Player, UI e Câmera restauradas.");
     }
+
+
 }
