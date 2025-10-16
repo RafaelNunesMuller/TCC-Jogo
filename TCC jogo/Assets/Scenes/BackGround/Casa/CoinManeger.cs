@@ -8,8 +8,6 @@ public class CoinManager : MonoBehaviour
     public static CoinManager instance;
     public TMP_Text coinsText;
     public int Coins = 0;
-    public Button buyButton;
-    public int itemPrice;
     public GameObject NoCoins;
     public Button OkayCoins;
 
@@ -19,7 +17,7 @@ public class CoinManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded; // escuta trocas de cena
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -29,9 +27,25 @@ public class CoinManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // tenta encontrar o novo texto automaticamente
+        // tenta localizar automaticamente os objetos necessários
         if (coinsText == null)
-            coinsText = GameObject.Find("Mostrar Coins").GetComponent<TMP_Text>();
+        {
+            GameObject coinsObj = GameObject.Find("Mostrar Coins");
+            if (coinsObj != null)
+                coinsText = coinsObj.GetComponent<TMP_Text>();
+        }
+
+        if (NoCoins == null)
+        {
+            NoCoins = GameObject.Find("NoCoins");
+        }
+
+        if (OkayCoins == null && NoCoins != null)
+        {
+            Transform button = NoCoins.transform.Find("OkayCoins");
+            if (button != null)
+                OkayCoins = button.GetComponent<Button>();
+        }
 
         ShowCoins(Coins);
     }
@@ -46,5 +60,42 @@ public class CoinManager : MonoBehaviour
     {
         if (coinsText != null)
             coinsText.text = "R$ " + Coins;
+    }
+
+    public bool TrySpendCoins(int amount)
+    {
+        if (Coins >= amount)
+        {
+            Coins -= amount;
+            ShowCoins(Coins);
+            return true;
+        }
+        else
+        {
+            // Se estiver na cena da loja, tenta abrir o painel de "sem moedas"
+            if (NoCoins == null)
+                NoCoins = GameObject.Find("NoCoins");
+
+            if (NoCoins != null)
+            {
+                NoCoins.SetActive(true);
+
+                if (OkayCoins == null)
+                {
+                    Transform button = NoCoins.transform.Find("OkayCoins");
+                    if (button != null)
+                        OkayCoins = button.GetComponent<Button>();
+                }
+
+                if (OkayCoins != null)
+                {
+                    OkayCoins.onClick.RemoveAllListeners();
+                    OkayCoins.onClick.AddListener(() => NoCoins.SetActive(false));
+                }
+            }
+
+            Debug.Log("Moedas insuficientes!");
+            return false;
+        }
     }
 }
