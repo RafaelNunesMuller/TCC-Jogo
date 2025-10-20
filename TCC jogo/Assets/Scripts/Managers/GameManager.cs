@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public playerStats playerStats;
     public string lastScene;
     public Vector3 lastPlayerPosition;
+    public string pontoDeEntrada;
+
 
     void Awake()
     {
@@ -47,15 +49,23 @@ public class GameManager : MonoBehaviour
     private void RestaurarReferenciasCena()
     {
         var player = FindAnyObjectByType<Player>();
-        if (player != null && playerStats != null)
+
+        // 🔹 Só move o player se não estiver vindo de uma entrada específica
+        if (player != null && playerStats != null && string.IsNullOrEmpty(pontoDeEntrada))
         {
-            playerStats.transform.position = lastPlayerPosition;
+            
+            Debug.Log($"📍 Player restaurado para posição antiga: {lastPlayerPosition}");
+        }
+        else if (!string.IsNullOrEmpty(pontoDeEntrada))
+        {
+            Debug.Log($"🚪 Ignorando reposicionamento — vindo do ponto de entrada: {pontoDeEntrada}");
         }
 
+        // 🔹 Reatribui câmera
         var camFollow = Camera.main?.GetComponent<CameraContoller>();
         if (camFollow != null && player != null)
         {
-            camFollow.SetTarget(player.transform); //  usa o método público
+            camFollow.SetTarget(player.transform);
             camFollow.transform.position = new Vector3(
                 player.transform.position.x,
                 player.transform.position.y,
@@ -63,6 +73,7 @@ public class GameManager : MonoBehaviour
             );
         }
 
+        // 🔹 Atualiza menus e UI
         foreach (var ui in FindObjectsByType<CombatUi>(FindObjectsSortMode.None))
             ui.playerStats = playerStats;
 
@@ -72,8 +83,9 @@ public class GameManager : MonoBehaviour
         foreach (var status in FindObjectsByType<MenuStatus>(FindObjectsSortMode.None))
             status.playerStats = playerStats;
 
-        Debug.Log("✅ Referências de Player, UI e Câmera restauradas.");
+        Debug.Log("✅ Player, UI e Câmera restaurados.");
     }
+
 
 
 }

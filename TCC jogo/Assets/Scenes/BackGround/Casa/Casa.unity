@@ -1205,6 +1205,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341451748}
   m_CullTransparentMesh: 1
+--- !u!1 &377158513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 377158515}
+  - component: {fileID: 377158514}
+  m_Layer: 0
+  m_Name: EntradaCasa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &377158514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377158513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9dbc7b3351857149a1b9cad72ab830f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nomeEntrada: EntradaCasa
+--- !u!4 &377158515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377158513}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.29, y: -1.6, z: -0.009524229}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &445039764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1495,7 @@ GameObject:
   - component: {fileID: 509521934}
   - component: {fileID: 509521935}
   - component: {fileID: 509521937}
+  - component: {fileID: 509521938}
   m_Layer: 5
   m_Name: "Sa\xEDda"
   m_TagString: Untagged
@@ -1792,6 +1838,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f3b529552f1984091a3479ad12df65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &509521938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509521931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3f4916b6978ac44a54539103be297b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cenaDestino: Mapa
+  pontoDeEntradaDestino: SaidaCasa
 --- !u!1 &551770022
 GameObject:
   m_ObjectHideFlags: 0
@@ -13045,6 +13105,7 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   lastScene: Casa
   lastPlayerPosition: {x: 1.38, y: 0.47, z: 0}
+  pontoDeEntrada: SaidaCasa
 --- !u!4 &2004469401
 Transform:
   m_ObjectHideFlags: 0
@@ -13478,3 +13539,4 @@ SceneRoots:
   - {fileID: 688363581}
   - {fileID: 20502760}
   - {fileID: 2004469401}
+  - {fileID: 377158515}
