@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         if (GameManager.Instance != null && GameManager.Instance.playerStats != null)
         {
             playerStats = GameManager.Instance.playerStats;
-            Debug.Log("✅ Player pegou o playerStats do GameManager.");
+            Debug.Log(" Player pegou o playerStats do GameManager.");
         }
 
 
