@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -27,9 +28,21 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name != "Battle")
         {
-            RestaurarReferenciasCena();
+            StartCoroutine(RestaurarDepoisDeCarregar());
         }
     }
+
+    public IEnumerator RestaurarDepoisDeCarregar()
+    {
+        // 🔹 Espera 1 frame para garantir que Player e UI existam
+        yield return null;
+
+        // 🔹 E mais 1 frame se precisar (em cenas mais pesadas)
+        yield return new WaitForEndOfFrame();
+
+        RestaurarReferenciasCena();
+    }
+
 
     private void RestaurarReferenciasCena()
     {
