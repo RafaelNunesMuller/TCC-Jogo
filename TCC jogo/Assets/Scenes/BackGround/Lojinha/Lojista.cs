@@ -8,6 +8,7 @@ public class Lojista : MonoBehaviour
     public GameObject Fala;
     public Button Okay;
     public Button Exit;
+    public GameObject Player;
 
     void OnTriggerEnter2D(Collider2D other)
     {
