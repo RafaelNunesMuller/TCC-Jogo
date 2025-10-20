@@ -4,7 +4,7 @@ using UnityEngine;
 public class CombatUi : MonoBehaviour
 {
     public TMP_Text PlayerHP;
-    private playerStats playerStats;
+    public playerStats playerStats;
 
     void Start()
     {

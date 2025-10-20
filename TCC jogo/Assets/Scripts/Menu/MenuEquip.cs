@@ -179,7 +179,7 @@ public class MenuEquip : MonoBehaviour
         equipSlots.Clear();
         itensAtuais.Clear();
 
-        // ✅ Pega direto do inventário global
+        //  Pega direto do inventário global
         inventario = inventarioCentral.itens;
 
         // Filtra itens conforme o tipo do slot selecionado

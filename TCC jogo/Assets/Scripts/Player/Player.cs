@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     //Ver se consegue arrumar o posicionamento quando ele entra e sai de um local, pois está torto
 
     public float moveSpeed = 5f;
+    public playerStats playerStats;
 
     private Vector2 movement;
     private Animator anim;
@@ -18,9 +19,6 @@ public class Player : MonoBehaviour
     private int stepsToNextEncounter;
     public float stepDistance = 0.5f; // distância que conta como 1 passo
     private Vector2 lastStepPosition;
-
-    public GameObject menuUI;
-    public GameObject MenuPanel;
     public bool canMove = true;
 
     void Start()
@@ -31,10 +29,12 @@ public class Player : MonoBehaviour
         stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
         lastStepPosition = rb.position;
 
-        if (GameManager.Instance != null && GameManager.Instance.lastPlayerPosition != Vector3.zero)
+        if (GameManager.Instance != null && GameManager.Instance.playerStats != null)
         {
-            transform.position = GameManager.Instance.lastPlayerPosition;
+            playerStats = GameManager.Instance.playerStats;
+            Debug.Log("✅ Player pegou o playerStats do GameManager.");
         }
+
 
     }
 
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        
 
         //  Garante que o GameManager tenha referência ao playerStats real
         if (GameManager.Instance != null)
