@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         var camFollow = Camera.main?.GetComponent<CameraContoller>();
         if (camFollow != null && player != null)
         {
-            camFollow.SetTarget(player.transform); //usa o método público
+            camFollow.SetTarget(player.transform); //  usa o método público
             camFollow.transform.position = new Vector3(
                 player.transform.position.x,
                 player.transform.position.y,
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         foreach (var status in FindObjectsByType<MenuStatus>(FindObjectsSortMode.None))
             status.playerStats = playerStats;
 
-        Debug.Log("✅ Referências de Player, UI e Câmera restauradas.");
+        Debug.Log("Referências de Player, UI e Câmera restauradas.");
     }
 
 
