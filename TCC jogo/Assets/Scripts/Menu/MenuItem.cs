@@ -59,7 +59,7 @@ public class MenuItem : MonoBehaviour
     {
 
 
-        itensAtuais = new List<Item>(Inventario.instance.itens);  // ✅ sempre pega do Inventario central
+        itensAtuais = new List<Item>(Inventario.instance.itens);  // sempre pega do Inventario central
         inventarioPainel.SetActive(true);
 
         // Limpa os slots antigos
@@ -111,7 +111,7 @@ public class MenuItem : MonoBehaviour
         // 🔹 Bloqueia uso de itens que não são consumíveis
         if (item.tipo != ItemTipo.Consumivel)
         {
-            Debug.Log($"❌ {item.nome} não pode ser usado aqui. Vá até o menu de Equipar!");
+            Debug.Log($"{item.nome} não pode ser usado aqui. Vá até o menu de Equipar!");
             MessageUI.instance.ShowMessage($"{item.nome} só pode ser equipado no menu de Equipar!");
             return;
         }
@@ -121,7 +121,7 @@ public class MenuItem : MonoBehaviour
         if (player != null)
         {
             Inventario.instance.Usar(item, player);
-            Debug.Log($"💊 {item.nome} foi usado!");
+            Debug.Log($"{item.nome} foi usado!");
         }
 
         // 🔹 Atualiza interface

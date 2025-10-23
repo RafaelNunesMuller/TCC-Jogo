@@ -21794,7 +21794,7 @@ GameObject:
   - component: {fileID: 390976219}
   m_Layer: 0
   m_Name: IrParaCasa
-  m_TagString: Untagged
+  m_TagString: IrParaCasa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22635,6 +22635,7 @@ MonoBehaviour:
   closedSprite: {fileID: -1659190226, guid: f19b01e749963144e8cb542a095fe502, type: 3}
   openSprite: {fileID: 1449708952, guid: f19b01e749963144e8cb542a095fe502, type: 3}
   nextSceneName: Dungeon - sala 1
+  Player: {fileID: 1204881176}
 --- !u!212 &524042836
 SpriteRenderer:
   m_ObjectHideFlags: 0

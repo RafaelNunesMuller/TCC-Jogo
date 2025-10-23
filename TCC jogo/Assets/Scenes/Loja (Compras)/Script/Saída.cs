@@ -7,5 +7,6 @@ public class Saída : MonoBehaviour
     public void Trigger()
     {
         SceneManager.LoadScene(Lojinha);
+
     }
 }

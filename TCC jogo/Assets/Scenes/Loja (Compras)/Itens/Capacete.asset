@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Capacete
   m_EditorClassIdentifier: 
   nome: Capacete Enferrujado
-  tipo: 2
+  tipo: 4
   quantidade: 1
   icone: {fileID: 165860527550927914, guid: a09d590f1f79c8a409e0e66fac212ea3, type: 3}
   consumivel: 0

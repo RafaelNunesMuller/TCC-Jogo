@@ -48,8 +48,6 @@ public class Player : MonoBehaviour
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
-
-                // Define manualmente a posição em que o player vai aparecer no mapa
                 GameManager.Instance.lastPlayerPosition = new Vector3(4.48f, 3.92f, 0f); //  edite aqui a posição exata
             }
 
@@ -58,32 +56,42 @@ public class Player : MonoBehaviour
         }
 
         // Saída da Loja → vai para o mapa, em outro ponto
-        if (tag == "SaidaLoja")
+        else if (tag == "SaidaLoja")
         {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
-                GameManager.Instance.lastPlayerPosition = new Vector3(5f, -1f, 0f); //  posição de saída da loja
-            }
+            gameObject.transform.position = new Vector3(2.49f, -5.67f); //  posição de saída da loja
+            
 
             SceneManager.LoadScene("Mapa");
             return;
         }
 
         // Saída da Casa → vai para o mapa
-        if (tag == "SaidaCasa")
+        else if(tag == "SairDaCasa")
         {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
-                GameManager.Instance.lastPlayerPosition = new Vector3(3f, 0f, 0f);
-            }
+            gameObject.transform.position = new Vector3(-8.52f, 3.27f);
+            
 
             SceneManager.LoadScene("Mapa");
             return;
         }
 
- 
+        else if (tag == "IrParaCasa")
+        {
+            gameObject.transform.position = new Vector3(1.38f, 0.47f);
+
+            SceneManager.LoadScene("Casa");
+            return;
+        }
+
+        else if (tag == "IrParaLoja")
+        {
+            gameObject.transform.position = new Vector3(1.38f, 0.47f);
+
+            SceneManager.LoadScene("Loja");
+            return;
+        }
+
+
     }
 
 

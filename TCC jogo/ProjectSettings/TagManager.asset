@@ -7,6 +7,8 @@ TagManager:
   - SairDaCasa
   - EntradaDungeon
   - SaidaDungeon
+  - IrParaCasa
+  - IrParaLoja
   layers:
   - Default
   - TransparentFX
