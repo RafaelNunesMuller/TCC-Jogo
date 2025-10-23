@@ -6,11 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("Referências persistentes")]
     public playerStats playerStats;
     public string lastScene;
     public Vector3 lastPlayerPosition;
-    public string pontoDeEntrada;
 
+    
 
     void Awake()
     {
@@ -28,40 +29,36 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // Se não é batalha, restaura câmera, UI, etc.
         if (scene.name != "Battle")
         {
             StartCoroutine(RestaurarDepoisDeCarregar());
         }
     }
 
-    public IEnumerator RestaurarDepoisDeCarregar()
+    private IEnumerator RestaurarDepoisDeCarregar()
     {
-        // 🔹 Espera 1 frame para garantir que Player e UI existam
-        yield return null;
-
-        // 🔹 E mais 1 frame se precisar (em cenas mais pesadas)
+        yield return null; // espera 1 frame para garantir que tudo carregou
         yield return new WaitForEndOfFrame();
 
         RestaurarReferenciasCena();
-    }
 
+        // Aguarda o SceneEntrance posicionar o player
+        yield return new WaitForSeconds(0.05f);
+
+        Debug.Log(" Cena restaurada com sucesso!");
+    }
 
     private void RestaurarReferenciasCena()
     {
         var player = FindAnyObjectByType<Player>();
-
-        // 🔹 Só move o player se não estiver vindo de uma entrada específica
-        if (player != null && playerStats != null && string.IsNullOrEmpty(pontoDeEntrada))
+        if (player != null && playerStats != null)
         {
-            
-            Debug.Log($"📍 Player restaurado para posição antiga: {lastPlayerPosition}");
-        }
-        else if (!string.IsNullOrEmpty(pontoDeEntrada))
-        {
-            Debug.Log($"🚪 Ignorando reposicionamento — vindo do ponto de entrada: {pontoDeEntrada}");
+            // reposiciona o player na última posição salva
+            player.transform.position = lastPlayerPosition;
         }
 
-        // 🔹 Reatribui câmera
+        // Restaura a câmera
         var camFollow = Camera.main?.GetComponent<CameraContoller>();
         if (camFollow != null && player != null)
         {
@@ -73,7 +70,7 @@ public class GameManager : MonoBehaviour
             );
         }
 
-        // 🔹 Atualiza menus e UI
+        // Atualiza UIs e menus
         foreach (var ui in FindObjectsByType<CombatUi>(FindObjectsSortMode.None))
             ui.playerStats = playerStats;
 
@@ -83,9 +80,7 @@ public class GameManager : MonoBehaviour
         foreach (var status in FindObjectsByType<MenuStatus>(FindObjectsSortMode.None))
             status.playerStats = playerStats;
 
-        Debug.Log("✅ Player, UI e Câmera restaurados.");
+        Debug.Log(" Player e câmera restaurados após troca de cena.");
     }
-
-
 
 }
