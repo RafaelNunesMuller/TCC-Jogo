@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Luva
   m_EditorClassIdentifier: 
   nome: Luva de Ouro (Lv.4)
-  tipo: 2
+  tipo: 5
   quantidade: 1
   icone: {fileID: 740631721098038716, guid: cf485f73fd8b0c44ca94a271a5145e37, type: 3}
   consumivel: 0

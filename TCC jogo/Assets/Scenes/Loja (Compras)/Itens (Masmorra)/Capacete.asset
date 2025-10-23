@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Capacete
   m_EditorClassIdentifier: 
   nome: Capacete de Ouro (Lv. 4)
-  tipo: 2
+  tipo: 4
   quantidade: 1
   icone: {fileID: -7398583437242665219, guid: 3ccfe7539084a06428480ac563d8d4ce, type: 3}
   consumivel: 0

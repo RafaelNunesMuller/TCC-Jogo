@@ -10,9 +10,8 @@ public class ItemSlot : MonoBehaviour
     public string itemName;
     [TextArea] public string itemDescription;
     public int itemPrice;
+    public bool isPurchased = false;
 
-
-    
     public Button itemButton;
     public ItemInfoUI infoUI;
     public Item itemDentro;

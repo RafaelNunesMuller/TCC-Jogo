@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using NUnit.Framework.Interfaces;
 
 public class ItemInfoUI : MonoBehaviour
 {
@@ -47,9 +48,13 @@ public class ItemInfoUI : MonoBehaviour
         if (currentItemSlot == null) return;
 
         int price = currentItemSlot.itemPrice;
-        if (CoinManager.instance.TrySpendCoins(price))
+        if (CoinManager.instance.TrySpendCoins(price) &&  !currentItemSlot.isPurchased)
         {
             Debug.Log("Item comprado!");
+            currentItemSlot.isPurchased = true;
+            Inventario.instance.Adicionar(currentItemSlot.itemDentro);
+           
+
             panel.SetActive(false);
             itens.SetActive(false);
             Vendedor.SetActive(true);
@@ -72,7 +77,21 @@ public class ItemInfoUI : MonoBehaviour
 
     public void ShowItem(Sprite sprite, string name, string description, int price, ItemSlot slot)
     {
+
         currentItemSlot = slot;
+        
+        if (currentItemSlot.isPurchased == true)
+        {
+            buyButton.gameObject.SetActive(false);
+            IndButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            buyButton.gameObject.SetActive(true);
+            IndButton.gameObject.SetActive(false);
+        }
+
+        
         currentItemPrice = price;
         itens.SetActive(false);
         panel.SetActive(true);
@@ -87,7 +106,6 @@ public class ItemInfoUI : MonoBehaviour
         itemNameText.gameObject.SetActive(true);
         itemDescriptionText.gameObject.SetActive(true);
         itemPriceText.gameObject.SetActive(true);
-        buyButton.gameObject.SetActive(true);
         exitButton.gameObject.SetActive(true);
 
     }
