@@ -32,11 +32,60 @@ public class Player : MonoBehaviour
         if (GameManager.Instance != null && GameManager.Instance.playerStats != null)
         {
             playerStats = GameManager.Instance.playerStats;
-            Debug.Log("✅ Player pegou o playerStats do GameManager.");
+            Debug.Log(" Player pegou o playerStats do GameManager.");
         }
 
 
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        string tag = collision.gameObject.tag;
+
+        // Saída da Dungeon → vai para o mapa
+        if (tag == "SaidaDungeon")
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
+
+                // Define manualmente a posição em que o player vai aparecer no mapa
+                GameManager.Instance.lastPlayerPosition = new Vector3(4.48f, 3.92f, 0f); //  edite aqui a posição exata
+            }
+
+            SceneManager.LoadScene("Mapa");
+            return;
+        }
+
+        // Saída da Loja → vai para o mapa, em outro ponto
+        if (tag == "SaidaLoja")
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
+                GameManager.Instance.lastPlayerPosition = new Vector3(5f, -1f, 0f); //  posição de saída da loja
+            }
+
+            SceneManager.LoadScene("Mapa");
+            return;
+        }
+
+        // Saída da Casa → vai para o mapa
+        if (tag == "SaidaCasa")
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
+                GameManager.Instance.lastPlayerPosition = new Vector3(3f, 0f, 0f);
+            }
+
+            SceneManager.LoadScene("Mapa");
+            return;
+        }
+
+ 
+    }
+
 
     void Awake()
     {

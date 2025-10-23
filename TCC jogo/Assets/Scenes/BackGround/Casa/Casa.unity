@@ -1450,6 +1450,7 @@ GameObject:
   - component: {fileID: 509521934}
   - component: {fileID: 509521935}
   - component: {fileID: 509521937}
+  - component: {fileID: 509521938}
   m_Layer: 5
   m_Name: "Sa\xEDda"
   m_TagString: Untagged
@@ -1792,6 +1793,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f3b529552f1984091a3479ad12df65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &509521938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509521931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3f4916b6978ac44a54539103be297b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cenaDestino: Mapa
+  pontoDeEntradaDestino: SaidaCasa
 --- !u!1 &551770022
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,10 +2734,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5f1af153f447e4faada10882b4ddf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
+  menuPanel: {fileID: 2049367233}
   cursor: {fileID: 445039765}
   statusText: {fileID: 1762714591}
-  menuPanel: {fileID: 2049367233}
+  playerStats: {fileID: 0}
 --- !u!114 &610944027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2932,14 +2947,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  playerStats: {fileID: 0}
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  menuUI: {fileID: 0}
-  MenuPanel: {fileID: 0}
   canMove: 1
 --- !u!50 &634963444
 Rigidbody2D:
@@ -13014,6 +13028,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000653454}
   m_CullTransparentMesh: 1
+--- !u!1 &2004469399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2004469401}
+  - component: {fileID: 2004469400}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2004469400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004469399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708808c1169fc4e4a8b5d07e7dd8c567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 0}
+  lastScene: Casa
+  lastPlayerPosition: {x: 1.38, y: 0.47, z: 0}
+--- !u!4 &2004469401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004469399}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.522419, y: -3.7111523, z: -0.10044856}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2020532548
 GameObject:
   m_ObjectHideFlags: 0
@@ -13431,3 +13492,4 @@ SceneRoots:
   - {fileID: 880729438}
   - {fileID: 688363581}
   - {fileID: 20502760}
+  - {fileID: 2004469401}

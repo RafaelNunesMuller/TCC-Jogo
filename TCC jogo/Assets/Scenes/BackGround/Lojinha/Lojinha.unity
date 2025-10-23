@@ -2265,6 +2265,7 @@ GameObject:
   - component: {fileID: 459110970}
   - component: {fileID: 459110972}
   - component: {fileID: 459110973}
+  - component: {fileID: 459110974}
   m_Layer: 0
   m_Name: Saida
   m_TagString: Untagged
@@ -2475,6 +2476,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f3b529552f1984091a3479ad12df65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &459110974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459110968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3f4916b6978ac44a54539103be297b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cenaDestino: Mapa
+  pontoDeEntradaDestino: SaidaLoja
 --- !u!1 &489856662
 GameObject:
   m_ObjectHideFlags: 0
@@ -10250,10 +10265,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5f1af153f447e4faada10882b4ddf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
+  menuPanel: {fileID: 1152316720}
   cursor: {fileID: 1902957030}
   statusText: {fileID: 967076245}
-  menuPanel: {fileID: 1152316720}
+  playerStats: {fileID: 0}
 --- !u!114 &1350692820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13316,14 +13331,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  playerStats: {fileID: 0}
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  menuUI: {fileID: 0}
-  MenuPanel: {fileID: 0}
   canMove: 1
 --- !u!50 &2128760256
 Rigidbody2D:
