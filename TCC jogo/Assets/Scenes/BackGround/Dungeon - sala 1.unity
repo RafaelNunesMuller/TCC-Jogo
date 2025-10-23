@@ -10981,8 +10981,6 @@ MonoBehaviour:
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  menuUI: {fileID: 1426226081}
-  MenuPanel: {fileID: 1826405365}
   canMove: 1
 --- !u!95 &2027303772
 Animator:
@@ -11433,10 +11431,9 @@ GameObject:
   - component: {fileID: 2117542642}
   - component: {fileID: 2117542641}
   - component: {fileID: 2117542643}
-  - component: {fileID: 2117542644}
   m_Layer: 0
   m_Name: Saida
-  m_TagString: Untagged
+  m_TagString: SaidaDungeon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11706,18 +11703,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!114 &2117542644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117542639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36f3b529552f1984091a3479ad12df65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2128778353
 GameObject:
   m_ObjectHideFlags: 0
