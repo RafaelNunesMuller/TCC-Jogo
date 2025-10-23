@@ -12,6 +12,7 @@ public class DungeonRoom1 : MonoBehaviour
 
     private bool isOpen = false;
     private SpriteRenderer sr;
+    public GameObject Player;
 
     void Start()
     {
@@ -48,7 +49,9 @@ public class DungeonRoom1 : MonoBehaviour
         // Só troca de cena se já estiver aberta
         if (isOpen && other.CompareTag("Player"))
         {
+            Player.transform.position = new Vector3(-1.45f, 7.52f);
             SceneManager.LoadScene(nextSceneName);
+            
         }
     }
 }
