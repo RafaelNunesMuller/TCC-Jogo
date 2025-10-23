@@ -3,15 +3,16 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
+
+    public static ItemSlot Instance;
     public Sprite itemSprite;
     public Button itemImageGO; 
     public string itemName;
     [TextArea] public string itemDescription;
     public int itemPrice;
+    public bool isPurchased = false;
 
-
-
-    public Button itemButton;     // botão do item
+    public Button itemButton;
     public ItemInfoUI infoUI;
     public Item itemDentro;
 
@@ -24,10 +25,13 @@ public class ItemSlot : MonoBehaviour
             itemButton.onClick.AddListener(OpenPanel);
     }
 
+
+
     public void OpenPanel()
     {
         if (infoUI != null)
-            infoUI.ShowItem(itemSprite, itemName, itemDescription, itemPrice);
+            infoUI.itemPrice = itemPrice;
+            infoUI.ShowItem(itemSprite, itemName, itemDescription, itemPrice, this);
             itemImageGO.gameObject.SetActive(true);
     }
 }

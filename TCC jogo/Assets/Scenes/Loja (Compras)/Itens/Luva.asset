@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Luva
   m_EditorClassIdentifier: 
   nome: Luvas de Couro
-  tipo: 2
+  tipo: 5
   quantidade: 1
   icone: {fileID: -2693528012177461458, guid: 79fc3043054563d45879100ebc498ffe, type: 3}
   consumivel: 0

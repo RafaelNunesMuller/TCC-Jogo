@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         foreach (var status in FindObjectsByType<MenuStatus>(FindObjectsSortMode.None))
             status.playerStats = playerStats;
 
-        Debug.Log(" Player e câmera restaurados após troca de cena.");
+        Debug.Log("Referências de Player, UI e Câmera restauradas.");
     }
 
 }

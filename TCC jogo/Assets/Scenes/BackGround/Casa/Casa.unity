@@ -2978,7 +2978,7 @@ Transform:
   m_GameObject: {fileID: 634963439}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.38, y: 0.47, z: 0}
+  m_LocalPosition: {x: -1.97, y: 0.58, z: 0}
   m_LocalScale: {x: 1.0060622, y: 1.0060622, z: 1.0060622}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3552,6 +3552,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinsText: {fileID: 1429062281}
   Coins: 0
+  NoCoins: {fileID: 0}
+  OkayCoins: {fileID: 0}
 --- !u!1 &929953690
 GameObject:
   m_ObjectHideFlags: 0
