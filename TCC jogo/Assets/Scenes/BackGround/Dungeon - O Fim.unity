@@ -2704,10 +2704,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5f1af153f447e4faada10882b4ddf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 1899282487}
+  menuPanel: {fileID: 1347052510}
   cursor: {fileID: 256765794}
   statusText: {fileID: 1890000916}
-  menuPanel: {fileID: 1347052510}
+  playerStats: {fileID: 1899282487}
 --- !u!114 &762958585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7465,7 +7465,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -15414,14 +15414,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  playerStats: {fileID: 0}
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  menuUI: {fileID: 1323873966}
-  MenuPanel: {fileID: 1347052510}
   canMove: 1
 --- !u!50 &1899282490
 Rigidbody2D:

@@ -9,6 +9,12 @@ TagManager:
   - SaidaDungeon
   - IrParaCasa
   - IrParaLoja
+  - andar2
+  - andar3
+  - andar4
+  - andar5
+  - descanso
+  - ultima
   layers:
   - Default
   - TransparentFX

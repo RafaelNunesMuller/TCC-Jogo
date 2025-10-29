@@ -2686,7 +2686,7 @@ GameObject:
   - component: {fileID: 238707795}
   m_Layer: 0
   m_Name: ProximoAndar
-  m_TagString: Untagged
+  m_TagString: andar2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10977,7 +10977,7 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   Perigolayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
