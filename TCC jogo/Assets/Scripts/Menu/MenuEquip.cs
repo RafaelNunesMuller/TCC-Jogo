@@ -5,7 +5,9 @@ using TMPro;
 
 public class MenuEquip : MonoBehaviour
 {
+    [Header("Referências Principais")]
     public playerStats playerStats;
+    public Inventario inventarioCentral;
 
     [Header("UI")]
     public TMP_Text EquipamentoAtual;
@@ -21,180 +23,156 @@ public class MenuEquip : MonoBehaviour
     public Button accessoryButton;
 
     [Header("Referências")]
-    public GameObject menuPanel; // arrasta o MenuPanel no inspector
+    public GameObject menuPanel;
 
     private List<Item> inventario = new List<Item>();
     private List<RectTransform> equipSlots = new List<RectTransform>();
     private List<Item> itensAtuais = new List<Item>();
-    private int cursorIndex = 0;
-    private string slotSelecionado = "";
-
-    private bool navegandoSlots = true; // true = cursor nos botões, false = cursor nos itens
     private List<RectTransform> botoesSlots = new List<RectTransform>();
 
-    public GameObject EquipItemPrefab;
+    private int cursorIndex = 0;
+    private string slotSelecionado = "";
+    private bool navegandoSlots = true;
 
-    private Inventario inventarioCentral;
+    // salva o último slot selecionado (para restaurar se voltar)
+    private string ultimoSlotSelecionado = "";
 
+    void Awake()
+    {
+        // 🔹 Garante que o GameManager tenha a referência
+        if (GameManager.Instance != null && GameManager.Instance.playerStats != null)
+            playerStats = GameManager.Instance.playerStats;
+    }
 
     void Start()
     {
-        Sprite espadaComum = Resources.Load<Sprite>("Icones/sword_02a");
-        Sprite espadaIncomum = Resources.Load<Sprite>("Icones/sword_02b");
-        Sprite espadaRara = Resources.Load<Sprite>("Icones/sword_02c");
-        Sprite espadaEpica = Resources.Load<Sprite>("Icones/sword_02d");
-        Sprite espadaLendaria = Resources.Load<Sprite>("Icones/sword_02e");
-
-        Sprite elmoComum = Resources.Load<Sprite>("Icones/Helmet_02a");
-        Sprite elmoIncomum = Resources.Load<Sprite>("Icones/Helmet_02b");
-        Sprite elmoRara = Resources.Load<Sprite>("Icones/Helmet_02c");
-        Sprite elmoEpica = Resources.Load<Sprite>("Icones/Helmet_02d");
-        Sprite elmoLendaria = Resources.Load<Sprite>("Icones/Helmet_02e");
-
-        Sprite armaduraComum = Resources.Load<Sprite>("Icones/armor_01a");
-        Sprite armaduraIncomum = Resources.Load<Sprite>("Icones/armor_01b");
-        Sprite armaduraRara = Resources.Load<Sprite>("Icones/armor_01c");
-        Sprite armaduraEpica = Resources.Load<Sprite>("Icones/armor_01d");
-        Sprite armaduraLendaria = Resources.Load<Sprite>("Icones/armor_01e");
-
-        Sprite luvaComum = Resources.Load<Sprite>("Icones/Gloves_01a");
-        Sprite luvaIncomum = Resources.Load<Sprite>("Icones/Gloves_01b");
-        Sprite luvaRara = Resources.Load<Sprite>("Icones/Gloves_01c");
-        Sprite luvaEpica = Resources.Load<Sprite>("Icones/Gloves_01d");
-        Sprite luvaLendaria = Resources.Load<Sprite>("Icones/Gloves_01e");
-
-        Sprite acessorioComum = Resources.Load<Sprite>("Icones/necklace_01a");
-        Sprite acessorioIncomum = Resources.Load<Sprite>("Icones/necklace_01b");
-        Sprite acessorioRara = Resources.Load<Sprite>("Icones/necklace_01c");
-        Sprite acessorioEpica = Resources.Load<Sprite>("Icones/necklace_01d");
-        Sprite acessorioLendaria = Resources.Load<Sprite>("Icones/necklace_01e");
-
-
-
         inventarioCentral = Inventario.instance;
 
-
-
-        // Guardar botões como slots
+        // 🔹 Preenche botões de slot
         botoesSlots.Add(weaponButton.GetComponent<RectTransform>());
         botoesSlots.Add(healmetButton.GetComponent<RectTransform>());
         botoesSlots.Add(gloveButton.GetComponent<RectTransform>());
-        botoesSlots.Add(armorButton.GetComponent<RectTransform>());    
+        botoesSlots.Add(armorButton.GetComponent<RectTransform>());
         botoesSlots.Add(accessoryButton.GetComponent<RectTransform>());
 
-        
-        
+        // 🔹 Corrige prefab se tiver sido destruído
+        if (equipItemPrefab == null)
+        {
+            equipItemPrefab = Resources.Load<GameObject>("UI/EquipItemPrefab");
+            if (equipItemPrefab == null)
+                Debug.LogError("❌ EquipItemPrefab não encontrado em Resources/UI/");
+        }
 
-        // Começa no primeiro botão
         cursorIndex = 0;
         MoveCursor(cursorIndex);
-
-
-         // 🔹 Se o playerStats estiver vazio, busca no GameManager
-    if (playerStats == null && GameManager.Instance != null)
-    {
-        playerStats = GameManager.Instance.playerStats;
-        Debug.Log("♻ playerStats restaurado no MenuEquip via GameManager.");
+        AtualizarEquip();
     }
 
-    // 🔹 Se o prefab tiver sumido (acontece ao trocar de cena)
-    if (equipItemPrefab == null)
+    void OnEnable()
     {
-        equipItemPrefab = Resources.Load<GameObject>("Prefabs/EquipItemPrefab");
-        Debug.Log("🔧 EquipItemPrefab recarregado via Resources.");
+        RestaurarReferencias();
+        AtualizarEquip();
+
+        // 🔹 se tinha um slot antes, reabre nele
+        if (!string.IsNullOrEmpty(ultimoSlotSelecionado))
+            SelecionarSlot(ultimoSlotSelecionado);
     }
 
-    // continua normalmente
-    AtualizarEquip();
+    private void RestaurarReferencias()
+    {
+        if (playerStats == null && GameManager.Instance != null)
+            playerStats = GameManager.Instance.playerStats;
+
+        if (inventarioCentral == null)
+            inventarioCentral = Inventario.instance;
+
+        if (equipItemPrefab == null)
+            equipItemPrefab = Resources.Load<GameObject>("UI/EquipItemPrefab");
     }
 
     void Update()
     {
         if (!gameObject.activeSelf) return;
+
         HandleInput();
+
         if (Input.GetKeyDown(KeyCode.X))
-        {
             VoltarParaMenu();
-        }
     }
+
     public void VoltarParaMenu()
     {
-        gameObject.SetActive(false); // fecha o Status
-        menuPanel.SetActive(true);        // reabre o menu principal
+        ultimoSlotSelecionado = slotSelecionado; // salva estado
+        gameObject.SetActive(false);
+        menuPanel.SetActive(true);
     }
 
+    // =============================
+    // CONTROLE DE INPUT
+    // =============================
     void HandleInput()
-{
-    if (navegandoSlots)
     {
-        // --- Navegação entre botões de slot (Arma, Armadura, etc.)
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (navegandoSlots)
         {
-            cursorIndex = Mathf.Min(cursorIndex + 1, botoesSlots.Count - 1);
-            MoveCursor(cursorIndex);
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            cursorIndex = Mathf.Max(cursorIndex - 1, 0);
-            MoveCursor(cursorIndex);
-        }
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            equipItemPrefab?.SetActive(true);
-
-            if (cursorIndex == 0) SelecionarSlot("Arma");
-            else if (cursorIndex == 1) SelecionarSlot("Elmo");
-            else if (cursorIndex == 2) SelecionarSlot("Luva");
-            else if (cursorIndex == 3) SelecionarSlot("Armadura");
-            else if (cursorIndex == 4) SelecionarSlot("Acessorio");
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            gameObject.SetActive(false);
-        }
-    }
-    else
-    {
-        // --- Navegação entre itens de um tipo específico ---
-        if (equipSlots == null || equipSlots.Count == 0)
-            return; // lista vazia → evita erro
-
-        // evita acessar algo que foi destruído
-        equipSlots.RemoveAll(slot => slot == null);
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            cursorIndex = Mathf.Min(cursorIndex + 1, equipSlots.Count - 1);
-            MoveCursor(cursorIndex);
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            cursorIndex = Mathf.Max(cursorIndex - 1, 0);
-            MoveCursor(cursorIndex);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            // proteção extra
-            if (cursorIndex >= 0 && cursorIndex < itensAtuais.Count && itensAtuais[cursorIndex] != null)
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                Equipar(itensAtuais[cursorIndex]);
+                cursorIndex = Mathf.Min(cursorIndex + 1, botoesSlots.Count - 1);
+                MoveCursor(cursorIndex);
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                cursorIndex = Mathf.Max(cursorIndex - 1, 0);
+                MoveCursor(cursorIndex);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                if (cursorIndex == 0) SelecionarSlot("Arma");
+                else if (cursorIndex == 1) SelecionarSlot("Elmo");
+                else if (cursorIndex == 2) SelecionarSlot("Luva");
+                else if (cursorIndex == 3) SelecionarSlot("Armadura");
+                else if (cursorIndex == 4) SelecionarSlot("Acessorio");
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.X))
+        else
         {
-            navegandoSlots = true;
-            cursorIndex = 0;
-            MoveCursor(cursorIndex);
+            if (equipSlots.Count == 0) return;
+
+            equipSlots.RemoveAll(slot => slot == null);
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                cursorIndex = Mathf.Min(cursorIndex + 1, equipSlots.Count - 1);
+                MoveCursor(cursorIndex);
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                cursorIndex = Mathf.Max(cursorIndex - 1, 0);
+                MoveCursor(cursorIndex);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                if (cursorIndex >= 0 && cursorIndex < itensAtuais.Count && itensAtuais[cursorIndex] != null)
+                    Equipar(itensAtuais[cursorIndex]);
+            }
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                navegandoSlots = true;
+                cursorIndex = 0;
+                MoveCursor(cursorIndex);
+            }
         }
     }
-}
 
-
+    // =============================
+    // SELEÇÃO E EXIBIÇÃO DE ITENS
+    // =============================
     public void SelecionarSlot(string slot)
     {
         slotSelecionado = slot;
+        ultimoSlotSelecionado = slot;
         MostrarListaEquip();
     }
 
@@ -206,10 +184,11 @@ public class MenuEquip : MonoBehaviour
         equipSlots.Clear();
         itensAtuais.Clear();
 
-        //  Pega direto do inventário global
+        if (inventarioCentral == null)
+            inventarioCentral = Inventario.instance;
+
         inventario = inventarioCentral.itens;
 
-        // Filtra itens conforme o tipo do slot selecionado
         foreach (Item item in inventario)
         {
             if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
@@ -218,6 +197,12 @@ public class MenuEquip : MonoBehaviour
                 (slotSelecionado == "Elmo" && item.tipo == ItemTipo.Elmo) ||
                 (slotSelecionado == "Luva" && item.tipo == ItemTipo.Luva))
             {
+                if (equipItemPrefab == null)
+                {
+                    Debug.LogWarning("⚠️ EquipItemPrefab não encontrado, pulando item.");
+                    continue;
+                }
+
                 GameObject obj = Instantiate(equipItemPrefab, equipListParent);
                 ItemEquipUI ui = obj.GetComponent<ItemEquipUI>();
                 ui.Configurar(item, () => Equipar(item));
@@ -236,10 +221,12 @@ public class MenuEquip : MonoBehaviour
             cursor.gameObject.SetActive(false);
     }
 
-
+    // =============================
+    // MOVIMENTO DO CURSOR
+    // =============================
     void MoveCursor(int index)
     {
-        Vector2 offset = new Vector2(1250f, -600f); // desloca o cursor 20px pra esquerda
+        Vector2 offset = new Vector2(1250f, -600f);
 
         if (navegandoSlots)
         {
@@ -261,42 +248,40 @@ public class MenuEquip : MonoBehaviour
         }
     }
 
-
+    // =============================
+    // EQUIPAR ITEM
+    // =============================
     void Equipar(Item item)
-{
-    if (item == null) return;
+    {
+        if (item == null || playerStats == null) return;
 
-    if (slotSelecionado == "Arma")
-        playerStats.EquiparArma(item);
-    else if (slotSelecionado == "Armadura")
-        playerStats.EquiparArmadura(item);
-    else if (slotSelecionado == "Elmo")
-        playerStats.EquiparElmo(item);
-    else if (slotSelecionado == "Luva")
-        playerStats.EquiparLuva(item);
-    else if (slotSelecionado == "Acessorio")
-        playerStats.EquiparAcessorio(item);
+        switch (slotSelecionado)
+        {
+            case "Arma": playerStats.EquiparArma(item); break;
+            case "Armadura": playerStats.EquiparArmadura(item); break;
+            case "Elmo": playerStats.EquiparElmo(item); break;
+            case "Luva": playerStats.EquiparLuva(item); break;
+            case "Acessorio": playerStats.EquiparAcessorio(item); break;
+        }
 
-    AtualizarEquip();
-
-    // 🔹 Evita tentar acessar UI destruída
-    navegandoSlots = true;
-    cursorIndex = 0;
-
-    if (cursor != null && botoesSlots.Count > 0)
+        AtualizarEquip();
+        navegandoSlots = true;
+        cursorIndex = 0;
         MoveCursor(cursorIndex);
-}
+    }
 
-
-    
-
+    // =============================
+    // ATUALIZA STATUS NA UI
+    // =============================
     void AtualizarEquip()
     {
+        if (playerStats == null) return;
+
         EquipamentoAtual.text =
-            $"Arma: {playerStats.armaEquipada.nome}\n" +
-            $"Elmo: {playerStats.elmoEquipada.nome}\n" +
-            $"Armadura: {playerStats.armaduraEquipada.nome}\n" +
-            $"Luva: {playerStats.luvaEquipada.nome}\n" +
-            $"Acessório: {playerStats.acessorioEquipado.nome}";
+            $"Arma: {(playerStats.armaEquipada != null ? playerStats.armaEquipada.nome : "Nenhuma")}\n" +
+            $"Elmo: {(playerStats.elmoEquipada != null ? playerStats.elmoEquipada.nome : "Nenhum")}\n" +
+            $"Armadura: {(playerStats.armaduraEquipada != null ? playerStats.armaduraEquipada.nome : "Nenhuma")}\n" +
+            $"Luva: {(playerStats.luvaEquipada != null ? playerStats.luvaEquipada.nome : "Nenhuma")}\n" +
+            $"Acessório: {(playerStats.acessorioEquipado != null ? playerStats.acessorioEquipado.nome : "Nenhum")}";
     }
 }
