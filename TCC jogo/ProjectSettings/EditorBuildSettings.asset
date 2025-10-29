@@ -42,7 +42,7 @@ EditorBuildSettings:
     path: Assets/Scenes/BackGround/Dungeon - sala 2.unity
     guid: 24fe057c5511af048ba6e994e5e5ed29
   - enabled: 1
-    path: Assets/Scenes/BackGround/Dungeon - sala 3.unity
+    path: Assets/Scenes/BackGround/Dungeon - sala_3.unity
     guid: 163595a27fa2a974dbc88bd89b706abf
   - enabled: 1
     path: Assets/Scenes/BackGround/Dungeon - sala 4.unity
