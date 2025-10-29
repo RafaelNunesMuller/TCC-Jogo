@@ -3,23 +3,47 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    //Ver se consegue arrumar o posicionamento quando ele entra e sai de um local, pois está torto
-
+    [Header("Movimento")]
     public float moveSpeed = 5f;
-    public playerStats playerStats;
-
     private Vector2 movement;
     private Animator anim;
     private Rigidbody2D rb;
+    public bool canMove = true;
 
     [Header("Encontros")]
     public LayerMask Perigolayer;
     public int minSteps = 5;
     public int maxSteps = 15;
     private int stepsToNextEncounter;
-    public float stepDistance = 0.5f; // distância que conta como 1 passo
+    public float stepDistance = 0.5f;
     private Vector2 lastStepPosition;
-    public bool canMove = true;
+
+    [Header("Status")]
+    public playerStats playerStats;
+
+    void Awake()
+    {
+        // Garante que só exista 1 player
+        var players = FindObjectsByType<Player>(FindObjectsSortMode.None);
+        if (players.Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Persiste entre cenas
+        DontDestroyOnLoad(gameObject);
+
+        // Garante que o GameManager conheça o playerStats atual
+        if (GameManager.Instance != null)
+        {
+            var stats = GetComponent<playerStats>();
+            if (stats != null)
+                GameManager.Instance.playerStats = stats;
+        }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
     void Start()
     {
@@ -29,175 +53,61 @@ public class Player : MonoBehaviour
         stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
         lastStepPosition = rb.position;
 
-        if (GameManager.Instance != null && GameManager.Instance.playerStats != null)
+        // 🔹 Reposiciona o player se houver posição salva
+        if (GameManager.Instance != null && GameManager.Instance.lastPlayerPosition != Vector3.zero)
         {
-            playerStats = GameManager.Instance.playerStats;
-            Debug.Log(" Player pegou o playerStats do GameManager.");
-        }
-
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        string tag = collision.gameObject.tag;
-
-        // Saída da Dungeon → vai para o mapa
-        if (tag == "SaidaDungeon")
-        {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
-                GameManager.Instance.lastPlayerPosition = new Vector3(4.48f, 3.92f, 0f); //  edite aqui a posição exata
-            }
-
-            SceneManager.LoadScene("Mapa");
-            return;
-        }
-
-        // Saída da Loja → vai para o mapa, em outro ponto
-        else if (tag == "SaidaLoja")
-        {
-            gameObject.transform.position = new Vector3(2.49f, -5.67f); //  posição de saída da loja
-            
-
-            SceneManager.LoadScene("Mapa");
-            return;
-        }
-
-        // Saída da Casa → vai para o mapa
-        else if(tag == "SairDaCasa")
-        {
-            gameObject.transform.position = new Vector3(-8.52f, 3.27f);
-            
-
-            SceneManager.LoadScene("Mapa");
-            return;
-        }
-
-        else if (tag == "IrParaCasa")
-        {
-            gameObject.transform.position = new Vector3(1.38f, 0.47f);
-
-            SceneManager.LoadScene("Casa");
-            return;
-        }
-
-        else if (tag == "IrParaLoja")
-        {
-            gameObject.transform.position = new Vector3(1.38f, 0.47f);
-
-            SceneManager.LoadScene("Loja");
-            return;
-        }
-
-
-    }
-
-
-    void Awake()
-    {
-        var players = FindObjectsByType<Player>(FindObjectsSortMode.None);
-
-        if (players.Length > 1)
-        {
-            
-            Destroy(gameObject);
-            return;
-        }
-
-        
-
-        //  Garante que o GameManager tenha referência ao playerStats real
-        if (GameManager.Instance != null)
-        {
-            var stats = GetComponent<playerStats>();
-            if (stats != null)
-            {
-                GameManager.Instance.playerStats = stats;
-            }
+            transform.position = GameManager.Instance.lastPlayerPosition;
+            Debug.Log($"📍 Player posicionado em {transform.position}");
         }
     }
 
-    void OnEnable()
-    {
-        // Quando a cena de batalha for carregada, checa se é "Battle"
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
+    void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    void OnSceneLoaded(Scene cena, LoadSceneMode modo)
+    private void OnSceneLoaded(Scene cena, LoadSceneMode modo)
     {
+        // Invisível durante batalha
+        var sr = GetComponent<SpriteRenderer>();
+        var col = GetComponent<Collider2D>();
+
         if (cena.name == "Battle")
         {
-            // 🔹 Deixa o player invisível
-            var sr = GetComponent<SpriteRenderer>();
-            if (sr != null)
-                sr.enabled = false;
-
-            // 🔹 Opcional: desativa o colisor também
-            var col = GetComponent<Collider2D>();
-            if (col != null)
-                col.enabled = false;
+            if (sr != null) sr.enabled = false;
+            if (col != null) col.enabled = false;
         }
         else
         {
-            // 🔹 Quando voltar pro mapa, reativa o player
-            var sr = GetComponent<SpriteRenderer>();
-            if (sr != null)
-                sr.enabled = true;
-
-            var col = GetComponent<Collider2D>();
-            if (col != null)
-                col.enabled = true;
+            if (sr != null) sr.enabled = true;
+            if (col != null) col.enabled = true;
         }
     }
 
-
-
     void Update()
     {
-
-
         if (!canMove) return;
 
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        // Se está se movendo, salva a posição atual
-        
-
-        // Movimento
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
         if (movement.x != 0) movement.y = 0;
 
         anim.SetFloat("Horizontal", movement.x);
         anim.SetFloat("Vertical", movement.y);
+        anim.SetBool("isMoving", movement != Vector2.zero);
 
         if (movement != Vector2.zero)
         {
             anim.SetFloat("LastMovex", movement.x);
             anim.SetFloat("LastMovey", movement.y);
 
-            // Checa se percorreu distância suficiente para ser um "passo"
             float dist = Vector2.Distance(rb.position, lastStepPosition);
             if (dist >= stepDistance)
             {
                 Collider2D perigo = Physics2D.OverlapCircle(transform.position, 0.2f, Perigolayer);
-                if (perigo != null)
-                {
-                    HandleStep();
-                }
-
+                if (perigo != null) HandleStep();
                 lastStepPosition = rb.position;
             }
         }
-
-        anim.SetBool("isMoving", movement != Vector2.zero);
     }
 
     void FixedUpdate()
@@ -213,8 +123,6 @@ public class Player : MonoBehaviour
         {
             if (Random.Range(1, 101) <= 35)
             {
-                Debug.Log(" Encontro de batalha!");
-
                 if (GameManager.Instance != null)
                 {
                     GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
@@ -228,5 +136,67 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        string tag = collision.gameObject.tag;
 
+        // 🔹 Controle de transição entre cenas
+        switch (tag)
+        {
+            case "SaidaDungeon":
+                SalvarPosicaoENovaCena("Mapa", new Vector3(4.48f, 3.92f, 0f));
+                break;
+
+            case "SaidaLoja":
+                SalvarPosicaoENovaCena("Mapa", new Vector3(2.49f, -5.67f, 0f));
+                break;
+
+            case "SairDaCasa":
+                SalvarPosicaoENovaCena("Mapa", new Vector3(-8.52f, 3.27f, 0f));
+                break;
+
+            case "IrParaCasa":
+                SalvarPosicaoENovaCena("Casa", new Vector3(1.38f, 0.47f, 0f));
+                break;
+
+            case "IrParaLoja":
+                SalvarPosicaoENovaCena("Loja", new Vector3(1.38f, 0.47f, 0f));
+                break;
+
+            case "andar2":
+                SalvarPosicaoENovaCena("Dungeon - sala 2", new Vector3(-13.51f, 8.5f, 0f));
+                break;
+
+            case "andar3":
+                SalvarPosicaoENovaCena("Dungeon - sala_3", new Vector3(-13.5f, 7.45f, 0f));
+                break;
+
+            case "andar4":
+                SalvarPosicaoENovaCena("Dungeon - sala 4", new Vector3(-2.51f, 9.89f, 0f));
+                break;
+
+            case "andar5":
+                SalvarPosicaoENovaCena("Dungeon - sala 5", new Vector3(-19.5f, 8.57f, 0f));
+                break;
+
+            case "descanso":
+                SalvarPosicaoENovaCena("Dungeon - Sala de Descanso", new Vector3(-17.49f, -0.19f, 0f));
+                break;
+
+            case "ultima":
+                SalvarPosicaoENovaCena("Dungeon - O Fim", new Vector3(-23.46f, 0.44f, 0f));
+                break;
+        }
+    }
+
+    private void SalvarPosicaoENovaCena(string novaCena, Vector3 novaPosicao)
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
+            GameManager.Instance.lastPlayerPosition = novaPosicao;
+        }
+
+        SceneManager.LoadScene(novaCena);
+    }
 }
