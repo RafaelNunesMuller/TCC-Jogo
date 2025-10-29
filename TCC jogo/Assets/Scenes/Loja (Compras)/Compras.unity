@@ -340,7 +340,6 @@ MonoBehaviour:
     iniciais sem atrapalhar a vis\xE3o ou os movimentos."
   itemPrice: 18
   isPurchased: 0
-  unavailableButton: {fileID: 0}
   itemButton: {fileID: 29648662}
   infoUI: {fileID: 2132557481}
   itemDentro: {fileID: 11400000, guid: d4e0c4304f31a6340b995fe43ddc40b1, type: 2}
@@ -607,7 +606,6 @@ MonoBehaviour:
     tornando golpes mais leves e aumentando a resist\xEAncia contra ataques diretos."
   itemPrice: 600
   isPurchased: 0
-  unavailableButton: {fileID: 0}
   itemButton: {fileID: 51313527}
   infoUI: {fileID: 2132557481}
   itemDentro: {fileID: 11400000, guid: f8d3d239c1c0d63429b47bf6972ba435, type: 2}
@@ -951,7 +949,6 @@ MonoBehaviour:
     Simples e funcionais, s\xE3o perfeitas para iniciantes em combate ou treino f\xEDsico."
   itemPrice: 15
   isPurchased: 0
-  unavailableButton: {fileID: 0}
   itemButton: {fileID: 84676411}
   infoUI: {fileID: 2132557481}
   itemDentro: {fileID: 11400000, guid: 5f10d627722b9ad4c95cc0f370d71c22, type: 2}
@@ -1778,7 +1775,6 @@ MonoBehaviour:
     inexplorado."
   itemPrice: 30
   isPurchased: 0
-  unavailableButton: {fileID: 0}
   itemButton: {fileID: 266652674}
   infoUI: {fileID: 2132557481}
   itemDentro: {fileID: 11400000, guid: 86e7546e51a6301408153a8f704915ff, type: 2}
@@ -1927,7 +1923,6 @@ MonoBehaviour:
     maestria."
   itemPrice: 13
   isPurchased: 0
-  unavailableButton: {fileID: 0}
   itemButton: {fileID: 271883534}
   infoUI: {fileID: 2132557481}
   itemDentro: {fileID: 11400000, guid: fd577b847b9f9d1489c1f6566de8fa14, type: 2}
@@ -5519,7 +5514,6 @@ MonoBehaviour:
     seguro contra golpes leves."
   itemPrice: 20
   isPurchased: 0
-  unavailableButton: {fileID: 0}
   itemButton: {fileID: 1074721228}
   infoUI: {fileID: 2132557481}
   itemDentro: {fileID: 11400000, guid: 96033d5bfcb272543aaa177d157f684f, type: 2}
@@ -7928,7 +7922,6 @@ MonoBehaviour:
     de um guerreiro ancestral."
   itemPrice: 600
   isPurchased: 0
-  unavailableButton: {fileID: 0}
   itemButton: {fileID: 1665932682}
   infoUI: {fileID: 2132557481}
   itemDentro: {fileID: 11400000, guid: 6702c905a4773d6478695a960e7e8b51, type: 2}
@@ -8891,7 +8884,6 @@ MonoBehaviour:
     esquecidos."
   itemPrice: 1
   isPurchased: 0
-  unavailableButton: {fileID: 69467067}
   itemButton: {fileID: 1772990199}
   infoUI: {fileID: 2132557481}
   itemDentro: {fileID: 11400000, guid: cbea7ddf4ec17ab4382e443c202e1f07, type: 2}
@@ -10119,6 +10111,8 @@ MonoBehaviour:
   exitButton: {fileID: 1014047318}
   exit: {fileID: 746419659}
   IndButton: {fileID: 69467067}
+  NoCoins: {fileID: 463353455}
+  OkayCoins: {fileID: 1004671178}
   Vendedor: {fileID: 8392705}
   Okay: {fileID: 1709163049}
   itemPrice: 0

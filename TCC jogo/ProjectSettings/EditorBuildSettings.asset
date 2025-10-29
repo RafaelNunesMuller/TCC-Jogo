@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/BackGround/Casa/Casa.unity
     guid: 0800b273c4392d6459a69dc93eae35d9
   - enabled: 1
-    path: Assets/Scenes/BackGround/Mapa.unity
+    path: Assets/Scenes/BackGround/Mapa/Mapa.unity
     guid: ff0d581f599423d459ff430e9025e435
   - enabled: 1
     path: Assets/Scenes/BackGround/Lojinha/Lojinha.unity

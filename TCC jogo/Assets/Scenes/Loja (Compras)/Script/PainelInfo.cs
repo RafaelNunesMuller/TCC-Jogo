@@ -16,6 +16,8 @@ public class ItemInfoUI : MonoBehaviour
     public Button exitButton;
     public GameObject exit;
     public Button IndButton;
+    public GameObject NoCoins;
+    public Button OkayCoins;
     public GameObject Vendedor;
     public Button Okay;
     public int itemPrice;
@@ -67,7 +69,8 @@ public class ItemInfoUI : MonoBehaviour
         }
         else
         {
-            Debug.Log("Sem moedas suficientes!");
+            NoCoins.gameObject.SetActive(true);
+            OkayCoins.onClick.AddListener(() => NoCoins.SetActive(false));
         }
     }
 

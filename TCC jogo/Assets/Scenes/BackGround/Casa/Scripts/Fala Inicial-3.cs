@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class FalaInicial3 : MonoBehaviour
 {
 
-
     public GameObject telaInicial_3;
     public GameObject telaInicial_4;
     public Button Okay3;
