@@ -8882,7 +8882,7 @@ MonoBehaviour:
     em si.\nEssa chave n\xE3o abre fechaduras comuns: ela foi forjada para destrancar
     uma \xFAnica porta, oculta e misteriosa, que guarda segredos h\xE1 muito tempo
     esquecidos."
-  itemPrice: 1
+  itemPrice: 0
   isPurchased: 0
   itemButton: {fileID: 1772990199}
   infoUI: {fileID: 2132557481}
