@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708808c1169fc4e4a8b5d07e7dd8c567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: {fileID: 0}
   lastScene: Dungeon - sala5
   lastPlayerPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &13685932
@@ -1072,14 +1073,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  playerStats: {fileID: 0}
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  menuUI: {fileID: 1340386704}
-  MenuPanel: {fileID: 368848891}
   canMove: 1
 --- !u!50 &474864908
 Rigidbody2D:
@@ -7805,10 +7805,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5f1af153f447e4faada10882b4ddf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 474864905}
+  menuPanel: {fileID: 368848891}
   cursor: {fileID: 2051885505}
   statusText: {fileID: 492254162}
-  menuPanel: {fileID: 368848891}
+  playerStats: {fileID: 474864905}
 --- !u!114 &1112814578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9333,7 +9333,7 @@ GameObject:
   - component: {fileID: 1687797931}
   m_Layer: 0
   m_Name: ProximoAndar
-  m_TagString: Untagged
+  m_TagString: ultima
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

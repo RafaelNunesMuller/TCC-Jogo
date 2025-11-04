@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CoinsCasa : MonoBehaviour
 {
 
-    private int Coinprat = 100;
+    private int Coinprat = 70;
     public bool foiAberto = false;
     private bool playerPerto = false;
     public CoinManager Coins;
