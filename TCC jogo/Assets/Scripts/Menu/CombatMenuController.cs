@@ -62,21 +62,15 @@ public class CombatMenuController : MonoBehaviour
                 Menu.SetActive(false);
                 break;
 
-            case 1: // item
+            case 1:
                 battleItemMenu.gameObject.SetActive(true);
                 battleItemMenu.AbrirInventario();
                 Menu.SetActive(false);
                 break;
 
 
-            case 2: // Fugir
-                if (GameManager.Instance != null)
-                {
-                    string cenaVoltar = GameManager.Instance.lastScene;
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(cenaVoltar);
-                }
+            case 2:
                 break;
-
         }
     }
 }
