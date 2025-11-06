@@ -166,11 +166,7 @@ public class MenuEquip : MonoBehaviour
     void MostrarListaEquip()
     {
 
-        if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
-            (slotSelecionado == "Armadura" && item.tipo == ItemTipo.Armadura) ||
-            (slotSelecionado == "Acessorio" && item.tipo == ItemTipo.Acessorio) ||
-            (slotSelecionado == "Elmo" && item.tipo == ItemTipo.Elmo) ||
-            (slotSelecionado == "Luva" && item.tipo == ItemTipo.Luva))
+      
 
         foreach (Transform child in equipListParent)
             Destroy(child.gameObject);

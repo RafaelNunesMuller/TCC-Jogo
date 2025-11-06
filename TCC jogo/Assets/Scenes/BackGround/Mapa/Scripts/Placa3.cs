@@ -22,10 +22,7 @@ public class Placa3 : MonoBehaviour
             Vendedor = false;
     }
 
-<<<<<<< HEAD
-    // Update is called once per frame
-=======
->>>>>>> Ale
+
     void Update()
     {
         if (Vendedor && Input.GetKeyDown(KeyCode.Z))
