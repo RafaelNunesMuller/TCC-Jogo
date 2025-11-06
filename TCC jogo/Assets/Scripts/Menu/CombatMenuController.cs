@@ -69,12 +69,16 @@ public class CombatMenuController : MonoBehaviour
                 break;
 
 
+<<<<<<< HEAD
             case 2: // Fugir
                 if (GameManager.Instance != null)
                 {
                     string cenaVoltar = GameManager.Instance.lastScene;
                     UnityEngine.SceneManagement.SceneManager.LoadScene(cenaVoltar);
                 }
+=======
+            case 2:
+>>>>>>> Ale
                 break;
 
         }
