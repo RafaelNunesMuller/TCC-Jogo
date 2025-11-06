@@ -15,6 +15,7 @@ TagManager:
   - andar5
   - descanso
   - ultima
+  - SairDaLoja
   layers:
   - Default
   - TransparentFX

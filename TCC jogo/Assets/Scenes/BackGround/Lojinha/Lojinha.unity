@@ -2552,11 +2552,9 @@ GameObject:
   - component: {fileID: 459110971}
   - component: {fileID: 459110970}
   - component: {fileID: 459110972}
-  - component: {fileID: 459110973}
-  - component: {fileID: 459110974}
   m_Layer: 0
   m_Name: Saida
-  m_TagString: Untagged
+  m_TagString: SairDaLoja
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2752,32 +2750,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!114 &459110973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459110968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36f3b529552f1984091a3479ad12df65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &459110974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459110968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb3f4916b6978ac44a54539103be297b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cenaDestino: Mapa
-  pontoDeEntradaDestino: SaidaLoja
 --- !u!1 &489856662
 GameObject:
   m_ObjectHideFlags: 0
@@ -12491,6 +12463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
+  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 516901927}
   equipListParent: {fileID: 208336094}
   equipItemPrefab: {fileID: 1557935856}
@@ -12501,7 +12474,6 @@ MonoBehaviour:
   armorButton: {fileID: 1289049136}
   accessoryButton: {fileID: 1912422450}
   menuPanel: {fileID: 1152316720}
-  EquipItemPrefab: {fileID: 1557935856}
 --- !u!114 &1711888110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14353,14 +14325,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  playerStats: {fileID: 0}
+  canMove: 1
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  canMove: 1
+  playerStats: {fileID: 0}
 --- !u!50 &2128760256
 Rigidbody2D:
   serializedVersion: 5

@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         string tag = collision.gameObject.tag;
 
@@ -160,7 +160,11 @@ public class Player : MonoBehaviour
                 break;
 
             case "IrParaLoja":
-                SalvarPosicaoENovaCena("Loja", new Vector3(6.47f, -4.5f, 0f));
+                SalvarPosicaoENovaCena("Lojinha", new Vector3(6.47f, -4.5f, 0f));
+                break;
+
+            case "SairDaLoja":
+                SalvarPosicaoENovaCena("Mapa", new Vector3(2.5f, -5.62f, 0f));
                 break;
 
             case "andar2":

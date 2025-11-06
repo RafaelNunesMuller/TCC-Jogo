@@ -448,7 +448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &61150808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,7 +988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2159a13ccdf304388ad77f5112861d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itens: []
+  itens:
+  - {fileID: 11400000, guid: 198d3f7887d48ab4bbc0807ba7cc6feb, type: 2}
 --- !u!4 &239554802
 Transform:
   m_ObjectHideFlags: 0
@@ -3958,14 +3959,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  playerStats: {fileID: 0}
+  canMove: 1
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  canMove: 1
+  playerStats: {fileID: 0}
 --- !u!50 &634963444
 Rigidbody2D:
   serializedVersion: 5
@@ -15866,6 +15867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 634963441}
+  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 1061581641}
   equipListParent: {fileID: 316614737}
   equipItemPrefab: {fileID: 61150807}
@@ -15876,7 +15878,6 @@ MonoBehaviour:
   armorButton: {fileID: 505874054}
   accessoryButton: {fileID: 1574906321}
   menuPanel: {fileID: 2049367233}
-  EquipItemPrefab: {fileID: 61150807}
 --- !u!114 &1909584156
 MonoBehaviour:
   m_ObjectHideFlags: 0
