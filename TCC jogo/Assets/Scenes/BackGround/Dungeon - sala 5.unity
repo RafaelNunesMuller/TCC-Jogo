@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 12687371}
   - component: {fileID: 12687370}
   - component: {fileID: 12687372}
+  - component: {fileID: 12687373}
   m_Layer: 0
   m_Name: bauEspecial06
   m_TagString: Untagged
@@ -480,6 +481,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1706296140}
   messageText: {fileID: 1653850258}
+--- !u!114 &12687373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12687368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &27339107
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +669,7 @@ GameObject:
   - component: {fileID: 172236571}
   - component: {fileID: 172236570}
   - component: {fileID: 172236572}
+  - component: {fileID: 172236573}
   m_Layer: 0
   m_Name: bauEspecial01
   m_TagString: Untagged
@@ -789,6 +807,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1706296140}
   messageText: {fileID: 1653850258}
+--- !u!114 &172236573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172236568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &189889443
 GameObject:
   m_ObjectHideFlags: 0
@@ -8808,14 +8842,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  playerStats: {fileID: 0}
+  canMove: 1
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  canMove: 1
+  playerStats: {fileID: 0}
 --- !u!50 &590200510
 Rigidbody2D:
   serializedVersion: 5
@@ -9628,9 +9662,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791233009}
-  - component: {fileID: 791233011}
   - component: {fileID: 791233010}
   - component: {fileID: 791233012}
+  - component: {fileID: 791233014}
+  - component: {fileID: 791233013}
   m_Layer: 0
   m_Name: bauF02
   m_TagString: Untagged
@@ -9708,27 +9743,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &791233011
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 791233008}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &791233012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9743,6 +9757,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1706296140}
   messageText: {fileID: 1653850258}
+--- !u!114 &791233013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791233008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
+--- !u!61 &791233014
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791233008}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &792609122
 GameObject:
   m_ObjectHideFlags: 0
@@ -10000,6 +10076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 590200507}
+  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 1566666487}
   equipListParent: {fileID: 189889444}
   equipItemPrefab: {fileID: 1656995688}
@@ -10010,7 +10087,6 @@ MonoBehaviour:
   armorButton: {fileID: 885965185}
   accessoryButton: {fileID: 209372835}
   menuPanel: {fileID: 277378480}
-  EquipItemPrefab: {fileID: 1656995688}
 --- !u!114 &854360057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10061,6 +10137,7 @@ GameObject:
   - component: {fileID: 882255205}
   - component: {fileID: 882255204}
   - component: {fileID: 882255206}
+  - component: {fileID: 882255207}
   m_Layer: 0
   m_Name: bauEspecial02
   m_TagString: Untagged
@@ -10198,6 +10275,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1706296140}
   messageText: {fileID: 1653850258}
+--- !u!114 &882255207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882255202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &884926515
 GameObject:
   m_ObjectHideFlags: 0
@@ -10569,6 +10662,7 @@ GameObject:
   - component: {fileID: 949742500}
   - component: {fileID: 949742499}
   - component: {fileID: 949742501}
+  - component: {fileID: 949742502}
   m_Layer: 0
   m_Name: bauEspecial03
   m_TagString: Untagged
@@ -10706,6 +10800,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1706296140}
   messageText: {fileID: 1653850258}
+--- !u!114 &949742502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949742497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &969894801
 GameObject:
   m_ObjectHideFlags: 0
@@ -16301,6 +16411,7 @@ GameObject:
   - component: {fileID: 1113673006}
   - component: {fileID: 1113673005}
   - component: {fileID: 1113673007}
+  - component: {fileID: 1113673008}
   m_Layer: 0
   m_Name: bauEspecial05
   m_TagString: Untagged
@@ -16438,6 +16549,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1706296140}
   messageText: {fileID: 1653850258}
+--- !u!114 &1113673008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113673003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &1126351100
 GameObject:
   m_ObjectHideFlags: 0
@@ -16956,9 +17083,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1218404646}
-  - component: {fileID: 1218404648}
   - component: {fileID: 1218404647}
   - component: {fileID: 1218404649}
+  - component: {fileID: 1218404650}
   m_Layer: 0
   m_Name: bauF01
   m_TagString: Untagged
@@ -17036,27 +17163,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &1218404648
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218404645}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1218404649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17071,6 +17177,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1706296140}
   messageText: {fileID: 1653850258}
+--- !u!61 &1218404650
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218404645}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1260923760
 GameObject:
   m_ObjectHideFlags: 0
@@ -20627,6 +20779,7 @@ GameObject:
   - component: {fileID: 1364038017}
   - component: {fileID: 1364038016}
   - component: {fileID: 1364038018}
+  - component: {fileID: 1364038019}
   m_Layer: 0
   m_Name: bauEspecial04
   m_TagString: Untagged
@@ -20764,6 +20917,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1706296140}
   messageText: {fileID: 1653850258}
+--- !u!114 &1364038019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364038014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &1401623467
 GameObject:
   m_ObjectHideFlags: 0
@@ -22909,6 +23078,7 @@ GameObject:
   - component: {fileID: 2097317820}
   - component: {fileID: 2097317819}
   - component: {fileID: 2097317821}
+  - component: {fileID: 2097317822}
   m_Layer: 0
   m_Name: bauEspecial07
   m_TagString: Untagged
@@ -23046,6 +23216,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1706296140}
   messageText: {fileID: 1653850258}
+--- !u!114 &2097317822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097317817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &2113098820
 GameObject:
   m_ObjectHideFlags: 0

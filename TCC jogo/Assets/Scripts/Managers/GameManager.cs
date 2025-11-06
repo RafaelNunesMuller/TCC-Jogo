@@ -79,14 +79,30 @@ public class GameManager : MonoBehaviour
         foreach (var ui in FindObjectsByType<CombatUi>(FindObjectsSortMode.None))
             ui.playerStats = playerStats;
 
-        foreach (var hp in FindObjectsByType<PlayerHealth>(FindObjectsSortMode.None))
-            hp.playerStats = playerStats;
+    foreach (var hp in FindObjectsByType<PlayerHealth>(FindObjectsSortMode.None))
+        hp.playerStats = playerStats;
 
-        foreach (var status in FindObjectsByType<MenuStatus>(FindObjectsSortMode.None))
-            status.playerStats = playerStats;
+    foreach (var status in FindObjectsByType<MenuStatus>(FindObjectsSortMode.None))
+        status.playerStats = playerStats;
 
-        foreach (var menu in FindObjectsByType<MenuController>(FindObjectsSortMode.None))
-            menu.playerScript = currentPlayer;
+    foreach (var menu in FindObjectsByType<MenuController>(FindObjectsSortMode.None))
+        menu.playerScript = currentPlayer;
+
+    // 🔹 Novo: restaura o MenuEquip também
+    foreach (var equip in FindObjectsByType<MenuEquip>(FindObjectsSortMode.None))
+    {
+        equip.playerStats = playerStats;
+
+        // garante que o prefab está configurado (se tiver sido perdido)
+        if (equip.equipItemPrefab == null)
+        {
+            equip.equipItemPrefab = Resources.Load<GameObject>("Prefabs/EquipItemPrefab");
+            Debug.Log("🔧 EquipItemPrefab restaurado via Resources.");
+        }
+    }
+
+Debug.Log("🧩 Referências de UI, menus e equipamentos restauradas.");
+
 
     }
 }
