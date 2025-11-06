@@ -20,6 +20,10 @@ public class Item : ScriptableObject
         this.bonusForca = bonusForca;
         this.bonusDefesa = bonusDefesa;
     }
+
+    public virtual void Usar(playerStats player)
+    {
+    }
 }
 
 public enum ItemTipo
