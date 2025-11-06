@@ -2683,6 +2683,7 @@ GameObject:
   - component: {fileID: 238707793}
   - component: {fileID: 238707792}
   - component: {fileID: 238707794}
+  - component: {fileID: 238707795}
   m_Layer: 0
   m_Name: ProximoAndar
   m_TagString: andar2
@@ -2867,6 +2868,19 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &238707795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238707790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36460b13e500cdd478b66546c3bee080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  andar: Dungeon - sala 2
 --- !u!1 &315974927
 GameObject:
   m_ObjectHideFlags: 0
@@ -4013,7 +4027,7 @@ MonoBehaviour:
   itemDentro: {fileID: 11400000, guid: bf5b7c88fde91b14ea7f221da3ba28bf, type: 2}
   foiAberto: 0
   baulFechado: {fileID: -1633341478, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
-  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
+  baulAberto: {fileID: 330036580373852294, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &661380264
 GameObject:
   m_ObjectHideFlags: 0
@@ -6975,7 +6989,7 @@ MonoBehaviour:
   itemDentro: {fileID: 11400000, guid: 1195c36ae580aae4a8d52571f2406633, type: 2}
   foiAberto: 0
   baulFechado: {fileID: -2543109058130754635, guid: fa2eb0994f049a1499718f0fdf8b84cb, type: 3}
-  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
+  baulAberto: {fileID: 330036580373852294, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &1478158176
 GameObject:
   m_ObjectHideFlags: 0
@@ -7586,7 +7600,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 2027303770}
-  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 1984074821}
   equipListParent: {fileID: 1810000249}
   equipItemPrefab: {fileID: 966746198}
@@ -7597,6 +7610,7 @@ MonoBehaviour:
   armorButton: {fileID: 1573683328}
   accessoryButton: {fileID: 315974928}
   menuPanel: {fileID: 1826405365}
+  EquipItemPrefab: {fileID: 966746198}
 --- !u!114 &1761340814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7958,7 +7972,7 @@ MonoBehaviour:
   itemDentro: {fileID: 11400000, guid: 198d3f7887d48ab4bbc0807ba7cc6feb, type: 2}
   foiAberto: 0
   baulFechado: {fileID: -1633341478, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
-  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
+  baulAberto: {fileID: 330036580373852294, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!61 &1822651270
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10960,14 +10974,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  canMove: 1
+  playerStats: {fileID: 0}
   Perigolayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  playerStats: {fileID: 0}
+  canMove: 1
 --- !u!95 &2027303772
 Animator:
   serializedVersion: 7

@@ -677,11 +677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d62bf9acc1f1bbb43b46159a41d9448f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   Casa: Telainicial
-=======
-  Casa: Frase_Inicial
->>>>>>> Ale
 --- !u!1 &1597854026
 GameObject:
   m_ObjectHideFlags: 0

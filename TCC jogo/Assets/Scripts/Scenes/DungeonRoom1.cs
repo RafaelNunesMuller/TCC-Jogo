@@ -41,23 +41,13 @@ public class DungeonRoom1 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-<<<<<<< HEAD
         if (!isOpen) return;
         if (!other.CompareTag("Player")) return;
 
-        // salva posição e cena destino no GameManager
+        // salva posiï¿½ï¿½o e cena destino no GameManager
         GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
         GameManager.Instance.lastPlayerPosition = new Vector3(-1.45f, 7.52f, 0f);
 
         SceneManager.LoadScene(nextSceneName);
-=======
-        if (isOpen && other.CompareTag("Player"))
-        {
-            Player.transform.position = new Vector3(-1.45f, 7.52f);
-            SceneManager.LoadScene(nextSceneName);
-            
-        }
->>>>>>> Ale
     }
-
 }

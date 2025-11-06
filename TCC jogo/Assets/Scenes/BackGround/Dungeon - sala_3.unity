@@ -380,7 +380,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
+  baulAberto: {fileID: 0}
 --- !u!1 &91928184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,9 +1272,10 @@ GameObject:
   - component: {fileID: 235941077}
   - component: {fileID: 235941076}
   - component: {fileID: 235941075}
+  - component: {fileID: 235941074}
   m_Layer: 0
   m_Name: ProximoAndar
-  m_TagString: andar4
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1294,6 +1295,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1790952458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &235941074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235941072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36460b13e500cdd478b66546c3bee080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  andar: Dungeon - sala 4
 --- !u!19719996 &235941075
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -2724,7 +2738,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: -1886479080452579497, guid: be946f57a9a5de149953ba6772ddf8a7, type: 3}
+  baulAberto: {fileID: 0}
 --- !u!1 &643944321
 GameObject:
   m_ObjectHideFlags: 0
@@ -7614,7 +7628,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
-  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 2061705516}
   equipListParent: {fileID: 1205243671}
   equipItemPrefab: {fileID: 236292834}
@@ -7625,6 +7638,7 @@ MonoBehaviour:
   armorButton: {fileID: 1150662100}
   accessoryButton: {fileID: 217678364}
   menuPanel: {fileID: 705195075}
+  EquipItemPrefab: {fileID: 236292834}
 --- !u!114 &1332760809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9190,6 +9204,7 @@ GameObject:
   - component: {fileID: 1430512946}
   - component: {fileID: 1430512945}
   - component: {fileID: 1430512944}
+  - component: {fileID: 1430512947}
   m_Layer: 0
   m_Name: AndarAnterior
   m_TagString: Untagged
@@ -9392,6 +9407,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1430512947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430512942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36460b13e500cdd478b66546c3bee080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  andar: Dungeon - sala 2
 --- !u!1 &1462799564
 GameObject:
   m_ObjectHideFlags: 0
@@ -15761,7 +15789,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
+  baulAberto: {fileID: 0}
 --- !u!1 &1996917123
 GameObject:
   m_ObjectHideFlags: 0
