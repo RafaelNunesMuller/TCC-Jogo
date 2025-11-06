@@ -18,8 +18,6 @@ public class MenuEquip : MonoBehaviour
     public Button armorButton;
     public Button accessoryButton;
 
-    [Header("Referências")]
-
     public GameObject menuPanel;
 
     private List<Item> inventario = new List<Item>();
@@ -71,6 +69,8 @@ public class MenuEquip : MonoBehaviour
 
 
         inventarioCentral = Inventario.instance;
+
+
         botoesSlots.Add(weaponButton.GetComponent<RectTransform>());
         botoesSlots.Add(healmetButton.GetComponent<RectTransform>());
         botoesSlots.Add(gloveButton.GetComponent<RectTransform>());
@@ -103,6 +103,7 @@ public class MenuEquip : MonoBehaviour
     {
         if (navegandoSlots)
         {
+
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 cursorIndex = Mathf.Min(cursorIndex + 1, botoesSlots.Count - 1);
@@ -165,9 +166,6 @@ public class MenuEquip : MonoBehaviour
 
     void MostrarListaEquip()
     {
-
-      
-
         foreach (Transform child in equipListParent)
             Destroy(child.gameObject);
 
@@ -177,7 +175,6 @@ public class MenuEquip : MonoBehaviour
         inventario = inventarioCentral.itens;
 
         foreach (Item item in inventario)
-
         {
             if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
                 (slotSelecionado == "Armadura" && item.tipo == ItemTipo.Armadura) ||
