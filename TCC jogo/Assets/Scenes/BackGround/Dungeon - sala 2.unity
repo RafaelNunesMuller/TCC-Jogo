@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   andar: Dungeon - sala 1
+  posicao: 0
 --- !u!1 &112908803
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,7 +729,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!114 &191874331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,7 +1108,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: 0}
+  baulAberto: {fileID: -1886479080452579497, guid: be946f57a9a5de149953ba6772ddf8a7, type: 3}
 --- !u!114 &280345271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3640,7 +3641,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!114 &616801829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4487,7 +4488,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!114 &808488760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4667,7 +4668,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &880684787
 GameObject:
   m_ObjectHideFlags: 0
@@ -5211,7 +5212,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!114 &962961506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6622,14 +6623,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  playerStats: {fileID: 0}
+  canMove: 1
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  canMove: 1
+  playerStats: {fileID: 0}
 --- !u!61 &1305638123
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7138,6 +7139,7 @@ GameObject:
   - component: {fileID: 1366393054}
   - component: {fileID: 1366393053}
   - component: {fileID: 1366393055}
+  - component: {fileID: 1366393056}
   m_Layer: 0
   m_Name: bauF02
   m_TagString: Untagged
@@ -7275,6 +7277,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1219865844}
   messageText: {fileID: 2029219117}
+--- !u!114 &1366393056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366393051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &1430610161
 GameObject:
   m_ObjectHideFlags: 0
@@ -7513,7 +7531,7 @@ MonoBehaviour:
   itemDentro: {fileID: 0}
   foiAberto: 0
   baulFechado: {fileID: 0}
-  baulAberto: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!114 &1431893210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9812,7 +9830,7 @@ GameObject:
   - component: {fileID: 1441553732}
   - component: {fileID: 1441553731}
   - component: {fileID: 1441553730}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14348,7 +14366,6 @@ GameObject:
   - component: {fileID: 1584781987}
   - component: {fileID: 1584781986}
   - component: {fileID: 1584781985}
-  - component: {fileID: 1584781984}
   m_Layer: 0
   m_Name: ProximoAndar
   m_TagString: andar3
@@ -14371,19 +14388,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 660949635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1584781984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584781982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36460b13e500cdd478b66546c3bee080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  andar: Dungeon - sala 3
 --- !u!19719996 &1584781985
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -15582,6 +15586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
+  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 1274308885}
   equipListParent: {fileID: 435911351}
   equipItemPrefab: {fileID: 1872502163}
@@ -15592,7 +15597,6 @@ MonoBehaviour:
   armorButton: {fileID: 674422899}
   accessoryButton: {fileID: 2131362372}
   menuPanel: {fileID: 1914777220}
-  EquipItemPrefab: {fileID: 1872502163}
 --- !u!114 &1870087403
 MonoBehaviour:
   m_ObjectHideFlags: 0

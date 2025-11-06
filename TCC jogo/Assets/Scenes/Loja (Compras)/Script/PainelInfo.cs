@@ -21,6 +21,7 @@ public class ItemInfoUI : MonoBehaviour
     public GameObject Vendedor;
     public Button Okay;
     public int itemPrice;
+    public GameObject player;
 
     public static Inventario instance;
     public static CoinManager Coins;

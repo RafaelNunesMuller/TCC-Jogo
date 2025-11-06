@@ -1962,16 +1962,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -25, y: -1, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: -27, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -2506,8 +2496,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 0f30b5e023f75e64d93158d0309ddaf9, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 0aae6fba09251064fa70f7e21ee5913d, type: 2}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: db555426e8f28a641bf07d457d82cc55, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: ab444bc3930dcad40b6a8c29127a268a, type: 2}
   - m_RefCount: 1
@@ -2539,8 +2529,8 @@ Tilemap:
     m_Data: {fileID: 439250426, guid: 71e9d32957a3a0b4395d62ed2ef79058, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -256527740, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1633341478, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -1310959221, guid: 71e9d32957a3a0b4395d62ed2ef79058, type: 3}
   - m_RefCount: 1
@@ -2550,7 +2540,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: -2073153692, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 75
+  - m_RefCount: 74
     m_Data:
       e00: 1
       e01: 0
@@ -2587,7 +2577,7 @@ Tilemap:
       e32: 7.58e-43
       e33: 7.55e-43
   m_TileColorArray:
-  - m_RefCount: 75
+  - m_RefCount: 74
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -6314,6 +6304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 1899282487}
+  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 1679282429}
   equipListParent: {fileID: 69416332}
   equipItemPrefab: {fileID: 186765647}
@@ -6324,7 +6315,6 @@ MonoBehaviour:
   armorButton: {fileID: 1435569625}
   accessoryButton: {fileID: 87218314}
   menuPanel: {fileID: 1347052510}
-  EquipItemPrefab: {fileID: 186765647}
 --- !u!114 &1082795632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15414,14 +15404,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  playerStats: {fileID: 0}
+  canMove: 1
   Perigolayer:
     serializedVersion: 2
     m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  canMove: 1
+  playerStats: {fileID: 0}
 --- !u!50 &1899282490
 Rigidbody2D:
   serializedVersion: 5
