@@ -51,7 +51,6 @@ public class ItemInfoUI : MonoBehaviour
         int price = currentItemSlot.itemPrice;
         if (CoinManager.instance.TrySpendCoins(price) &&  !currentItemSlot.isPurchased)
         {
-            Debug.Log("Item comprado!");
             currentItemSlot.isPurchased = true;
             Inventario.instance.Adicionar(currentItemSlot.itemDentro);
            

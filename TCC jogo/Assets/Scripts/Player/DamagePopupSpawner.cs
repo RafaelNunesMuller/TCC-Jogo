@@ -10,7 +10,6 @@ public class DamagePopupSpawner : MonoBehaviour
     {
         if (damagePopupPrefab == null || popupAnchor == null)
         {
-            Debug.LogError("DamagePopupPrefab ou popupAnchor não foi atribuído!");
             return;
         }
 
