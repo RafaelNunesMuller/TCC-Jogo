@@ -76,14 +76,8 @@ public class GameManager : MonoBehaviour
             );
         }
 
-<<<<<<< HEAD
-        // 🔹 5. Atualiza todas as UIs e menus
-    foreach (var ui in FindObjectsByType<CombatUi>(FindObjectsSortMode.None))
-        ui.playerStats = playerStats;
-=======
         foreach (var ui in FindObjectsByType<CombatUi>(FindObjectsSortMode.None))
             ui.playerStats = playerStats;
->>>>>>> Ale
 
     foreach (var hp in FindObjectsByType<PlayerHealth>(FindObjectsSortMode.None))
         hp.playerStats = playerStats;
