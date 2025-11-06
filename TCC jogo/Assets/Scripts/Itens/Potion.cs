@@ -13,6 +13,5 @@ public class Potion : Item
     public override void Usar(playerStats player)
     {
         player.Curar(cura);
-        Debug.Log($"{nome} curou {cura} HP!");
     }
 }

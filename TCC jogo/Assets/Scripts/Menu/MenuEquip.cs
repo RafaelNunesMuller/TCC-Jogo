@@ -7,21 +7,18 @@ public class MenuEquip : MonoBehaviour
 {
     public playerStats playerStats;
 
-    [Header("UI")]
     public TMP_Text EquipamentoAtual;
     public Transform equipListParent;
     public GameObject equipItemPrefab;
     public RectTransform cursor;
 
-    [Header("Slot Buttons")]
     public Button weaponButton;
     public Button healmetButton;
     public Button gloveButton;
     public Button armorButton;
     public Button accessoryButton;
 
-    [Header("Referências")]
-    public GameObject menuPanel; // arrasta o MenuPanel no inspector
+    public GameObject menuPanel;
 
     private List<Item> inventario = new List<Item>();
     private List<RectTransform> equipSlots = new List<RectTransform>();
@@ -29,7 +26,7 @@ public class MenuEquip : MonoBehaviour
     private int cursorIndex = 0;
     private string slotSelecionado = "";
 
-    private bool navegandoSlots = true; // true = cursor nos botões, false = cursor nos itens
+    private bool navegandoSlots = true; 
     private List<RectTransform> botoesSlots = new List<RectTransform>();
 
     public GameObject EquipItemPrefab;
@@ -74,8 +71,6 @@ public class MenuEquip : MonoBehaviour
         inventarioCentral = Inventario.instance;
 
 
-
-        // Guardar botões como slots
         botoesSlots.Add(weaponButton.GetComponent<RectTransform>());
         botoesSlots.Add(healmetButton.GetComponent<RectTransform>());
         botoesSlots.Add(gloveButton.GetComponent<RectTransform>());
@@ -85,7 +80,6 @@ public class MenuEquip : MonoBehaviour
         
         AtualizarEquip();
 
-        // Começa no primeiro botão
         cursorIndex = 0;
         MoveCursor(cursorIndex);
     }
@@ -101,15 +95,15 @@ public class MenuEquip : MonoBehaviour
     }
     public void VoltarParaMenu()
     {
-        gameObject.SetActive(false); // fecha o Status
-        menuPanel.SetActive(true);        // reabre o menu principal
+        gameObject.SetActive(false);
+        menuPanel.SetActive(true);
     }
 
     void HandleInput()
     {
         if (navegandoSlots)
         {
-            // Navegação entre os botões
+
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 cursorIndex = Mathf.Min(cursorIndex + 1, botoesSlots.Count - 1);
@@ -137,7 +131,7 @@ public class MenuEquip : MonoBehaviour
         }
         else
         {
-            // Navegação dentro da lista de itens
+
             if (equipSlots.Count == 0) return;
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -157,7 +151,6 @@ public class MenuEquip : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.X))
             {
-                // Volta para os botões
                 navegandoSlots = true;
                 cursorIndex = 0;
                 MoveCursor(cursorIndex);
@@ -179,10 +172,8 @@ public class MenuEquip : MonoBehaviour
         equipSlots.Clear();
         itensAtuais.Clear();
 
-        //  Pega direto do inventário global
         inventario = inventarioCentral.itens;
 
-        // Filtra itens conforme o tipo do slot selecionado
         foreach (Item item in inventario)
         {
             if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
@@ -212,7 +203,7 @@ public class MenuEquip : MonoBehaviour
 
     void MoveCursor(int index)
     {
-        Vector2 offset = new Vector2(1250f, -600f); // desloca o cursor 20px pra esquerda
+        Vector2 offset = new Vector2(1250f, -600f); 
 
         if (navegandoSlots)
         {

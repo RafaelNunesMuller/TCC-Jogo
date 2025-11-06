@@ -92,10 +92,8 @@ public class BattleItemMenu : MonoBehaviour
         if (player != null)
         {
             Inventario.instance.Usar(item, player);
-            Debug.Log($"?? Player usou {item.nome} em batalha!");
         }
 
-        // Fecha menu de item e devolve o turno aos inimigos
         inventarioPainel.SetActive(false);
         StartCoroutine(battleSystem.EnemiesTurn());
     }

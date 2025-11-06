@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class AttackMenu : MonoBehaviour
 {
-    public Button[] attackButtons;     // Lista de ataques
-    public RectTransform cursor;       // Cursor para navegação
+    public Button[] attackButtons;
+    public RectTransform cursor;
     public TargetMenu targetMenu;
     public playerStats player;
     public CombatMenuController combatMenu;
@@ -22,7 +22,6 @@ public class AttackMenu : MonoBehaviour
     {
         CursorAttack.SetActive(true);
 
-        // 🔹 Busca o player persistente
         if (GameManager.Instance != null)
         {
             player = GameManager.Instance.playerStats;
@@ -34,7 +33,6 @@ public class AttackMenu : MonoBehaviour
 
         if (player == null)
         {
-            Debug.LogError("❌ Nenhum playerStats encontrado na cena!");
             enabled = false;
             return;
         }
@@ -44,13 +42,13 @@ public class AttackMenu : MonoBehaviour
     {
         ataqueSelecionado = 0;
         AtualizarCursor();
-        combatMenu.enabled = false; // 🔹 desativa menu principal enquanto escolhe ataque
+        combatMenu.enabled = false;
         
     }
 
     void OnDisable()
     {
-        combatMenu.enabled = true; // 🔹 reativa menu principal ao fechar
+        combatMenu.enabled = true;
     }
 
     void Update()
@@ -76,7 +74,7 @@ public class AttackMenu : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.X)) // botão de voltar
+        if (Input.GetKeyDown(KeyCode.X))
         {
             VoltarParaMenu();
         }
@@ -107,7 +105,7 @@ public class AttackMenu : MonoBehaviour
 
         BattleSystem bs = FindFirstObjectByType<BattleSystem>();
         if (bs != null && bs.inimigosAtivos != null)
-            targetMenu.ConfigurarInimigos(bs.inimigosAtivos);  // ✅ clones corretos
+            targetMenu.ConfigurarInimigos(bs.inimigosAtivos);
 
         targetMenu.AbrirSelecao(ataque, player);
         gameObject.SetActive(false);
@@ -117,7 +115,7 @@ public class AttackMenu : MonoBehaviour
 
     public void VoltarParaMenu()
     {
-        gameObject.SetActive(false); // fecha o Status
-        menu.SetActive(true);        // reabre o menu principal
+        gameObject.SetActive(false);
+        menu.SetActive(true);
     }
 }

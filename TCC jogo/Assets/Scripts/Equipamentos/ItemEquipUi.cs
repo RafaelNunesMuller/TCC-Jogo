@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class ItemEquipUI : MonoBehaviour
 {
-    public Image iconImage;          // Ícone do item
-    public TMP_Text nomeText;        // Nome do item
+    public Image iconImage;          
+    public TMP_Text nomeText;        
     
 
     private UnityAction onClick;
@@ -22,8 +22,8 @@ public class ItemEquipUI : MonoBehaviour
             }
             else
             {
-                iconImage.sprite = null; // deixa vazio mas mantém visível
-                iconImage.enabled = false; // ou pode deixar true se quiser sempre mostrar
+                iconImage.sprite = null;
+                iconImage.enabled = false;
             }
         }
 
@@ -36,7 +36,6 @@ public class ItemEquipUI : MonoBehaviour
     }
 
 
-    // Para usar no botão do prefab
     public void Selecionar()
     {
         onClick?.Invoke();

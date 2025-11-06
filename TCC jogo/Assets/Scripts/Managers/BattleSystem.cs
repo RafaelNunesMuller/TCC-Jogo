@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
-    [Header("Referências")]
     public List<EnemyStats> inimigosAtivos;
     public playerStats player => GameManager.Instance.playerStats;
 
@@ -27,22 +26,18 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator FinalizarBatalha()
     {
-        yield return new WaitForSeconds(1.5f); // tempo antes de mostrar vitória
+        yield return new WaitForSeconds(1.5f);
 
-        //  pega referência ao player e ao XP ganho
-        int xpGanho = CalcularXPInimigos(); // cria esse método abaixo
+        int xpGanho = CalcularXPInimigos();
         var player = GameManager.Instance.playerStats;
 
-        // Salva os status antigos (antes do level up)
         int oldLevel = player.level;
         int oldStr = player.strength;
         int oldDef = player.defense;
         int oldHP = player.maxHP;
 
-        // Aplica XP e level up
         player.GainExperience(xpGanho);
 
-        // Mostra tela de vitória
         VictoryUI victory = FindAnyObjectByType<VictoryUI>();
         if (victory != null)
         {
@@ -50,10 +45,8 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitUntil(() => victory.foiConfirmado);
         }
 
-        //  Garante que os stats salvos sejam mantidos
         GameManager.Instance.playerStats = player;
 
-        //  Volta pra última cena
         SceneManager.LoadScene(GameManager.Instance.lastScene);
     }
 
@@ -74,7 +67,6 @@ public class BattleSystem : MonoBehaviour
     public void SetEnemies(List<EnemyStats> novosInimigos)
     {
         inimigosAtivos = novosInimigos;
-        Debug.Log($" {inimigosAtivos.Count} inimigos entraram na batalha!");
     }
 
     public void PlayerAttack(EnemyStats target, int damage)
@@ -84,14 +76,11 @@ public class BattleSystem : MonoBehaviour
         int finalDamage = Mathf.Max(1, damage - target.defense);
         target.TakeDamage(finalDamage);
 
-        Debug.Log($" Player atacou {target.enemyName} e causou {finalDamage} de dano!");
-
         StartCoroutine(EnemiesTurn());
     }
 
     public IEnumerator EnemiesTurn()
     {
-        Debug.Log(" Turno dos inimigos!");
 
         foreach (var inimigo in inimigosAtivos)
         {
@@ -105,11 +94,9 @@ public class BattleSystem : MonoBehaviour
                 int dano = Mathf.Max(1, inimigo.strength + ataque.power - player.DefenseTotal);
                 player.TakeDamage(dano);
 
-                Debug.Log($"{inimigo.enemyName} usou {ataque.nome} e causou {dano} de dano!");
             }
         }
 
         yield return new WaitForSeconds(1.5f);
-        Debug.Log("✨ Turno do Player novamente!");
     }
 }

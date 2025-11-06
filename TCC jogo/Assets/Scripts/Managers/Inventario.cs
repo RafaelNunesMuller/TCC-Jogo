@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Inventario : MonoBehaviour
 {
-    public static Inventario instance; // Singleton global
+    public static Inventario instance;
     public List<Item> itens = new List<Item>();
 
     void Awake()
@@ -11,7 +11,7 @@ public class Inventario : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // ?? Mantém entre cenas
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

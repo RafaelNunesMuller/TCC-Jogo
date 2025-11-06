@@ -27,12 +27,10 @@ public class MessageUI : MonoBehaviour
 
     private System.Collections.IEnumerator EsperarConfirmacao()
     {
-        // 🔹 Espera 0.2s pra evitar detectar o mesmo "Z" usado pra abrir o baú
         aguardandoEntrada = true;
         yield return new WaitForSeconds(0.2f);
         aguardandoEntrada = false;
 
-        // 🔹 Espera o jogador apertar Z só depois disso
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z));
 
         panel.SetActive(false);

@@ -4,13 +4,12 @@ using System.Collections.Generic;
 
 public class MenuItem : MonoBehaviour
 {
-    public GameObject itemSlotPrefab;       // Prefab do slot de item
-    public Transform itemSlotContainer;     // Container dos slots (pai)
-    public RectTransform cursor;            // Cursor que indica o slot selecionado
-    public GameObject inventarioPainel;     // Painel do inventário
+    public GameObject itemSlotPrefab;       
+    public Transform itemSlotContainer;    
+    public RectTransform cursor;           
+    public GameObject inventarioPainel;  
 
-    [Header("Referências")]
-    public GameObject menuPanel; // arrasta o MenuPanel no inspector
+    public GameObject menuPanel;
 
     private List<RectTransform> itemSlots = new List<RectTransform>();
     private int cursorIndex = 0;
@@ -18,7 +17,7 @@ public class MenuItem : MonoBehaviour
 
     void Update()
     {
-        if (!inventarioPainel.activeSelf) return; // Só responde se o inventário estiver aberto
+        if (!inventarioPainel.activeSelf) return; 
 
         HandleInput();
 
@@ -54,21 +53,20 @@ public class MenuItem : MonoBehaviour
         }
     }
 
-    // Abre o inventário e cria/atualiza os slots dos itens
     public void Open()
     {
 
 
-        itensAtuais = new List<Item>(Inventario.instance.itens);  // sempre pega do Inventario central
+        itensAtuais = new List<Item>(Inventario.instance.itens);
         inventarioPainel.SetActive(true);
 
-        // Limpa os slots antigos
+    
         foreach (Transform child in itemSlotContainer)
             Destroy(child.gameObject);
 
         itemSlots.Clear();
 
-        // Cria até 30 slots
+
         for (int i = 0; i < 30; i++)
         {
 
@@ -100,7 +98,6 @@ public class MenuItem : MonoBehaviour
         cursor.anchoredPosition = targetSlot.anchoredPosition;
     }
 
-    // Usa o item selecionado
     public void UseItem(int index)
     {
         if (index < 0 || index >= itensAtuais.Count)
@@ -108,23 +105,19 @@ public class MenuItem : MonoBehaviour
 
         Item item = itensAtuais[index];
 
-        // 🔹 Bloqueia uso de itens que não são consumíveis
         if (item.tipo != ItemTipo.Consumivel)
         {
-            Debug.Log($"{item.nome} não pode ser usado aqui. Vá até o menu de Equipar!");
             MessageUI.instance.ShowMessage($"{item.nome} só pode ser equipado no menu de Equipar!");
             return;
         }
 
-        // 🔹 Procura o player e usa o item
+
         playerStats player = FindFirstObjectByType<playerStats>();
         if (player != null)
         {
             Inventario.instance.Usar(item, player);
-            Debug.Log($"{item.nome} foi usado!");
         }
 
-        // 🔹 Atualiza interface
         Open();
         MoveCursor(cursorIndex);
     }

@@ -3,26 +3,21 @@ using UnityEngine;
 
 public class MenuStatus : MonoBehaviour
 {
-    [Header("Referências")]
     public GameObject menuPanel;
     public RectTransform cursor;
     public TMP_Text statusText;
 
-    [Header("Dados")]
     public playerStats playerStats;
 
     void OnEnable()
     {
-        //  Repega o playerStats salvo no GameManager
         if (GameManager.Instance != null && GameManager.Instance.playerStats != null)
         {
             playerStats = GameManager.Instance.playerStats;
-            Debug.Log(" MenuStatus reassociou o playerStats do GameManager.");
         }
         else if (playerStats == null)
         {
             playerStats = FindAnyObjectByType<playerStats>();
-            Debug.LogWarning(" Nenhum playerStats no GameManager, usando o da cena.");
         }
 
         AtualizarStatus();

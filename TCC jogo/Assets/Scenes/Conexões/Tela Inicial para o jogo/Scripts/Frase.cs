@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // precisa desse namespace
+using UnityEngine.SceneManagement;
 
 public class TrocarCena : MonoBehaviour
 {
