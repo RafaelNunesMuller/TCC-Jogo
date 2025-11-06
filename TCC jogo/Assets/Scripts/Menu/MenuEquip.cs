@@ -20,15 +20,22 @@ public class MenuEquip : MonoBehaviour
     public Button armorButton;
     public Button accessoryButton;
 
+<<<<<<< HEAD
+    [Header("Referências")]
+=======
+>>>>>>> Ale
     public GameObject menuPanel;
 
     private List<Item> inventario = new List<Item>();
     private List<RectTransform> equipSlots = new List<RectTransform>();
     private List<Item> itensAtuais = new List<Item>();
+<<<<<<< HEAD
+=======
     private int cursorIndex = 0;
     private string slotSelecionado = "";
 
     private bool navegandoSlots = true; 
+>>>>>>> Ale
     private List<RectTransform> botoesSlots = new List<RectTransform>();
 
     private int cursorIndex = 0;
@@ -49,6 +56,11 @@ public class MenuEquip : MonoBehaviour
     {
         inventarioCentral = Inventario.instance;
 
+<<<<<<< HEAD
+        // 🔹 Preenche botões de slot
+=======
+
+>>>>>>> Ale
         botoesSlots.Add(weaponButton.GetComponent<RectTransform>());
         botoesSlots.Add(healmetButton.GetComponent<RectTransform>());
         botoesSlots.Add(gloveButton.GetComponent<RectTransform>());
@@ -98,12 +110,15 @@ public class MenuEquip : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
             VoltarParaMenu();
+<<<<<<< HEAD
+=======
         }
     }
     public void VoltarParaMenu()
     {
         gameObject.SetActive(false);
         menuPanel.SetActive(true);
+>>>>>>> Ale
     }
 
     public void VoltarParaMenu()
@@ -120,6 +135,10 @@ public class MenuEquip : MonoBehaviour
     {
         if (navegandoSlots)
         {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Ale
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 cursorIndex = Mathf.Min(cursorIndex + 1, botoesSlots.Count - 1);
@@ -142,6 +161,10 @@ public class MenuEquip : MonoBehaviour
         }
         else
         {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Ale
             if (equipSlots.Count == 0) return;
 
             equipSlots.RemoveAll(slot => slot == null);
@@ -201,11 +224,23 @@ public class MenuEquip : MonoBehaviour
 
     foreach (Item item in inventario)
     {
+<<<<<<< HEAD
         if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
             (slotSelecionado == "Armadura" && item.tipo == ItemTipo.Armadura) ||
             (slotSelecionado == "Acessorio" && item.tipo == ItemTipo.Acessorio) ||
             (slotSelecionado == "Elmo" && item.tipo == ItemTipo.Elmo) ||
             (slotSelecionado == "Luva" && item.tipo == ItemTipo.Luva))
+=======
+        foreach (Transform child in equipListParent)
+            Destroy(child.gameObject);
+
+        equipSlots.Clear();
+        itensAtuais.Clear();
+
+        inventario = inventarioCentral.itens;
+
+        foreach (Item item in inventario)
+>>>>>>> Ale
         {
             // cria novo item UI a partir do prefab real
             GameObject obj = Instantiate(equipItemPrefab, equipListParent);
@@ -235,7 +270,11 @@ public class MenuEquip : MonoBehaviour
     // =============================
     void MoveCursor(int index)
     {
+<<<<<<< HEAD
+        Vector2 offset = new Vector2(1250f, -600f);
+=======
         Vector2 offset = new Vector2(1250f, -600f); 
+>>>>>>> Ale
 
         if (navegandoSlots)
         {
