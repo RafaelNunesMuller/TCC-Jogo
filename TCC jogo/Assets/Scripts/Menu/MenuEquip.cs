@@ -177,49 +177,52 @@ public class MenuEquip : MonoBehaviour
     }
 
     void MostrarListaEquip()
+{
+    // limpa lista anterior
+    if (equipListParent.childCount > 1)
+{
+    Destroy(equipListParent.GetChild(0).gameObject);
+    equipSlots.RemoveAt(0);
+    itensAtuais.RemoveAt(0);
+}
+
+
+    
+    if (inventarioCentral == null)
+        inventarioCentral = Inventario.instance;
+
+    inventario = inventarioCentral.itens;
+
+    foreach (Item item in inventario)
     {
-        foreach (Transform child in equipListParent)
-            Destroy(child.gameObject);
-
-        equipSlots.Clear();
-        itensAtuais.Clear();
-
-        if (inventarioCentral == null)
-            inventarioCentral = Inventario.instance;
-
-        inventario = inventarioCentral.itens;
-
-        foreach (Item item in inventario)
+        if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
+            (slotSelecionado == "Armadura" && item.tipo == ItemTipo.Armadura) ||
+            (slotSelecionado == "Acessorio" && item.tipo == ItemTipo.Acessorio) ||
+            (slotSelecionado == "Elmo" && item.tipo == ItemTipo.Elmo) ||
+            (slotSelecionado == "Luva" && item.tipo == ItemTipo.Luva))
         {
-            if ((slotSelecionado == "Arma" && item.tipo == ItemTipo.Arma) ||
-                (slotSelecionado == "Armadura" && item.tipo == ItemTipo.Armadura) ||
-                (slotSelecionado == "Acessorio" && item.tipo == ItemTipo.Acessorio) ||
-                (slotSelecionado == "Elmo" && item.tipo == ItemTipo.Elmo) ||
-                (slotSelecionado == "Luva" && item.tipo == ItemTipo.Luva))
-            {
-                if (equipItemPrefab == null)
-                {
-                    Debug.LogWarning("⚠️ EquipItemPrefab não encontrado, pulando item.");
-                    continue;
-                }
+            // cria novo item UI a partir do prefab real
+            GameObject obj = Instantiate(equipItemPrefab, equipListParent);
+            ItemEquipUI ui = obj.GetComponent<ItemEquipUI>();
 
-                GameObject obj = Instantiate(equipItemPrefab, equipListParent);
-                ItemEquipUI ui = obj.GetComponent<ItemEquipUI>();
-                ui.Configurar(item, () => Equipar(item));
+            // configura ícone e callback
+            ui.Configurar(item, () => Equipar(item));
 
-                equipSlots.Add(obj.GetComponent<RectTransform>());
-                itensAtuais.Add(item);
-            }
+            // adiciona na lista de navegação
+            equipSlots.Add(obj.GetComponent<RectTransform>());
+            itensAtuais.Add(item);
         }
-
-        cursorIndex = 0;
-        navegandoSlots = false;
-
-        if (equipSlots.Count > 0)
-            MoveCursor(cursorIndex);
-        else
-            cursor.gameObject.SetActive(false);
     }
+
+    cursorIndex = 0;
+    navegandoSlots = false;
+
+    if (equipSlots.Count > 0)
+        MoveCursor(cursorIndex);
+    else
+        cursor.gameObject.SetActive(false);
+}
+
 
     // =============================
     // MOVIMENTO DO CURSOR

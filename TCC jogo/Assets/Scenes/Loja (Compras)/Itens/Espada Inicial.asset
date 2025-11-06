@@ -17,5 +17,5 @@ MonoBehaviour:
   quantidade: 1
   icone: {fileID: 6516178239082597138, guid: 6a869a0d3e70ba84da9d50c0a30f756b, type: 3}
   consumivel: 0
-  bonusForca: 0
+  bonusForca: 11
   bonusDefesa: 0
