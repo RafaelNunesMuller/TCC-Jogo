@@ -14,6 +14,10 @@ public class CoinsCasa : MonoBehaviour
     public Button ok;
     public Button okVas;
 
+
+
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
