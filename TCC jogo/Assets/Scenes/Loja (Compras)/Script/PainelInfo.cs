@@ -1,8 +1,6 @@
-﻿// ItemInfoUI.cs
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using NUnit.Framework.Interfaces;
 
 public class ItemInfoUI : MonoBehaviour
 {

@@ -6,7 +6,7 @@ public class Equipamento
     public string nome;
     public int bonusForca;
     public int bonusDefesa;
-    public Sprite sprite; // ícone do equipamento
+    public Sprite sprite;
 
     public Equipamento(string nome, int forca, int defesa, Sprite sprite = null)
     {

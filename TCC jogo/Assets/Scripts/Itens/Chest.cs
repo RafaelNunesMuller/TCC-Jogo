@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    [Header("Configuração do Baú")]
     public Item itemDentro;
     public bool foiAberto = false;
     public Sprite baulFechado;
@@ -56,7 +55,6 @@ public class Chest : MonoBehaviour
         {
             string mensagem = $"Você encontrou nada!";
             MessageUI.instance.ShowMessage(mensagem);
-            Debug.LogWarning("O baú não tem item dentro!");
         }
     }
 }

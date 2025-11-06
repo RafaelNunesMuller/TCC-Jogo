@@ -6,7 +6,7 @@ public class StrenghPotion : Item
 
     public StrenghPotion(int quantidade) : base("StrenghPotion", ItemTipo.Consumivel, quantidade)
     {
-        ForcaUp = 20; // Quantidade que vai aumentar a força
+        ForcaUp = 20;
     }
 
     

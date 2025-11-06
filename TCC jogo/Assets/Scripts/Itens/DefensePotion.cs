@@ -6,6 +6,6 @@ public class DefensePotion : Item
 
     public DefensePotion(int quantidade) : base("DefensePotion", ItemTipo.Consumivel, quantidade)
     {
-        DefUp = 20; // Quantidade que vai aumentar a força
+        DefUp = 20;
     }
 }

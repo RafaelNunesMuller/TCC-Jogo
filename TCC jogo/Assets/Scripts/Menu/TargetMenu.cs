@@ -5,8 +5,7 @@ using TMPro;
 
 public class TargetMenu : MonoBehaviour
 {
-    [Header("UI")]
-    public Button[] enemyButtons;   // botões fixos
+    public Button[] enemyButtons;
     public RectTransform cursor;
     public GameObject Menu;
     public CombatMenuController combatMenu;
@@ -18,9 +17,7 @@ public class TargetMenu : MonoBehaviour
     private int inimigoSelecionado = 0;
     public GameObject Cursor;
 
-    // =============================
-    // CONFIGURAÇÃO DOS INIMIGOS
-    // =============================
+
     public void ConfigurarInimigos(List<EnemyStats> inimigosAtivosRecebidos)
     {
         inimigosAtivos.Clear();
@@ -39,19 +36,18 @@ public class TargetMenu : MonoBehaviour
                     refInimigo = enemyButtons[i].gameObject.AddComponent<EnemyReference>();
                 refInimigo.enemy = inimigo;
 
-                // Atualiza nome do inimigo
+
                 var tmp = enemyButtons[i].GetComponentInChildren<TMP_Text>();
                 if (tmp != null)
                     tmp.text = inimigo.enemyName;
 
                 int localIndex = i;
 
-                // Evento quando o inimigo morre → botão desativa
                 inimigo.OnDeath += () =>
                 {
                     enemyButtons[localIndex].gameObject.SetActive(false);
                     inimigosAtivos[localIndex] = null;
-                    // se o inimigo atual morreu, move o cursor pro próximo
+
                     if (localIndex == inimigoSelecionado)
                         MoveToNext(1);
                 };
@@ -67,9 +63,6 @@ public class TargetMenu : MonoBehaviour
         AtualizarCursor();
     }
 
-    // =============================
-    // ABRIR SELEÇÃO DE ALVO
-    // =============================
     public void AbrirSelecao(Attack ataque, playerStats jogadorRef)
     {
         ataqueAtual = ataque;
@@ -77,7 +70,6 @@ public class TargetMenu : MonoBehaviour
 
         if (CountAliveInimigos() == 0)
         {
-            Debug.LogWarning("⚠ Nenhum inimigo vivo para atacar!");
             return;
         }
 
@@ -89,9 +81,6 @@ public class TargetMenu : MonoBehaviour
             combatMenu.enabled = false;
     }
 
-    // =============================
-    // UPDATE
-    // =============================
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -107,9 +96,6 @@ public class TargetMenu : MonoBehaviour
             VoltarParaMenu();
     }
 
-    // =============================
-    // MOVIMENTO DO CURSOR
-    // =============================
     void MoveToNext(int dir)
     {
         if (enemyButtons.Length == 0) return;
@@ -143,9 +129,6 @@ public class TargetMenu : MonoBehaviour
         cursor.anchoredPosition = new Vector2(195, -15);
     }
 
-    // =============================
-    // CONFIRMAR ALVO
-    // =============================
     void ConfirmarAlvo()
     {
         if (inimigoSelecionado >= inimigosAtivos.Count)
@@ -154,7 +137,6 @@ public class TargetMenu : MonoBehaviour
         EnemyStats inimigo = inimigosAtivos[inimigoSelecionado];
         if (inimigo == null || !inimigo.IsAlive)
         {
-            Debug.LogWarning("❌ Esse inimigo já está morto!");
             MoveToNext(1);
             return;
         }
@@ -168,9 +150,6 @@ public class TargetMenu : MonoBehaviour
             inimigo.TakeDamage(dano);
     }
 
-    // =============================
-    // VOLTAR AO MENU PRINCIPAL
-    // =============================
     public void VoltarParaMenu()
     {
         gameObject.SetActive(false);
