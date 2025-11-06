@@ -76,13 +76,8 @@ public class GameManager : MonoBehaviour
             );
         }
 
-
-    foreach (var ui in FindObjectsByType<CombatUi>(FindObjectsSortMode.None))
-        ui.playerStats = playerStats;
-
         foreach (var ui in FindObjectsByType<CombatUi>(FindObjectsSortMode.None))
             ui.playerStats = playerStats;
-
 
         foreach (var hp in FindObjectsByType<PlayerHealth>(FindObjectsSortMode.None))
             hp.playerStats = playerStats;

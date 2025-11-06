@@ -23,10 +23,8 @@ public class Item : ScriptableObject
 
     public virtual void Usar(playerStats player)
     {
-
     }
 }
-
 
 public enum ItemTipo
 {
