@@ -22,6 +22,7 @@ public class Placa3 : MonoBehaviour
             Vendedor = false;
     }
 
+
     void Update()
     {
         if (Vendedor && Input.GetKeyDown(KeyCode.Z))

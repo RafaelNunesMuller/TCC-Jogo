@@ -22,6 +22,7 @@ public class Placa2 : MonoBehaviour
             placa2 = false;
     }
 
+
     void Update()
     {
         if (placa2 && Input.GetKeyDown(KeyCode.Z))
