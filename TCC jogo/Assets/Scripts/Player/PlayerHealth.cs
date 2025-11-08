@@ -10,7 +10,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        // 🔹 Busca o player persistente
         if (GameManager.Instance != null)
         {
             playerStats = GameManager.Instance.playerStats;
@@ -22,12 +21,10 @@ public class PlayerHealth : MonoBehaviour
 
         if (playerStats == null)
         {
-            Debug.LogError("❌ Nenhum playerStats encontrado na cena!");
             enabled = false;
             return;
         }
 
-        // Inicializa a barra com o valor atual
         healthBar.UpdateHealthBar(playerStats.currentHP, playerStats.maxHP);
         lastHP = playerStats.currentHP;
         lastMaxHP = playerStats.maxHP;
@@ -37,7 +34,6 @@ public class PlayerHealth : MonoBehaviour
     {
         if (playerStats == null) return;
 
-        // 🔹 Só atualiza a barra quando algo muda
         if (playerStats.currentHP != lastHP || playerStats.maxHP != lastMaxHP)
         {
             healthBar.UpdateHealthBar(playerStats.currentHP, playerStats.maxHP);

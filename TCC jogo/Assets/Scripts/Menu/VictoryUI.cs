@@ -4,7 +4,6 @@ using TMPro;
 
 public class VictoryUI : MonoBehaviour
 {
-    [Header("Referências de UI")]
     public GameObject victoryPanel;
     public TMP_Text textoMensagem;
     public TMP_Text textoStats;

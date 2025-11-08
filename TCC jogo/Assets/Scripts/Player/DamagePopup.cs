@@ -21,10 +21,8 @@ public class DamagePopup : MonoBehaviour
 
     void Update()
     {
-        // movimento para cima
         transform.position += Vector3.up * moveSpeed * Time.deltaTime;
 
-        // fade
         textColor.a -= fadeSpeed * Time.deltaTime;
         textMesh.color = textColor;
 

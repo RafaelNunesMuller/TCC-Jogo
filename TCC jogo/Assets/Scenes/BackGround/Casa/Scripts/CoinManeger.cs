@@ -27,7 +27,6 @@ public class CoinManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // tenta localizar automaticamente os objetos necessários
         if (coinsText == null)
         {
             GameObject coinsObj = GameObject.Find("Mostrar Coins");
@@ -72,7 +71,6 @@ public class CoinManager : MonoBehaviour
         }
         else
         {
-            // Se estiver na cena da loja, tenta abrir o painel de "sem moedas"
             if (NoCoins == null)
                 NoCoins = GameObject.Find("NoCoins");
 
@@ -94,7 +92,6 @@ public class CoinManager : MonoBehaviour
                 }
             }
 
-            Debug.Log("Moedas insuficientes!");
             return false;
         }
     }

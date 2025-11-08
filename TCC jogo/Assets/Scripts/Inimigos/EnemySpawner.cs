@@ -3,15 +3,12 @@ using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Prefabs de inimigos possíveis")]
     public GameObject[] enemyPrefabs;
 
-    [Header("Locais de spawn")]
     public Transform[] spawnPoints;
 
-    [Header("Referências")]
     public TargetMenu targetMenu;
-    public BattleSystem battleSystem; // <-- referência ao BattleSystem
+    public BattleSystem battleSystem; 
 
     private List<EnemyStats> inimigosAtivos = new List<EnemyStats>();
 
@@ -35,11 +32,9 @@ public class EnemySpawner : MonoBehaviour
             inimigosAtivos.Add(stats);
         }
 
-        // 🔹 Passa inimigos reais para o TargetMenu
         if (targetMenu != null)
             targetMenu.ConfigurarInimigos(inimigosAtivos);
 
-        // 🔹 Passa inimigos reais para o BattleSystem
         if (battleSystem != null)
             battleSystem.SetEnemies(inimigosAtivos);
     }

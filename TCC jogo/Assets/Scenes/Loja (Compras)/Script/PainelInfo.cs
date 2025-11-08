@@ -1,8 +1,6 @@
-﻿// ItemInfoUI.cs
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using NUnit.Framework.Interfaces;
 
 public class ItemInfoUI : MonoBehaviour
 {
@@ -21,7 +19,6 @@ public class ItemInfoUI : MonoBehaviour
     public GameObject Vendedor;
     public Button Okay;
     public int itemPrice;
-    public GameObject player;
 
     public static Inventario instance;
     public static CoinManager Coins;
@@ -53,7 +50,6 @@ public class ItemInfoUI : MonoBehaviour
         int price = currentItemSlot.itemPrice;
         if (CoinManager.instance.TrySpendCoins(price) &&  !currentItemSlot.isPurchased)
         {
-            Debug.Log("Item comprado!");
             currentItemSlot.isPurchased = true;
             Inventario.instance.Adicionar(currentItemSlot.itemDentro);
            

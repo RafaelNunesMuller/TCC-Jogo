@@ -3,14 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    [Header("Movimento")]
     public float moveSpeed = 5f;
     private Vector2 movement;
     private Animator anim;
     private Rigidbody2D rb;
     public bool canMove = true;
 
-    [Header("Encontros")]
+
     public LayerMask Perigolayer;
     public int minSteps = 5;
     public int maxSteps = 15;
@@ -18,12 +17,11 @@ public class Player : MonoBehaviour
     public float stepDistance = 0.5f;
     private Vector2 lastStepPosition;
 
-    [Header("Status")]
+
     public playerStats playerStats;
 
     void Awake()
     {
-        // Garante que só exista 1 player
         var players = FindObjectsByType<Player>(FindObjectsSortMode.None);
         if (players.Length > 1)
         {
@@ -31,10 +29,10 @@ public class Player : MonoBehaviour
             return;
         }
 
-        // Persiste entre cenas
+
         DontDestroyOnLoad(gameObject);
 
-        // Garante que o GameManager conheça o playerStats atual
+
         if (GameManager.Instance != null)
         {
             var stats = GetComponent<playerStats>();
@@ -53,11 +51,10 @@ public class Player : MonoBehaviour
         stepsToNextEncounter = Random.Range(minSteps, maxSteps + 1);
         lastStepPosition = rb.position;
 
-        // 🔹 Reposiciona o player se houver posição salva
+ 
         if (GameManager.Instance != null && GameManager.Instance.lastPlayerPosition != Vector3.zero)
         {
             transform.position = GameManager.Instance.lastPlayerPosition;
-            Debug.Log($"📍 Player posicionado em {transform.position}");
         }
     }
 
@@ -68,7 +65,6 @@ public class Player : MonoBehaviour
 
     private void OnSceneLoaded(Scene cena, LoadSceneMode modo)
     {
-        // Invisível durante batalha
         var sr = GetComponent<SpriteRenderer>();
         var col = GetComponent<Collider2D>();
 
@@ -136,11 +132,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         string tag = collision.gameObject.tag;
 
-        // 🔹 Controle de transição entre cenas
+ 
         switch (tag)
         {
             case "SaidaDungeon":
@@ -160,11 +156,11 @@ public class Player : MonoBehaviour
                 break;
 
             case "IrParaLoja":
-                SalvarPosicaoENovaCena("Lojinha", new Vector3(6.47f, -4.5f, 0f));
+                SalvarPosicaoENovaCena("Lojinha", new Vector3(6f, -4f, 0f));
                 break;
 
             case "SairDaLoja":
-                SalvarPosicaoENovaCena("Mapa", new Vector3(2.5f, -5.62f, 0f));
+                SalvarPosicaoENovaCena("Mapa", new Vector3(2f, -6f, 0f));
                 break;
 
             case "andar2":

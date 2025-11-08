@@ -8,7 +8,6 @@ public class MusicManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton para não duplicar
         if (instance == null)
         {
             instance = this;
@@ -20,17 +19,14 @@ public class MusicManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    // Método para trocar música
     public void TocarMusica(AudioClip novoClip, bool loop = true)
     {
-        if (audioSource.clip == novoClip) return; // evita reiniciar a mesma música
+        if (audioSource.clip == novoClip) return;
         audioSource.clip = novoClip;
         audioSource.loop = loop;
         audioSource.Play();
     }
 
-    // Método opcional para parar música
     public void PararMusica()
     {
         audioSource.Stop();

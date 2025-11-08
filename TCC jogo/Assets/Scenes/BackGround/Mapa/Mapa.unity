@@ -22371,7 +22371,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -33612,7 +33612,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
-  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 1324309177}
   equipListParent: {fileID: 1594775471}
   equipItemPrefab: {fileID: 873515040}
@@ -33623,6 +33622,7 @@ MonoBehaviour:
   armorButton: {fileID: 629133515}
   accessoryButton: {fileID: 1132942334}
   menuPanel: {fileID: 1759498905}
+  EquipItemPrefab: {fileID: 873515040}
 --- !u!114 &2096350532
 MonoBehaviour:
   m_ObjectHideFlags: 0

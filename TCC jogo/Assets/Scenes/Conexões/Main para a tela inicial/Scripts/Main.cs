@@ -1,32 +1,27 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro; // caso queira usar TextMeshPro
+using TMPro; 
 
 public class Main : MonoBehaviour
 {
-    [Header("Cena")]
     public string cenaParaCarregar = "Loading";
 
-    [Header("Tempo")]
-    public float tempoDeEspera = 3f;          // tempo total da tela de loading
-    public float tempoEntreTextos = 0.5f;     // tempo entre mudan�a de textos
+    public float tempoDeEspera = 3f;         
+    public float tempoEntreTextos = 0.5f;     
 
-    [Header("Textos de Loading")]
-    public TMP_Text targetText;               // arrasta o TMP_Text do Canvas
-    public string[] textos;                   // os tr�s textos em loop
+    public TMP_Text targetText;               
+    public string[] textos;                  
 
     private void Start()
     {
         if (textos == null || textos.Length == 0)
         {
-            Debug.LogWarning("Nenhum texto de loading foi atribu�do!");
             return;
         }
 
         if (targetText == null)
         {
-            Debug.LogWarning("Nenhum TMP_Text atribu�do!");
             return;
         }
 
@@ -38,7 +33,7 @@ public class Main : MonoBehaviour
     {
         int index = 0;
 
-        while (true) // loop infinito at� a cena mudar
+        while (true) 
         {
             targetText.text = textos[index];
             index = (index + 1) % textos.Length;

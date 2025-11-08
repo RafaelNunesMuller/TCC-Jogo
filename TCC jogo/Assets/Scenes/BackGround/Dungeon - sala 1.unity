@@ -2683,6 +2683,7 @@ GameObject:
   - component: {fileID: 238707793}
   - component: {fileID: 238707792}
   - component: {fileID: 238707794}
+  - component: {fileID: 238707795}
   m_Layer: 0
   m_Name: ProximoAndar
   m_TagString: andar2
@@ -2867,6 +2868,19 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &238707795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238707790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36460b13e500cdd478b66546c3bee080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  andar: Dungeon - sala 2
 --- !u!1 &315974927
 GameObject:
   m_ObjectHideFlags: 0
@@ -7586,7 +7600,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 2027303770}
-  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 1984074821}
   equipListParent: {fileID: 1810000249}
   equipItemPrefab: {fileID: 966746198}
@@ -7597,6 +7610,7 @@ MonoBehaviour:
   armorButton: {fileID: 1573683328}
   accessoryButton: {fileID: 315974928}
   menuPanel: {fileID: 1826405365}
+  EquipItemPrefab: {fileID: 966746198}
 --- !u!114 &1761340814
 MonoBehaviour:
   m_ObjectHideFlags: 0

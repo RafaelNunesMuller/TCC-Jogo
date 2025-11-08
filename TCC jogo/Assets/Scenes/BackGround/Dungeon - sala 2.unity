@@ -171,7 +171,6 @@ GameObject:
   - component: {fileID: 88394872}
   - component: {fileID: 88394871}
   - component: {fileID: 88394873}
-  - component: {fileID: 88394874}
   m_Layer: 0
   m_Name: AndarAnterior
   m_TagString: Untagged
@@ -374,20 +373,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!114 &88394874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88394869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36460b13e500cdd478b66546c3bee080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  andar: Dungeon - sala 1
-  posicao: 0
 --- !u!1 &112908803
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +683,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1022,7 +1007,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -3610,7 +3595,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -4457,7 +4442,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -4623,7 +4608,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -5181,7 +5166,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -7247,7 +7232,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -14366,6 +14351,7 @@ GameObject:
   - component: {fileID: 1584781987}
   - component: {fileID: 1584781986}
   - component: {fileID: 1584781985}
+  - component: {fileID: 1584781984}
   m_Layer: 0
   m_Name: ProximoAndar
   m_TagString: andar3
@@ -14388,6 +14374,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 660949635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1584781984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584781982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36460b13e500cdd478b66546c3bee080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  andar: Dungeon - sala 3
 --- !u!19719996 &1584781985
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -15586,7 +15585,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
-  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 1274308885}
   equipListParent: {fileID: 435911351}
   equipItemPrefab: {fileID: 1872502163}
@@ -15597,6 +15595,7 @@ MonoBehaviour:
   armorButton: {fileID: 674422899}
   accessoryButton: {fileID: 2131362372}
   menuPanel: {fileID: 1914777220}
+  EquipItemPrefab: {fileID: 1872502163}
 --- !u!114 &1870087403
 MonoBehaviour:
   m_ObjectHideFlags: 0

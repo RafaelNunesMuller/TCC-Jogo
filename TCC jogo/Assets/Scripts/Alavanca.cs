@@ -11,7 +11,7 @@ public class Alavanca : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        sr.sprite = closedSprite; // começa fechada
+        sr.sprite = closedSprite;
     }
 
 
@@ -23,7 +23,7 @@ public class Alavanca : MonoBehaviour
             CameraShake camShake = Camera.main.GetComponent<CameraShake>();
             if (camShake != null)
             {
-                StartCoroutine(camShake.Shake(0.2f, 0.2f)); // duração, intensidade
+                StartCoroutine(camShake.Shake(0.2f, 0.2f));
             }
             AbrirPorta();
 
@@ -35,6 +35,5 @@ public class Alavanca : MonoBehaviour
         isOpen = true;
       
         PortaMovida.SetActive(false);
-        Debug.Log("Porta aberta!");
     }
 }

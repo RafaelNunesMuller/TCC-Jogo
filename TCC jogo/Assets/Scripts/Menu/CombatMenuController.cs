@@ -7,7 +7,6 @@ public class CombatMenuController : MonoBehaviour
     public RectTransform cursor;
     private int opcaoSelecionada = 0;
 
-    [Header("Menus")]
     public GameObject Menu;
     public GameObject InventarioItem;
     public AttackMenu attackMenu;
@@ -20,14 +19,13 @@ public class CombatMenuController : MonoBehaviour
     {
         AtualizarCursor();
 
-        // pega o script MenuItem do objeto InventarioItem
         if (InventarioItem != null)
             menuItemScript = InventarioItem.GetComponent<MenuItem>();
     }
 
     void Update()
     {
-        if (!Menu.activeSelf) return; // 🔹 só lê input quando o menu principal está aberto
+        if (!Menu.activeSelf) return;
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -59,7 +57,7 @@ public class CombatMenuController : MonoBehaviour
     {
         switch (opcao)
         {
-            case 0: // Atacar
+            case 0: //atacar
                 attackMenu.gameObject.SetActive(true);
                 Menu.SetActive(false);
                 break;
@@ -71,14 +69,13 @@ public class CombatMenuController : MonoBehaviour
                 break;
 
 
-            case 2: // Fugir
+            case 2:// fugir
                 if (GameManager.Instance != null)
                 {
                     string cenaVoltar = GameManager.Instance.lastScene;
                     UnityEngine.SceneManagement.SceneManager.LoadScene(cenaVoltar);
                 }
                 break;
-
         }
     }
 }

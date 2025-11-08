@@ -31,7 +31,6 @@ public class MenuController : MonoBehaviour
             inventario.SetActive(false);
             MenuEquip.SetActive(false);
 
-            // Bloqueia ou libera o movimento do player
             playerScript.canMove = !isActive;
         }
 
@@ -40,17 +39,17 @@ public class MenuController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.UpArrow))
 {
-            currentIndex--;  // diminui
+            currentIndex--;
             if (currentIndex < 0)
-                currentIndex = options.Length - 1;  // volta para o último
+                currentIndex = options.Length - 1;
             UpdateCursor();
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            currentIndex++;  // aumenta
+            currentIndex++;
             if (currentIndex >= options.Length)
-                currentIndex = 0;  // volta para o primeiro
+                currentIndex = 0;
             UpdateCursor();
         }
 
@@ -69,7 +68,7 @@ public class MenuController : MonoBehaviour
     void UpdateCursor()
     {
         cursor.SetParent(options[currentIndex], false);
-        cursor.anchoredPosition = new Vector2(200, 0); // esquerda
+        cursor.anchoredPosition = new Vector2(200, 0);
     }
     
 
@@ -79,32 +78,27 @@ public class MenuController : MonoBehaviour
         switch (currentIndex)
         {
             case 0:
-                menuUI.SetActive(false); // Fecha o menu principal
-                playerScript.canMove = false; // Bloqueia movimento
-                menuItem.Open(); // Abre inventário
-                Debug.Log("Abrir ITEM");
+                menuUI.SetActive(false);
+                playerScript.canMove = false;
+                menuItem.Open();
                 break;
 
             case 1:
                 menuUI.SetActive(false);
                 playerScript.canMove = false; 
-                MenuEquip.SetActive(true); //Abre o Equip
-                Debug.Log("Abrir EQUIP");
+                MenuEquip.SetActive(true);
                 break;
 
             case 2:
                 menuUI.SetActive(false);
                 playerScript.canMove = false;
-                MenuStatus.SetActive(true); //Abre o Status
-                Debug.Log("Abrir STATUS");
+                MenuStatus.SetActive(true);
                 break;
 
             case 3:
-                Debug.Log("Abrir SAVE");
                 break;
 
             case 4:
-                Debug.Log("Fechar menu");
                 menuUI.SetActive(false);
                 playerScript.canMove = true;
                 break;

@@ -2552,7 +2552,7 @@ GameObject:
   - component: {fileID: 459110971}
   - component: {fileID: 459110970}
   - component: {fileID: 459110972}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Saida
   m_TagString: SairDaLoja
   m_Icon: {fileID: 0}
@@ -2568,7 +2568,7 @@ Transform:
   m_GameObject: {fileID: 459110968}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: 0, z: 0}
+  m_LocalPosition: {x: -0.13540298, y: 0.10900712, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12463,7 +12463,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
-  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 516901927}
   equipListParent: {fileID: 208336094}
   equipItemPrefab: {fileID: 1557935856}
@@ -12474,6 +12473,7 @@ MonoBehaviour:
   armorButton: {fileID: 1289049136}
   accessoryButton: {fileID: 1912422450}
   menuPanel: {fileID: 1152316720}
+  EquipItemPrefab: {fileID: 1557935856}
 --- !u!114 &1711888110
 MonoBehaviour:
   m_ObjectHideFlags: 0

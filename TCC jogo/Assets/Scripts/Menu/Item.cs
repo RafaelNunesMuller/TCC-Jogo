@@ -21,10 +21,8 @@ public class Item : ScriptableObject
         this.bonusDefesa = bonusDefesa;
     }
 
-    // Virtual ? sobrescrito nas subclasses (Poções, etc.)
     public virtual void Usar(playerStats player)
     {
-        Debug.Log($"{nome} foi usado.");
     }
 }
 
