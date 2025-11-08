@@ -156,7 +156,11 @@ public class Player : MonoBehaviour
                 break;
 
             case "IrParaLoja":
-                SalvarPosicaoENovaCena("Loja", new Vector3(1.38f, 0.47f, 0f));
+                SalvarPosicaoENovaCena("Lojinha", new Vector3(6f, -4f, 0f));
+                break;
+
+            case "SairDaLoja":
+                SalvarPosicaoENovaCena("Mapa", new Vector3(2f, -6f, 0f));
                 break;
 
             case "andar2":
