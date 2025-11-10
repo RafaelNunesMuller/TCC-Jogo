@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chave
   m_EditorClassIdentifier: 
   nome: Chave Antiga
-  tipo: 0
+  tipo: 6
   quantidade: 1
   icone: {fileID: -3801711695369542089, guid: 36c16c48705934b4ea80eba7f6d89626, type: 3}
   consumivel: 1

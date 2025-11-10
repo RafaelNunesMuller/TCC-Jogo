@@ -33,5 +33,6 @@ public enum ItemTipo
     Armadura,
     Acessorio,
     Elmo,
-    Luva
+    Luva,
+    Chave
 }

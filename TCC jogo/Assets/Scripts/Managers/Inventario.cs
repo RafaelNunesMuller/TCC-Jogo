@@ -30,4 +30,15 @@ public class Inventario : MonoBehaviour
         item.quantidade--;
         if (item.quantidade <= 0) itens.Remove(item);
     }
+
+    public bool TemItem(string nomeItem)
+    {
+        foreach (var item in itens)
+        {
+            if (item.nome == nomeItem)
+                return true;
+        }
+        return false;
+    }
+
 }
