@@ -23,15 +23,21 @@ public class DungeonRoom1 : MonoBehaviour
     {
         if (!isOpen && other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Z))
         {
+            if (!Inventario.instance.TemItem("Chave Antiga")) 
+            {
+                Debug.Log("Você não tem a Chave!");
+                
+                return;
+            }
+
             CameraShake camShake = Camera.main.GetComponent<CameraShake>();
             if (camShake != null)
-            {
                 StartCoroutine(camShake.Shake(0.2f, 0.2f));
-            }
-            AbrirPorta();
 
+            AbrirPorta();
         }
     }
+
 
     void AbrirPorta()
     {
@@ -41,11 +47,14 @@ public class DungeonRoom1 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isOpen && other.CompareTag("Player"))
-        {
-            Player.transform.position = new Vector3(-1.45f, 7.52f);
-            SceneManager.LoadScene(nextSceneName);
-            
-        }
+
+        if(!isOpen) return;
+        if (!other.CompareTag("Player")) return;
+
+
+        GameManager.Instance.lastScene = SceneManager.GetActiveScene().name;
+        GameManager.Instance.lastPlayerPosition = new Vector3(-1.45f, 7.52f, 0f);
+
+        SceneManager.LoadScene(nextSceneName);
     }
 }
