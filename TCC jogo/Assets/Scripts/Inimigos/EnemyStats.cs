@@ -3,6 +3,7 @@ using System.Collections.Generic;
 public class EnemyStats : MonoBehaviour
 {
     public DamagePopupSpawner popupSpawner;
+    public bool bossFinal;
 
     public string enemyName;
     public int level;
