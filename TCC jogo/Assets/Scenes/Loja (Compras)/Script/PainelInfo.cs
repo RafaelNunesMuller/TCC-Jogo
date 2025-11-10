@@ -75,6 +75,8 @@ public class ItemInfoUI : MonoBehaviour
 
 
 
+
+
     public void ShowItem(Sprite sprite, string name, string description, int price, ItemSlot slot)
     {
 

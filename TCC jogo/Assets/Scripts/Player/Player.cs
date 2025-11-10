@@ -63,22 +63,20 @@ public class Player : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene cena, LoadSceneMode modo)
+    void OnSceneLoaded(Scene cena, LoadSceneMode modo)
     {
         var sr = GetComponent<SpriteRenderer>();
-        var col = GetComponent<Collider2D>();
 
-        if (cena.name == "Battle")
+        if (cena.name == "Battle" || cena.name == "Compras" || cena.name == "Game Over" || cena.name == "Tela de vitória")
         {
             if (sr != null) sr.enabled = false;
-            if (col != null) col.enabled = false;
         }
         else
         {
             if (sr != null) sr.enabled = true;
-            if (col != null) col.enabled = true;
         }
     }
+
 
     void Update()
     {

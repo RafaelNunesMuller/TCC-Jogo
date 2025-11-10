@@ -15,6 +15,7 @@ public class Lojista : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Vendedor = true;
+            
         }
 
     }
@@ -23,6 +24,7 @@ public class Lojista : MonoBehaviour
     {
         if (other.CompareTag("Player"))
             Vendedor = false;
+            
     }
 
     void Update()
@@ -30,7 +32,13 @@ public class Lojista : MonoBehaviour
         if (Vendedor && Input.GetKeyDown(KeyCode.Z))
         {
             Fala.SetActive(true);
-            Exit.onClick.AddListener(() => Fala.SetActive(false));
+            
+            Exit.onClick.AddListener(() =>
+            {
+             Fala.SetActive(false);
+             
+            });
+
             Okay.onClick.AddListener(() => SceneManager.LoadScene("Compras"));
         }
     }
