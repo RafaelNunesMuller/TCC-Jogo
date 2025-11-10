@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 17899008}
   - component: {fileID: 17899010}
   - component: {fileID: 17899009}
+  - component: {fileID: 17899011}
   m_Layer: 0
   m_Name: bauF02
   m_TagString: Untagged
@@ -238,7 +239,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -268,6 +269,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 965691000}
   messageText: {fileID: 589706282}
+--- !u!114 &17899011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17899006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &84243654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,6 +2340,7 @@ GameObject:
   - component: {fileID: 767593327}
   - component: {fileID: 767593329}
   - component: {fileID: 767593328}
+  - component: {fileID: 767593330}
   m_Layer: 0
   m_Name: bauF01
   m_TagString: Untagged
@@ -2430,7 +2448,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -2460,6 +2478,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 965691000}
   messageText: {fileID: 589706282}
+--- !u!114 &767593330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767593325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &845566779
 GameObject:
   m_ObjectHideFlags: 0
@@ -8565,6 +8599,7 @@ GameObject:
   - component: {fileID: 1366434114}
   - component: {fileID: 1366434113}
   - component: {fileID: 1366434115}
+  - component: {fileID: 1366434116}
   m_Layer: 0
   m_Name: bauEspecial
   m_TagString: Untagged
@@ -8617,7 +8652,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -8702,6 +8737,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 965691000}
   messageText: {fileID: 589706282}
+--- !u!114 &1366434116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366434111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDentro: {fileID: 0}
+  foiAberto: 0
+  baulFechado: {fileID: 0}
+  baulAberto: {fileID: -1886479080452579497, guid: be946f57a9a5de149953ba6772ddf8a7, type: 3}
 --- !u!1 &1382544337
 GameObject:
   m_ObjectHideFlags: 0
@@ -9821,14 +9872,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  playerStats: {fileID: 0}
+  canMove: 1
   Perigolayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  canMove: 1
+  playerStats: {fileID: 0}
 --- !u!50 &1603996603
 Rigidbody2D:
   serializedVersion: 5
@@ -9837,7 +9888,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603996598}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
@@ -9845,7 +9896,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a0c2e92f6ce3d1e4693202297053bed4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -10054,7 +10105,6 @@ GameObject:
   - component: {fileID: 1780122924}
   - component: {fileID: 1780122923}
   - component: {fileID: 1780122922}
-  - component: {fileID: 1780122921}
   m_Layer: 0
   m_Name: ProximoAndar
   m_TagString: andar5
@@ -10077,19 +10127,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2033918882}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1780122921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780122919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36460b13e500cdd478b66546c3bee080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  andar: Dungeon - sala 3
 --- !u!19719996 &1780122922
 TilemapCollider2D:
   m_ObjectHideFlags: 0

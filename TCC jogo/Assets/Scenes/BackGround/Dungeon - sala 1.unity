@@ -4027,7 +4027,7 @@ MonoBehaviour:
   itemDentro: {fileID: 11400000, guid: bf5b7c88fde91b14ea7f221da3ba28bf, type: 2}
   foiAberto: 0
   baulFechado: {fileID: -1633341478, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
-  baulAberto: {fileID: 330036580373852294, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &661380264
 GameObject:
   m_ObjectHideFlags: 0
@@ -6989,7 +6989,7 @@ MonoBehaviour:
   itemDentro: {fileID: 11400000, guid: 1195c36ae580aae4a8d52571f2406633, type: 2}
   foiAberto: 0
   baulFechado: {fileID: -2543109058130754635, guid: fa2eb0994f049a1499718f0fdf8b84cb, type: 3}
-  baulAberto: {fileID: 330036580373852294, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!1 &1478158176
 GameObject:
   m_ObjectHideFlags: 0
@@ -7972,7 +7972,7 @@ MonoBehaviour:
   itemDentro: {fileID: 11400000, guid: 198d3f7887d48ab4bbc0807ba7cc6feb, type: 2}
   foiAberto: 0
   baulFechado: {fileID: -1633341478, guid: 1c13ed81de85e1d448b4f218bafc451c, type: 3}
-  baulAberto: {fileID: 330036580373852294, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
+  baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
 --- !u!61 &1822651270
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10974,14 +10974,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  playerStats: {fileID: 0}
+  canMove: 1
   Perigolayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   minSteps: 5
   maxSteps: 15
   stepDistance: 0.9
-  canMove: 1
+  playerStats: {fileID: 0}
 --- !u!95 &2027303772
 Animator:
   serializedVersion: 7
