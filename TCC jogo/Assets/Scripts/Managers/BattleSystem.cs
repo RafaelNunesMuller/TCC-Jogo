@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class BattleSystem : MonoBehaviour
 {
     public List<EnemyStats> inimigosAtivos;
+
     public playerStats player => GameManager.Instance.playerStats;
 
     private bool batalhaEncerrada = false;
@@ -25,30 +26,41 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator FinalizarBatalha()
+{
+    yield return new WaitForSeconds(1.5f);
+
+    int xpGanho = CalcularXPInimigos();
+    var player = GameManager.Instance.playerStats;
+
+    int oldLevel = player.level;
+    int oldStr = player.strength;
+    int oldDef = player.defense;
+    int oldHP = player.maxHP;
+
+    player.GainExperience(xpGanho);
+
+    VictoryUI victory = FindAnyObjectByType<VictoryUI>();
+    if (victory != null)
     {
-        yield return new WaitForSeconds(1.5f);
+        victory.MostrarVitoria(player, xpGanho, oldLevel, oldStr, oldDef, oldHP);
+        yield return new WaitUntil(() => victory.foiConfirmado);
+    }
 
-        int xpGanho = CalcularXPInimigos();
-        var player = GameManager.Instance.playerStats;
+    GameManager.Instance.playerStats = player;
 
-        int oldLevel = player.level;
-        int oldStr = player.strength;
-        int oldDef = player.defense;
-        int oldHP = player.maxHP;
+    // Boss Final Apenas
+    bool matouBossFinal = inimigosAtivos.Exists(e => e != null && e.bossFinal);
 
-        player.GainExperience(xpGanho);
-
-        VictoryUI victory = FindAnyObjectByType<VictoryUI>();
-        if (victory != null)
-        {
-            victory.MostrarVitoria(player, xpGanho, oldLevel, oldStr, oldDef, oldHP);
-            yield return new WaitUntil(() => victory.foiConfirmado);
-        }
-
-        GameManager.Instance.playerStats = player;
-
+    if (matouBossFinal)
+    {
+        SceneManager.LoadScene("Tela de vitória");
+    }
+    else
+    {
         SceneManager.LoadScene(GameManager.Instance.lastScene);
     }
+}
+
 
     int CalcularXPInimigos()
     {
@@ -60,9 +72,6 @@ public class BattleSystem : MonoBehaviour
         }
         return totalXP;
     }
-
-
-
 
     public void SetEnemies(List<EnemyStats> novosInimigos)
     {
@@ -81,7 +90,6 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator EnemiesTurn()
     {
-
         foreach (var inimigo in inimigosAtivos)
         {
             if (inimigo == null || !inimigo.IsAlive) continue;
@@ -93,7 +101,6 @@ public class BattleSystem : MonoBehaviour
             {
                 int dano = Mathf.Max(1, inimigo.strength + ataque.power - player.DefenseTotal);
                 player.TakeDamage(dano);
-
             }
         }
 

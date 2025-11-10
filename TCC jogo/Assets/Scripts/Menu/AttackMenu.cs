@@ -18,7 +18,7 @@ public class AttackMenu : MonoBehaviour
     private int ataqueSelecionado = 0;
 
 
-    void Start()
+    void OnEnable()
     {
         CursorAttack.SetActive(true);
 
@@ -36,10 +36,7 @@ public class AttackMenu : MonoBehaviour
             enabled = false;
             return;
         }
-    }
 
-    void OnEnable()
-    {
         ataqueSelecionado = 0;
         AtualizarCursor();
         combatMenu.enabled = false;

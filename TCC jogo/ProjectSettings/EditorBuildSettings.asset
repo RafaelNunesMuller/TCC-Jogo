@@ -65,6 +65,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Loja (Compras)/Compras (Masmorra).unity
     guid: d30c93c40ce09f14b9b56bf327181c4b
+  - enabled: 1
+    path: "Assets/Scenes/BackGround/Vit\xF3ria/Tela de vit\xF3ria.unity"
+    guid: 5ca82c56b36aa1547adb15932e666d02
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
