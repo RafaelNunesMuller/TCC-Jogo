@@ -51,14 +51,30 @@ public class BattleSystem : MonoBehaviour
     // Boss Final Apenas
     bool matouBossFinal = inimigosAtivos.Exists(e => e != null && e.bossFinal);
 
-    if (matouBossFinal)
+        if (matouBossFinal)
+        {
+            SceneManager.LoadScene("Tela de vitória");
+        }
+        else
+        {
+            SceneManager.LoadScene(GameManager.Instance.lastScene);
+        }
+    
+
+        //  Dá moedas extras ao vencer todos os inimigos
+    int moedasTotais = 0;
+    foreach (var inimigo in inimigosAtivos)
     {
-        SceneManager.LoadScene("Tela de vitória");
+        if (inimigo != null)
+            moedasTotais += inimigo.coinReward;
     }
-    else
+
+    if (CoinManager.instance != null)
     {
-        SceneManager.LoadScene(GameManager.Instance.lastScene);
+        CoinManager.instance.AddCoins(moedasTotais);
+        Debug.Log($" Batalha vencida! Recompensa total: +{moedasTotais} moedas.");
     }
+
 }
 
 

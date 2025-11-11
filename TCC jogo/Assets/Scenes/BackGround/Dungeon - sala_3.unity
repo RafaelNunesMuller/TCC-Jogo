@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3414c2255e64724aa50013ac92b9518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDentro: {fileID: 0}
+  itemDentro: {fileID: 11400000, guid: 1cd0963d153af1444ac30c08bdfde047, type: 2}
   foiAberto: 0
   baulFechado: {fileID: 0}
   baulAberto: {fileID: 21300000, guid: d5be6a6c8eaa5674f82d2330e5ea9d8f, type: 3}
@@ -1299,7 +1299,7 @@ GameObject:
   - component: {fileID: 235941075}
   m_Layer: 0
   m_Name: ProximoAndar
-  m_TagString: Untagged
+  m_TagString: andar4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7639,6 +7639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
+  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 2061705516}
   equipListParent: {fileID: 1205243671}
   equipItemPrefab: {fileID: 236292834}
@@ -7649,7 +7650,6 @@ MonoBehaviour:
   armorButton: {fileID: 1150662100}
   accessoryButton: {fileID: 217678364}
   menuPanel: {fileID: 705195075}
-  EquipItemPrefab: {fileID: 236292834}
 --- !u!114 &1332760809
 MonoBehaviour:
   m_ObjectHideFlags: 0
