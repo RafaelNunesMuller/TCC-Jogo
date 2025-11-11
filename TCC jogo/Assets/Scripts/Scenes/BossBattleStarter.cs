@@ -10,7 +10,7 @@ public class BossBattleStarter : MonoBehaviour
 {
     if (FindAnyObjectByType<EnemyStats>() != null)
     {
-        Debug.Log("Já existe um inimigo nessa cena, não criar outro.");
+        
         return;
     }
 
