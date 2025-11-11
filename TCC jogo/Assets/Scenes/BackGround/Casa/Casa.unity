@@ -14695,7 +14695,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 816.08264, y: -450.95587}
+  m_AnchoredPosition: {x: 864.81354, y: -336.65283}
   m_SizeDelta: {x: -0.00012207031, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1769969744
@@ -15599,7 +15599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 634963441}
-  inventarioCentral: {fileID: 239554801}
+  inventarioCentral: {fileID: 0}
   EquipamentoAtual: {fileID: 1061581641}
   equipListParent: {fileID: 316614737}
   equipItemPrefab: {fileID: 2703970506922725134, guid: aa31e9465ca9aeb498237c7170dc951e, type: 3}
