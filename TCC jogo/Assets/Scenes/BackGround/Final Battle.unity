@@ -3874,7 +3874,7 @@ MonoBehaviour:
   defense: 50
   magic: 50
   magicDefense: 50
-  maxHP: 1
+  maxHP: 150
   currentHP: 0
   experienceReward: 9999
   attacks:

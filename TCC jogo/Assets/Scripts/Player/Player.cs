@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     {
         var sr = GetComponent<SpriteRenderer>();
 
-        if (cena.name == "Battle" || cena.name == "Compras" || cena.name == "Game Over" || cena.name == "Tela de vitória")
+        if (cena.name == "Battle" || cena.name == "Compras" || cena.name == "Game Over" || cena.name == "Tela de vitória" || cena.name == "Compras (Masmorra)")
         {
             if (sr != null) sr.enabled = false;
         }
