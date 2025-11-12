@@ -170,7 +170,7 @@ public class Player : MonoBehaviour
                 break;
 
             case "andar4":
-                SalvarPosicaoENovaCena("Dungeon - sala 4", new Vector3(-2.51f, 9.89f, 0f));
+                SalvarPosicaoENovaCena("Dungeon - sala_4", new Vector3(-2.51f, 9.89f, 0f));
                 break;
 
             case "andar5":
