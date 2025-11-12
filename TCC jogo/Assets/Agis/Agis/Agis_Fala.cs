@@ -132,4 +132,21 @@ public class Agis_Fala : MonoBehaviour
         falaIndex++;
         MostrarFalaAtual();
     }
+
+    void OnEnable()
+{
+    SceneManager.sceneLoaded += OnSceneLoaded;
+}
+
+void OnDisable()
+{
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+}
+
+void OnSceneLoaded(Scene cena, LoadSceneMode modo)
+{
+    
+        player = GameObject.Find("Player");
+    
+}
 }
